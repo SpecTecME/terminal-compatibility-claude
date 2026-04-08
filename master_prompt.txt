@@ -1,0 +1,4 @@
+Read /docs/AI_RULES.md and README.md before proceeding.
+
+Task:
+then describe the task here
