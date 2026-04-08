@@ -1,4 +1,16 @@
-Read /docs/AI_RULES.md and README.md before proceeding.
+You are working on a Base44 migration project.
 
-Task:
-then describe the task here
+Before any task:
+- Read README.md (MASTER SPEC)
+- Follow it strictly
+
+This is NOT a new system.
+This is a 1:1 migration.
+
+Rules:
+- No UI changes
+- No logic changes
+- No renaming
+- Only replace Base44 dependencies
+
+Confirm understanding before proceeding.
