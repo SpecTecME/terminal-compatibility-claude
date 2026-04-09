@@ -1,0 +1,90 @@
+{
+  "name": "TerminalRegistrationFormInstance",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "applicationId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalRegistrationApplication"
+    },
+    "applicationPublicId": {
+      "type": "string",
+      "description": "Application publicId for migration"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "formTemplateId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalAttachment template"
+    },
+    "formTemplatePublicId": {
+      "type": "string",
+      "description": "Form template publicId for migration"
+    },
+    "templateFileAttachmentId": {
+      "type": "string",
+      "description": "Reference to file stored on template"
+    },
+    "instanceName": {
+      "type": "string",
+      "description": "Instance name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "TEMPLATE_COPIED",
+        "IN_PROGRESS",
+        "COMPLETED"
+      ],
+      "default": "TEMPLATE_COPIED",
+      "description": "Form instance status"
+    },
+    "completedFileAttachmentId": {
+      "type": "string",
+      "description": "Reference to completed file"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Completion timestamp"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Short notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "applicationId",
+    "applicationPublicId",
+    "terminalId",
+    "terminalPublicId",
+    "vesselId",
+    "vesselPublicId",
+    "formTemplateId",
+    "formTemplatePublicId",
+    "instanceName"
+  ]
+}

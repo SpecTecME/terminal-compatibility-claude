@@ -1,0 +1,70 @@
+{
+  "name": "TerminalCompany",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "relationshipRole": {
+      "type": "string",
+      "enum": [
+        "Operator",
+        "Owner",
+        "Authority",
+        "Agent",
+        "Service Provider",
+        "Other"
+      ],
+      "description": "Role of company at this terminal"
+    },
+    "isPrimary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this the primary company for this role"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Relationship start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Relationship end date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "terminalId",
+    "terminalPublicId",
+    "companyId",
+    "companyPublicId",
+    "relationshipRole"
+  ]
+}

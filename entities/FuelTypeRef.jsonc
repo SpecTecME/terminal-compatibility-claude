@@ -1,0 +1,58 @@
+{
+  "name": "FuelTypeRef",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "code": {
+      "type": "string",
+      "description": "Unique fuel type code (e.g., LNG, MGO)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Fuel type name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "GAS",
+        "DISTILLATE",
+        "RESIDUAL",
+        "ALCOHOL",
+        "OTHER"
+      ],
+      "description": "Fuel category"
+    },
+    "heatingRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether heating is required"
+    },
+    "isCryogenic": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether fuel is cryogenic"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the fuel type is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "code",
+    "name"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "VesselTypeAllowedCargoType",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to VesselTypeRef"
+    },
+    "vesselTypeRefPublicId": {
+      "type": "string",
+      "description": "VesselTypeRef publicId for migration"
+    },
+    "cargoTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to CargoTypeRef"
+    },
+    "cargoTypeRefPublicId": {
+      "type": "string",
+      "description": "CargoTypeRef publicId for migration"
+    },
+    "isAllowed": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this cargo type is allowed"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this record is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselTypeRefId",
+    "vesselTypeRefPublicId",
+    "cargoTypeRefId",
+    "cargoTypeRefPublicId"
+  ]
+}

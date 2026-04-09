@@ -1,0 +1,48 @@
+{
+  "name": "UserContactTagAssignment",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Base44 reference to User"
+    },
+    "userPublicId": {
+      "type": "string",
+      "description": "User publicId for migration"
+    },
+    "contactId": {
+      "type": "string",
+      "description": "Base44 reference to Contact"
+    },
+    "contactPublicId": {
+      "type": "string",
+      "description": "Contact publicId for migration"
+    },
+    "userTagId": {
+      "type": "string",
+      "description": "Base44 reference to UserTag"
+    },
+    "userTagPublicId": {
+      "type": "string",
+      "description": "UserTag publicId for migration"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "userId",
+    "userPublicId",
+    "contactId",
+    "contactPublicId",
+    "userTagId",
+    "userTagPublicId"
+  ]
+}

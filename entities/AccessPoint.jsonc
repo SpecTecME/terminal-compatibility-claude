@@ -1,0 +1,92 @@
+{
+  "name": "AccessPoint",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "zoneId": {
+      "type": "string",
+      "description": "Base44 reference to VesselZone"
+    },
+    "zonePublicId": {
+      "type": "string",
+      "description": "Zone publicId for migration"
+    },
+    "accessCode": {
+      "type": "string",
+      "description": "Unique access point code per vessel (e.g., AP-01)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Access point name"
+    },
+    "accessType": {
+      "type": "string",
+      "enum": [
+        "GANGWAY",
+        "ACCOM_LADDER",
+        "PILOT_LADDER",
+        "OTHER"
+      ],
+      "description": "Type of access point"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "PORT",
+        "STARBOARD",
+        "CENTER",
+        "NA"
+      ],
+      "description": "Side of vessel"
+    },
+    "deck": {
+      "type": "string",
+      "description": "Deck identifier"
+    },
+    "operatingHeightMin_m": {
+      "type": "number",
+      "description": "Minimum operating height in meters"
+    },
+    "operatingHeightMax_m": {
+      "type": "number",
+      "description": "Maximum operating height in meters"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "OUT_OF_SERVICE"
+      ],
+      "default": "ACTIVE",
+      "description": "Access point status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "accessCode",
+    "name",
+    "accessType"
+  ]
+}

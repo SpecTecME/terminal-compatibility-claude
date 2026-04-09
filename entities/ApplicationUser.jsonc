@@ -1,0 +1,43 @@
+{
+  "name": "ApplicationUser",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "description": "Full name of the application user"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "username": {
+      "type": "string",
+      "description": "Username for the application"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "description": "User status"
+    },
+    "base44_user_id": {
+      "type": "string",
+      "description": "Optional mapping to Base44 internal user ID"
+    },
+    "default_role_id": {
+      "type": "string",
+      "description": "Default application role ID"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "full_name",
+    "email"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "name": "VesselCompanyRole",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration portability"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration portability"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "RegisteredOwner",
+        "BeneficialOwner",
+        "TechnicalManager",
+        "CommercialManager",
+        "ISMDocHolder",
+        "Operator"
+      ],
+      "description": "Company role in relation to vessel"
+    },
+    "validFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Date from which this role assignment is valid"
+    },
+    "validTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Date until which this role assignment is valid (null = open-ended)"
+    },
+    "isPrimary": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this is the primary/current company for this role"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about this role assignment"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this role assignment is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "companyId",
+    "role"
+  ]
+}

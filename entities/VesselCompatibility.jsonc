@@ -1,0 +1,68 @@
+{
+  "name": "VesselCompatibility",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration (optional)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Approved",
+        "Under Review",
+        "Not Applied",
+        "Rejected",
+        "Expired"
+      ],
+      "default": "Not Applied",
+      "description": "Compatibility approval status"
+    },
+    "application_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of application submission"
+    },
+    "approval_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of approval"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Approval expiry date"
+    },
+    "reviewer": {
+      "type": "string",
+      "description": "Name of reviewer at terminal"
+    },
+    "comments": {
+      "type": "string",
+      "description": "Review comments or notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselPublicId",
+    "terminalPublicId",
+    "status"
+  ]
+}

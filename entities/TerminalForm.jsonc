@@ -1,0 +1,111 @@
+{
+  "name": "TerminalForm",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminal_id": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berthId": {
+      "type": "string",
+      "description": "Base44 reference to Berth - null means terminal-wide"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType - links this form/questionnaire template to a document type"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "form_name": {
+      "type": "string",
+      "description": "Name of the form/questionnaire"
+    },
+    "appliesTo": {
+      "type": "string",
+      "enum": [
+        "Terminal",
+        "Berth"
+      ],
+      "description": "Whether form applies to terminal-wide or specific berth"
+    },
+    "revision": {
+      "type": "string",
+      "description": "Revision number or version identifier"
+    },
+    "version": {
+      "type": "string",
+      "description": "Form version (legacy field, use revision instead)"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Date from which this form version is effective"
+    },
+    "effectiveTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Date until which this form version is effective (null = current)"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "description": "URL to terminal website or original source"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Downloadable form template file URL (Word/Excel/PDF)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Form description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Pre-arrival",
+        "Arrival",
+        "Operations",
+        "Departure",
+        "General"
+      ],
+      "description": "Form category (legacy field)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Superseded",
+        "Inactive"
+      ],
+      "default": "Active",
+      "description": "Form status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "terminal_id",
+    "form_name"
+  ]
+}

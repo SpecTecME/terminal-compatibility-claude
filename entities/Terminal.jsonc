@@ -1,0 +1,188 @@
+{
+  "name": "Terminal",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability - immutable, unique"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier for multi-tenancy"
+    },
+    "siteId": {
+      "type": "string",
+      "description": "Reference to Site/Complex (LEGACY - use terminalComplexId)"
+    },
+    "sitePublicId": {
+      "type": "string",
+      "description": "Site publicId for migration (LEGACY)"
+    },
+    "terminalComplexId": {
+      "type": "string",
+      "description": "Reference to TerminalComplex"
+    },
+    "terminalComplexPublicId": {
+      "type": "string",
+      "description": "TerminalComplex publicId for migration"
+    },
+    "productTypeRefId": {
+      "type": "string",
+      "description": "Reference to ProductTypeRef (primary product type)"
+    },
+    "productTypeRefPublicId": {
+      "type": "string",
+      "description": "ProductTypeRef publicId for migration"
+    },
+    "name": {
+      "type": "string",
+      "description": "Terminal name"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Reference to Country (internal ID)"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration portability"
+    },
+    "legacyCountryCode": {
+      "type": "string",
+      "description": "Legacy ISO 3166-1 alpha-2 country code (deprecated, kept for audit/migration)"
+    },
+    "legacyCountryName": {
+      "type": "string",
+      "description": "Legacy country display name (deprecated, kept for audit/migration)"
+    },
+    "port": {
+      "type": "string",
+      "description": "Port name"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "GPS latitude coordinate"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "GPS longitude coordinate"
+    },
+    "capacity_mtpa": {
+      "type": "number",
+      "description": "Terminal capacity in MTPA"
+    },
+    "terminal_type_id": {
+      "type": "string",
+      "description": "Base44 reference to TerminalType"
+    },
+    "terminal_type_public_id": {
+      "type": "string",
+      "description": "TerminalType publicId for migration"
+    },
+    "operation_type": {
+      "type": "string",
+      "enum": [
+        "Import",
+        "Export",
+        "Import/Export"
+      ],
+      "description": "Type of terminal operations"
+    },
+    "operator": {
+      "type": "string",
+      "description": "Terminal operator company"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Operational",
+        "Maintenance",
+        "Under Construction",
+        "Planned",
+        "Inactive"
+      ],
+      "default": "Operational"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the terminal is active (soft delete flag)"
+    },
+    "isArchived": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the terminal is archived (soft delete)"
+    },
+    "archivedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time when archived"
+    },
+    "archivedReason": {
+      "type": "string",
+      "description": "Reason for archiving"
+    },
+    "contact_email": {
+      "type": "string",
+      "description": "Primary contact email"
+    },
+    "contact_phone": {
+      "type": "string",
+      "description": "Primary contact phone"
+    },
+    "website": {
+      "type": "string",
+      "description": "Terminal website"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Terminal timezone (e.g., UTC+4, Europe/Paris)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Terminal description and facilities overview"
+    },
+    "storage_capacity": {
+      "type": "number",
+      "description": "Total storage capacity in cubic meters"
+    },
+    "number_of_tanks": {
+      "type": "number",
+      "description": "Number of storage tanks"
+    },
+    "loading_rate": {
+      "type": "number",
+      "description": "Loading rate in cubic meters per hour"
+    },
+    "approach_channel_depth": {
+      "type": "number",
+      "description": "Approach channel depth in meters"
+    },
+    "pilotage_required": {
+      "type": "boolean",
+      "description": "Whether pilotage is mandatory"
+    },
+    "tugs_available": {
+      "type": "boolean",
+      "description": "Tug services availability"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "procedureNotes": {
+      "type": "string",
+      "description": "Terminal-level notes for Procedures tab"
+    },
+    "formsNotes": {
+      "type": "string",
+      "description": "Terminal-level notes for Forms tab"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name",
+    "latitude",
+    "longitude"
+  ]
+}

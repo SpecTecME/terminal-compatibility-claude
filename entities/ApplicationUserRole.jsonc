@@ -1,0 +1,42 @@
+{
+  "name": "ApplicationUserRole",
+  "type": "object",
+  "properties": {
+    "application_user_id": {
+      "type": "string",
+      "description": "Reference to ApplicationUser"
+    },
+    "application_role_id": {
+      "type": "string",
+      "description": "Reference to ApplicationRole"
+    },
+    "assigned_from": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "group_mapping",
+        "system"
+      ],
+      "default": "manual",
+      "description": "How this role was assigned"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "valid_from": {
+      "type": "string",
+      "format": "date",
+      "description": "Role valid from date"
+    },
+    "valid_to": {
+      "type": "string",
+      "format": "date",
+      "description": "Role valid to date"
+    }
+  },
+  "required": [
+    "application_user_id",
+    "application_role_id"
+  ]
+}

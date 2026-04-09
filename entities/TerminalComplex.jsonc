@@ -1,0 +1,68 @@
+{
+  "name": "TerminalComplex",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Terminal complex name"
+    },
+    "code": {
+      "type": "string",
+      "description": "Unique code (optional)"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region or state"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "address": {
+      "type": "string",
+      "description": "Physical address"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "GPS latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "GPS longitude"
+    },
+    "operatorAuthority": {
+      "type": "string",
+      "description": "Port authority or complex operator"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the complex is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name"
+  ]
+}

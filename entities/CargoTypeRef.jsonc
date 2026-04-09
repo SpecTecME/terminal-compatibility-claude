@@ -1,0 +1,77 @@
+{
+  "name": "CargoTypeRef",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "code": {
+      "type": "string",
+      "description": "Unique cargo type code (e.g., LNG, CRUDE_OIL)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Cargo type name"
+    },
+    "cargoCategory": {
+      "type": "string",
+      "enum": [
+        "GAS",
+        "LIQUID_BULK",
+        "DRY_BULK",
+        "CONTAINER",
+        "RORO",
+        "PASSENGER",
+        "GENERAL",
+        "OTHER"
+      ],
+      "description": "Cargo category"
+    },
+    "defaultUnit": {
+      "type": "string",
+      "enum": [
+        "m3",
+        "MT",
+        "TEU",
+        "CEU",
+        "pax",
+        "lane_meters"
+      ],
+      "description": "Default unit for this cargo type"
+    },
+    "productTypeId": {
+      "type": "string",
+      "description": "Base44 reference to ProductTypeRef (for terminal/berth compatibility)"
+    },
+    "productTypePublicId": {
+      "type": "string",
+      "description": "ProductTypeRef publicId for migration portability"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the cargo type is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "code",
+    "name",
+    "cargoCategory",
+    "defaultUnit"
+  ]
+}

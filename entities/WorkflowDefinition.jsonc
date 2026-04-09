@@ -1,0 +1,49 @@
+{
+  "name": "WorkflowDefinition",
+  "type": "object",
+  "properties": {
+    "workflow_name": {
+      "type": "string",
+      "description": "Workflow name (base name, without version suffix)"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "Target entity/table this workflow applies to"
+    },
+    "description": {
+      "type": "string",
+      "description": "Workflow description"
+    },
+    "version_number": {
+      "type": "string",
+      "description": "Version identifier e.g. TRM-001, TRM-002"
+    },
+    "lifecycle_status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "PUBLISHED",
+        "OBSOLETE"
+      ],
+      "default": "DRAFT",
+      "description": "Lifecycle status of this workflow version"
+    },
+    "parent_workflow_id": {
+      "type": "string",
+      "description": "ID of the workflow this was copied/derived from (for lineage tracking)"
+    },
+    "published_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when this workflow version was published"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "workflow_name",
+    "table_name"
+  ]
+}

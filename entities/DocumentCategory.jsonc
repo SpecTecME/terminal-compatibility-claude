@@ -1,0 +1,36 @@
+{
+  "name": "DocumentCategory",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Category name - unique"
+    },
+    "description": {
+      "type": "string",
+      "description": "Category description"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the category is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name"
+  ]
+}

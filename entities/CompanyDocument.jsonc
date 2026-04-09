@@ -1,0 +1,69 @@
+{
+  "name": "CompanyDocument",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType (optional)"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "title": {
+      "type": "string",
+      "description": "Document title"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "File URL"
+    },
+    "issueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Issue date"
+    },
+    "expiryDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Expiry date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Expired"
+      ],
+      "default": "Active",
+      "description": "Document status"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "companyId",
+    "companyPublicId",
+    "title"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "name": "SystemTag",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Tag name"
+    },
+    "code": {
+      "type": "string",
+      "description": "Stable identifier used by logic - unique"
+    },
+    "category": {
+      "type": "string",
+      "description": "Tag category"
+    },
+    "appliesTo": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Contact",
+          "Company"
+        ]
+      },
+      "description": "Where this tag can be applied"
+    },
+    "isSystem": {
+      "type": "boolean",
+      "default": false,
+      "description": "System tag - cannot delete or edit code"
+    },
+    "isLocked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Locked tag - cannot delete or edit"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the tag is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name",
+    "code",
+    "appliesTo"
+  ]
+}

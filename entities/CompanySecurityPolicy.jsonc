@@ -1,0 +1,112 @@
+{
+  "name": "CompanySecurityPolicy",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "authSourcePolicy": {
+      "type": "string",
+      "enum": [
+        "LOCAL",
+        "SSO",
+        "HYBRID"
+      ],
+      "default": "LOCAL",
+      "description": "Authentication source policy: LOCAL (password only), SSO (SSO only), HYBRID (both allowed)"
+    },
+    "mfaSourcePolicy": {
+      "type": "string",
+      "enum": [
+        "APP",
+        "IDP",
+        "EITHER"
+      ],
+      "default": "APP",
+      "description": "MFA source policy: APP (handled by app), IDP (handled by IdP), EITHER (allow either)"
+    },
+    "enforceMfa": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether MFA is mandatory for all users"
+    },
+    "allowedMfaMethods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "authenticator",
+          "sms",
+          "email"
+        ]
+      },
+      "default": [
+        "authenticator",
+        "sms",
+        "email"
+      ],
+      "description": "Allowed MFA methods"
+    },
+    "passwordMinLength": {
+      "type": "number",
+      "default": 8,
+      "description": "Minimum password length"
+    },
+    "passwordComplexity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "strong"
+      ],
+      "default": "medium",
+      "description": "Required password complexity level"
+    },
+    "passwordExpiryDays": {
+      "type": "number",
+      "description": "Days until password expires (optional)"
+    },
+    "sessionTimeoutMinutes": {
+      "type": "number",
+      "default": 480,
+      "description": "Session timeout in minutes"
+    },
+    "maxConcurrentSessions": {
+      "type": "number",
+      "description": "Maximum concurrent sessions per user (optional)"
+    },
+    "allowPasswordReuse": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether users can reuse previous passwords"
+    },
+    "documentApprovalMode": {
+      "type": "string",
+      "enum": [
+        "COMPLEX",
+        "SIMPLE"
+      ],
+      "default": "COMPLEX",
+      "description": "Document approval mode: COMPLEX (use terminal/berth requirements and rules), SIMPLE (manually select documents per vessel and terminal)"
+    },
+    "policyEffectiveFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when policy becomes effective"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this policy is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId"
+  ]
+}

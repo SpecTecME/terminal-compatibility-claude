@@ -1,0 +1,64 @@
+{
+  "name": "VesselTerminalDocumentSetItem",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "documentSetId": {
+      "type": "string",
+      "description": "Base44 reference to VesselTerminalDocumentSet"
+    },
+    "documentSetPublicId": {
+      "type": "string",
+      "description": "DocumentSet publicId for migration"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "documentId": {
+      "type": "string",
+      "description": "Base44 reference to Document (actual vessel document)"
+    },
+    "documentPublicId": {
+      "type": "string",
+      "description": "Document publicId for migration"
+    },
+    "isRequired": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this document is required in the set"
+    },
+    "isProvided": {
+      "type": "boolean",
+      "default": false,
+      "description": "Computed: true if documentId is present"
+    },
+    "remark": {
+      "type": "string",
+      "description": "Notes about this item"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display order in the set"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "documentSetId",
+    "documentSetPublicId",
+    "documentTypeId",
+    "documentTypePublicId"
+  ]
+}

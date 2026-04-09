@@ -1,0 +1,87 @@
+{
+  "name": "CompanyOffice",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "officeName": {
+      "type": "string",
+      "description": "Office name (e.g., Singapore Office, London HQ)"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "addressLine1": {
+      "type": "string",
+      "description": "Address line 1"
+    },
+    "postalCode": {
+      "type": "string",
+      "description": "Postal code"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Office timezone"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Office phone number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Office email address"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this office is active"
+    },
+    "isHQ": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is the headquarters"
+    },
+    "legalEntityId": {
+      "type": "string",
+      "description": "Base44 reference to CompanyLegalEntity (optional)"
+    },
+    "legalEntityPublicId": {
+      "type": "string",
+      "description": "Legal entity publicId for migration"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "companyId",
+    "companyPublicId",
+    "officeName"
+  ]
+}

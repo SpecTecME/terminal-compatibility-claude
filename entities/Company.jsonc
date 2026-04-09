@@ -1,0 +1,101 @@
+{
+  "name": "Company",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Company brand name - unique"
+    },
+    "legalName": {
+      "type": "string",
+      "description": "Full legal name (optional)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Operator",
+        "Owner",
+        "Authority",
+        "Agent",
+        "Service Provider",
+        "Other"
+      ],
+      "description": "Primary company role/type"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Company main phone number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Company main email address"
+    },
+    "website": {
+      "type": "string",
+      "description": "Company website"
+    },
+    "hqAddressLine1": {
+      "type": "string",
+      "description": "HQ address line 1"
+    },
+    "hqCity": {
+      "type": "string",
+      "description": "HQ city"
+    },
+    "hqPostalCode": {
+      "type": "string",
+      "description": "HQ postal code"
+    },
+    "hqCountryId": {
+      "type": "string",
+      "description": "HQ country reference"
+    },
+    "iacsMember": {
+      "type": "boolean",
+      "default": false,
+      "description": "IACS member status - only visible/relevant for Authority type"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the company is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "mainContactId": {
+      "type": "string",
+      "description": "Base44 reference to Contact"
+    },
+    "mainContactPublicId": {
+      "type": "string",
+      "description": "Contact publicId for migration"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name"
+  ]
+}

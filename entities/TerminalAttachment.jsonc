@@ -1,0 +1,77 @@
+{
+  "name": "TerminalAttachment",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "attachmentType": {
+      "type": "string",
+      "enum": [
+        "Procedure",
+        "Form"
+      ],
+      "description": "Classification: Procedure or Form"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the attachment"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL of the uploaded file"
+    },
+    "validFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Date from which the attachment is valid"
+    },
+    "validTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Date until which the attachment is valid"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Superseded",
+        "Archived"
+      ],
+      "default": "Draft",
+      "description": "Status of the attachment"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Per-attachment quick notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "terminalId",
+    "terminalPublicId",
+    "attachmentType",
+    "name",
+    "file_url",
+    "status"
+  ]
+}

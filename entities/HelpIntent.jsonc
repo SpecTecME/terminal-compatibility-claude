@@ -1,0 +1,53 @@
+{
+  "name": "HelpIntent",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier for multi-tenancy."
+    },
+    "intentKey": {
+      "type": "string",
+      "description": "A unique, machine-readable key for the intent (e.g., registration_missing_documents)."
+    },
+    "answerMarkdown": {
+      "type": "string",
+      "description": "The short, conversational answer provided by the chatbot for this intent, supports Markdown."
+    },
+    "actionType": {
+      "type": "string",
+      "enum": [
+        "Navigate",
+        "OpenModal",
+        "OpenTab",
+        "None"
+      ],
+      "default": "None",
+      "description": "The type of action the chatbot can suggest after providing the answer."
+    },
+    "actionPayload": {
+      "type": "string",
+      "description": "JSON string containing the payload for the action (e.g., {\"page\": \"Documents\"} for Navigate)."
+    },
+    "priority": {
+      "type": "number",
+      "default": 100,
+      "description": "The priority of the intent, used for ranking when multiple intents match (lower number is higher priority)."
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this intent is currently active and usable by the chatbot."
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "intentKey",
+    "answerMarkdown"
+  ]
+}

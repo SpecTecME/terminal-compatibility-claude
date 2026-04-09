@@ -1,0 +1,67 @@
+{
+  "name": "UdfConfiguration",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "module": {
+      "type": "string",
+      "enum": [
+        "Vessel"
+      ],
+      "description": "Module this UDF belongs to"
+    },
+    "udfCode": {
+      "type": "string",
+      "enum": [
+        "UDF01",
+        "UDF02"
+      ],
+      "description": "UDF slot identifier"
+    },
+    "label": {
+      "type": "string",
+      "description": "Display label - NULL/empty means hidden everywhere"
+    },
+    "includeInSearch": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include in search and list views when label is set"
+    },
+    "createList": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable dropdown list values for this UDF"
+    },
+    "fieldType": {
+      "type": "string",
+      "enum": [
+        "Text"
+      ],
+      "default": "Text",
+      "description": "Field type (read-only, preconfigured)"
+    },
+    "maxLength": {
+      "type": "number",
+      "description": "Maximum length for text input (read-only, preconfigured)"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "module",
+    "udfCode",
+    "fieldType",
+    "maxLength"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "VesselBerthCompatibility",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "registrationId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalRegistrationApplication"
+    },
+    "registrationPublicId": {
+      "type": "string",
+      "description": "Registration publicId for migration"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "berthId": {
+      "type": "string",
+      "description": "Base44 reference to Berth"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "compatibilityStatus": {
+      "type": "string",
+      "enum": [
+        "COMPATIBLE",
+        "COMPATIBLE_WITH_RESTRICTIONS",
+        "NOT_COMPATIBLE"
+      ],
+      "description": "Automatic compatibility evaluation"
+    },
+    "restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of restriction reasons"
+    },
+    "incompatibilityReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of incompatibility reasons"
+    },
+    "computedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last computation time"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "berthId",
+    "berthPublicId",
+    "compatibilityStatus"
+  ]
+}

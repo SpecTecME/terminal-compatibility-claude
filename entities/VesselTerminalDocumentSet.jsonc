@@ -1,0 +1,60 @@
+{
+  "name": "VesselTerminalDocumentSet",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berthId": {
+      "type": "string",
+      "description": "Base44 reference to Berth (optional, berth-specific set)"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE",
+        "ARCHIVED"
+      ],
+      "default": "DRAFT",
+      "description": "Set status - only one ACTIVE per vessel-terminal-berth combination"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes about this document set"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "terminalId",
+    "terminalPublicId"
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "name": "UserPreference",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Base44 reference to User - 1:1 relationship"
+    },
+    "userPublicId": {
+      "type": "string",
+      "description": "User publicId for migration"
+    },
+    "timeZone": {
+      "type": "string",
+      "default": "UTC",
+      "description": "IANA timezone (e.g., Asia/Dubai, Europe/London)"
+    },
+    "dateFormat": {
+      "type": "string",
+      "enum": [
+        "DD/MM/YYYY",
+        "MM/DD/YYYY",
+        "YYYY-MM-DD"
+      ],
+      "default": "DD/MM/YYYY",
+      "description": "Preferred date format"
+    },
+    "timeFormat": {
+      "type": "string",
+      "enum": [
+        "24H",
+        "12H"
+      ],
+      "default": "24H",
+      "description": "Preferred time format"
+    },
+    "weekStartDay": {
+      "type": "string",
+      "enum": [
+        "Monday",
+        "Sunday"
+      ],
+      "default": "Monday",
+      "description": "First day of the week"
+    },
+    "emailNotificationsEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable email notifications"
+    },
+    "inAppNotificationsEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable in-app notifications"
+    },
+    "defaultReminderLeadDays": {
+      "type": "number",
+      "default": 14,
+      "description": "Default reminder lead time in days"
+    },
+    "notificationDigest": {
+      "type": "string",
+      "enum": [
+        "Instant",
+        "Daily",
+        "Weekly"
+      ],
+      "default": "Instant",
+      "description": "Notification digest frequency"
+    },
+    "defaultLandingPage": {
+      "type": "string",
+      "enum": [
+        "Dashboard",
+        "WorldMap",
+        "Terminals",
+        "Fleet",
+        "Documents"
+      ],
+      "default": "Dashboard",
+      "description": "Default landing page after login"
+    },
+    "tableDensity": {
+      "type": "string",
+      "enum": [
+        "Compact",
+        "Comfortable",
+        "Spacious"
+      ],
+      "default": "Comfortable",
+      "description": "Table row density preference"
+    },
+    "rememberLastFilters": {
+      "type": "boolean",
+      "default": true,
+      "description": "Remember last used filters"
+    },
+    "holidayAwarenessEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable holiday awareness"
+    },
+    "greetingStyle": {
+      "type": "string",
+      "enum": [
+        "Formal",
+        "Neutral",
+        "Friendly"
+      ],
+      "default": "Neutral",
+      "description": "Greeting style preference"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "userId",
+    "userPublicId",
+    "timeZone"
+  ]
+}

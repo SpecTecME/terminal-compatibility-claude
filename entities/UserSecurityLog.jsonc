@@ -1,0 +1,64 @@
+{
+  "name": "UserSecurityLog",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Base44 reference to User"
+    },
+    "userPublicId": {
+      "type": "string",
+      "description": "User publicId for migration"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "PASSWORD_CHANGED",
+        "MFA_ENABLED",
+        "MFA_DISABLED",
+        "MFA_METHOD_ADDED",
+        "MFA_METHOD_REMOVED",
+        "LOGIN_SUCCESS",
+        "LOGIN_FAILED",
+        "LOGOUT",
+        "SESSION_TERMINATED",
+        "RECOVERY_EMAIL_CHANGED",
+        "RECOVERY_PHONE_CHANGED",
+        "RECOVERY_CODES_GENERATED"
+      ],
+      "description": "Type of security event"
+    },
+    "eventDetails": {
+      "type": "string",
+      "description": "Additional event details (JSON string)"
+    },
+    "ipAddress": {
+      "type": "string",
+      "description": "IP address of the action"
+    },
+    "userAgent": {
+      "type": "string",
+      "description": "Browser/device user agent"
+    },
+    "eventTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event occurred"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "userId",
+    "userPublicId",
+    "eventType"
+  ]
+}

@@ -1,0 +1,355 @@
+{
+  "name": "Vessel",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselInternalId": {
+      "type": "string",
+      "description": "Internal vessel ID (e.g., VSL-000128)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Vessel name"
+    },
+    "imoNumber": {
+      "type": "string",
+      "description": "IMO number - globally unique (7 digits)"
+    },
+    "mmsi": {
+      "type": "string",
+      "description": "MMSI number (9 digits)"
+    },
+    "callSign": {
+      "type": "string",
+      "description": "Call sign (identifier for radio communications)"
+    },
+    "vesselTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to VesselTypeRef"
+    },
+    "vesselTypeRefPublicId": {
+      "type": "string",
+      "description": "VesselTypeRef publicId for migration"
+    },
+    "flagCountryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "flagCountryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "ownerCompanyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (Owner)"
+    },
+    "ownerCompanyPublicId": {
+      "type": "string",
+      "description": "Owner Company publicId for migration"
+    },
+    "operatorCompanyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (Operator)"
+    },
+    "operatorCompanyPublicId": {
+      "type": "string",
+      "description": "Operator Company publicId for migration"
+    },
+    "udf01": {
+      "type": "string",
+      "description": "User-defined field 01 value (max 10 chars)"
+    },
+    "udf02": {
+      "type": "string",
+      "description": "User-defined field 02 value (max 12 chars)"
+    },
+    "yearBuilt": {
+      "type": "number",
+      "description": "Year vessel was built"
+    },
+    "shipyard": {
+      "type": "string",
+      "description": "Shipyard name where vessel was built"
+    },
+    "classSocietyCompanyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (Classification Society)"
+    },
+    "classSocietyCompanyPublicId": {
+      "type": "string",
+      "description": "Class Society Company publicId for migration"
+    },
+    "classNotation": {
+      "type": "string",
+      "description": "Class notation (e.g., +1A LNGC)"
+    },
+    "loa_m": {
+      "type": "number",
+      "description": "Length Overall (m)"
+    },
+    "width_m": {
+      "type": "number",
+      "description": "Width (m)"
+    },
+    "beam_m": {
+      "type": "number",
+      "description": "Beam (m)"
+    },
+    "depth_m": {
+      "type": "number",
+      "description": "Depth (m)"
+    },
+    "lbpM": {
+      "type": "number",
+      "description": "Length Between Perpendiculars (m)"
+    },
+    "mouldedDepthM": {
+      "type": "number",
+      "description": "Moulded Depth (m)"
+    },
+    "breadthMouldedM": {
+      "type": "number",
+      "description": "Breadth Moulded (m)"
+    },
+    "summerDraftM": {
+      "type": "number",
+      "description": "Summer Draft (m)"
+    },
+    "designDraft_m": {
+      "type": "number",
+      "description": "Design Draft (m)"
+    },
+    "maxDraft_m": {
+      "type": "number",
+      "description": "Maximum Draft (m)"
+    },
+    "airDraft_m": {
+      "type": "number",
+      "description": "Air Draft (m)"
+    },
+    "displacementSummer_t": {
+      "type": "number",
+      "description": "Displacement at summer draft (t)"
+    },
+    "gt": {
+      "type": "number",
+      "description": "Gross Tonnage"
+    },
+    "ntItc69": {
+      "type": "number",
+      "description": "Net Tonnage, ITC 69"
+    },
+    "dwt": {
+      "type": "number",
+      "description": "Deadweight (t)"
+    },
+    "cargoContainmentType": {
+      "type": "string",
+      "description": "Cargo containment type (e.g., Membrane GTT Mark III)"
+    },
+    "cargoCapacity_m3": {
+      "type": "number",
+      "description": "Cargo capacity (m\u00b3)"
+    },
+    "maxLoadingRate_m3ph": {
+      "type": "number",
+      "description": "Maximum loading rate (m\u00b3/h)"
+    },
+    "maxDischargeRate_m3ph": {
+      "type": "number",
+      "description": "Maximum discharge rate (m\u00b3/h)"
+    },
+    "vapourReturnSupported": {
+      "type": "boolean",
+      "description": "Vapour return supported"
+    },
+    "esdErcType": {
+      "type": "string",
+      "description": "ESD/ERC type (e.g., SIGTTO-compatible ERC)"
+    },
+    "berthingSideSupported": {
+      "type": "string",
+      "enum": [
+        "Port",
+        "Starboard",
+        "Both"
+      ],
+      "description": "Berthing side supported"
+    },
+    "manifoldLngCount": {
+      "type": "number",
+      "description": "Number of LNG manifolds"
+    },
+    "manifoldVapourCount": {
+      "type": "number",
+      "description": "Number of vapour manifolds"
+    },
+    "lngManifoldHeightMin_m": {
+      "type": "number",
+      "description": "LNG manifold minimum height (m)"
+    },
+    "lngManifoldHeightMax_m": {
+      "type": "number",
+      "description": "LNG manifold maximum height (m)"
+    },
+    "vapourManifoldHeightMin_m": {
+      "type": "number",
+      "description": "Vapour manifold minimum height (m)"
+    },
+    "vapourManifoldHeightMax_m": {
+      "type": "number",
+      "description": "Vapour manifold maximum height (m)"
+    },
+    "manifoldSpacingPitch_mm": {
+      "type": "number",
+      "description": "Manifold spacing/pitch (mm)"
+    },
+    "manifoldToBow_m": {
+      "type": "number",
+      "description": "Manifold distance to bow (m)"
+    },
+    "manifoldToStern_m": {
+      "type": "number",
+      "description": "Manifold distance to stern (m)"
+    },
+    "flangeSizeLng_in": {
+      "type": "string",
+      "description": "LNG flange size (e.g., 16\")"
+    },
+    "flangeRating": {
+      "type": "string",
+      "description": "Flange rating (e.g., ANSI 150)"
+    },
+    "ercManufacturerModel": {
+      "type": "string",
+      "description": "ERC manufacturer and model"
+    },
+    "mooringWinches": {
+      "type": "number",
+      "description": "Number of mooring winches"
+    },
+    "mooringLinesTotal": {
+      "type": "number",
+      "description": "Total number of mooring lines"
+    },
+    "headLines": {
+      "type": "number",
+      "description": "Number of head lines"
+    },
+    "breastLinesForward": {
+      "type": "number",
+      "description": "Number of forward breast lines"
+    },
+    "springsForward": {
+      "type": "number",
+      "description": "Number of forward spring lines"
+    },
+    "sternLines": {
+      "type": "number",
+      "description": "Number of stern lines"
+    },
+    "breastLinesAft": {
+      "type": "number",
+      "description": "Number of aft breast lines"
+    },
+    "springsAft": {
+      "type": "number",
+      "description": "Number of aft spring lines"
+    },
+    "lineType": {
+      "type": "string",
+      "description": "Mooring line type (e.g., HMPE)"
+    },
+    "lineMBL_kN": {
+      "type": "number",
+      "description": "Line minimum breaking load (kN)"
+    },
+    "brakeHoldingCapacity_kN": {
+      "type": "number",
+      "description": "Brake holding capacity (kN)"
+    },
+    "chockType": {
+      "type": "string",
+      "description": "Chock type (e.g., Panama)"
+    },
+    "fairleadChockPositionsNotes": {
+      "type": "string",
+      "description": "Fairlead/chock positions (station numbers/coordinates)"
+    },
+    "fenderContactZone": {
+      "type": "string",
+      "description": "Fender contact zone (e.g., Midship)"
+    },
+    "shellPlatingRestrictions": {
+      "type": "string",
+      "description": "Shell plating restrictions"
+    },
+    "fenderPointLoadLimit_kN": {
+      "type": "number",
+      "description": "Fender point load limit (kN)"
+    },
+    "preferredFenderType": {
+      "type": "string",
+      "description": "Preferred fender type (e.g., Cone, Cell)"
+    },
+    "maxWindBerthing_kn": {
+      "type": "number",
+      "description": "Maximum wind during berthing (kn)"
+    },
+    "maxWindAlongside_kn": {
+      "type": "number",
+      "description": "Maximum wind alongside (kn)"
+    },
+    "maxCurrentAlongside_kn": {
+      "type": "number",
+      "description": "Maximum current alongside (kn)"
+    },
+    "maxWaveHeight_m": {
+      "type": "number",
+      "description": "Maximum wave height (m)"
+    },
+    "tideRangeMin_m": {
+      "type": "number",
+      "description": "Minimum tide range (m)"
+    },
+    "tideRangeMax_m": {
+      "type": "number",
+      "description": "Maximum tide range (m)"
+    },
+    "tugRequirementsNotes": {
+      "type": "string",
+      "description": "Tug requirements notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Laid Up",
+        "Under Repair",
+        "Scrapped"
+      ],
+      "default": "Active"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the vessel is active (soft delete flag)"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Vessel photo URL"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name"
+  ]
+}

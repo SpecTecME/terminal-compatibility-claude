@@ -1,0 +1,89 @@
+{
+  "name": "MusterStation",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "zoneId": {
+      "type": "string",
+      "description": "Base44 reference to VesselZone"
+    },
+    "zonePublicId": {
+      "type": "string",
+      "description": "Zone publicId for migration"
+    },
+    "musterCode": {
+      "type": "string",
+      "description": "Unique muster station code per vessel (e.g., MS-A)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Muster station name"
+    },
+    "musterType": {
+      "type": "string",
+      "enum": [
+        "PRIMARY",
+        "SECONDARY"
+      ],
+      "description": "Type of muster station"
+    },
+    "deck": {
+      "type": "string",
+      "description": "Deck identifier"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "PORT",
+        "STARBOARD",
+        "CENTER",
+        "NA"
+      ],
+      "description": "Side of vessel"
+    },
+    "locationDescription": {
+      "type": "string",
+      "description": "Location description"
+    },
+    "capacityPersons": {
+      "type": "number",
+      "description": "Capacity in persons (min 0)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DISABLED"
+      ],
+      "default": "ACTIVE",
+      "description": "Muster station status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "musterCode",
+    "name"
+  ]
+}

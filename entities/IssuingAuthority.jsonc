@@ -1,0 +1,69 @@
+{
+  "name": "IssuingAuthority",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name of the issuing authority"
+    },
+    "authority_type": {
+      "type": "string",
+      "enum": [
+        "Flag State",
+        "Class Society",
+        "Port State",
+        "OCIMF",
+        "Terminal",
+        "Owner or Operator",
+        "Manufacturer or Shipyard",
+        "Engineering Consultant",
+        "Other"
+      ],
+      "description": "Type of authority"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration portability"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (related organisation)"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration portability"
+    },
+    "contact_email": {
+      "type": "string",
+      "format": "email",
+      "description": "Contact email for the authority"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "Website of the authority"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name",
+    "authority_type"
+  ]
+}

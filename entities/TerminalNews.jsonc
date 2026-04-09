@@ -1,0 +1,46 @@
+{
+  "name": "TerminalNews",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminal_id": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "title": {
+      "type": "string",
+      "description": "News headline"
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "Brief summary of the news"
+    },
+    "full_url": {
+      "type": "string",
+      "description": "URL to full news article"
+    },
+    "published_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Publication date"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "terminal_id",
+    "title",
+    "excerpt"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "name": "ApprovalSubmission",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vessel_id": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "terminal_id": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berth_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of Base44 berth IDs"
+    },
+    "berthPublicIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of berth publicIds for migration"
+    },
+    "document_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of Base44 document IDs"
+    },
+    "documentPublicIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of document publicIds for migration"
+    },
+    "submission_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of submission"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Under Review",
+        "Approved",
+        "Rejected",
+        "Requires Updates"
+      ],
+      "default": "Draft"
+    },
+    "submitted_by": {
+      "type": "string",
+      "description": "User who submitted"
+    },
+    "reviewer_email": {
+      "type": "string",
+      "description": "Terminal reviewer email"
+    },
+    "review_comments": {
+      "type": "string",
+      "description": "Comments from reviewer"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of review"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vessel_id",
+    "terminal_id",
+    "status"
+  ]
+}

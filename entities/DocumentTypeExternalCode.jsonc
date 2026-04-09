@@ -1,0 +1,76 @@
+{
+  "name": "DocumentTypeExternalCode",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "authorityCompanyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (authority)"
+    },
+    "authorityCompanyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "externalCode": {
+      "type": "string",
+      "description": "External code used by the authority"
+    },
+    "externalName": {
+      "type": "string",
+      "description": "External name/description used by the authority"
+    },
+    "codeType": {
+      "type": "string",
+      "enum": [
+        "Certificate Code",
+        "Document Code",
+        "Regulation Reference",
+        "Other"
+      ],
+      "description": "Type of external code"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about this mapping"
+    },
+    "isPrimary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is the primary mapping for this authority"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this code is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "documentTypeId",
+    "documentTypePublicId",
+    "authorityCompanyId",
+    "authorityCompanyPublicId",
+    "externalCode",
+    "codeType"
+  ]
+}

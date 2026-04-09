@@ -1,0 +1,73 @@
+{
+  "name": "TerminalDocument",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminal_id": {
+      "type": "string",
+      "description": "Base44 reference to Terminal (if terminal-level)"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berth_id": {
+      "type": "string",
+      "description": "Base44 reference to Berth (if berth-level)"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "document_name": {
+      "type": "string",
+      "description": "Document name"
+    },
+    "document_category": {
+      "type": "string",
+      "enum": [
+        "Procedures",
+        "Drawings",
+        "Plans",
+        "Safety Manuals",
+        "Regulations",
+        "Specifications",
+        "Other"
+      ],
+      "description": "Document category"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Document file URL"
+    },
+    "version": {
+      "type": "string",
+      "description": "Document version"
+    },
+    "issue_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date issued"
+    },
+    "description": {
+      "type": "string",
+      "description": "Document description"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "document_name"
+  ]
+}

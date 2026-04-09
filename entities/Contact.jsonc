@@ -1,0 +1,146 @@
+{
+  "name": "Contact",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name (for persons)"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name (for persons)"
+    },
+    "isGroupEmail": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a group mailbox"
+    },
+    "groupName": {
+      "type": "string",
+      "description": "Group mailbox name"
+    },
+    "preferredName": {
+      "type": "string",
+      "description": "Preferred name for greetings"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "phoneMobile": {
+      "type": "string",
+      "description": "Mobile phone number"
+    },
+    "phoneOffice": {
+      "type": "string",
+      "description": "Office phone number"
+    },
+    "whatsapp": {
+      "type": "string",
+      "description": "WhatsApp number"
+    },
+    "preferredContactMethod": {
+      "type": "string",
+      "enum": [
+        "Email",
+        "Mobile",
+        "WhatsApp",
+        "Office",
+        "Other"
+      ],
+      "description": "Preferred contact method"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Contact timezone"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "officeId": {
+      "type": "string",
+      "description": "Base44 reference to CompanyOffice (optional)"
+    },
+    "officePublicId": {
+      "type": "string",
+      "description": "Office publicId for migration"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "jobTitle": {
+      "type": "string",
+      "description": "Job title"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of birth"
+    },
+    "religionOrObservance": {
+      "type": "string",
+      "description": "Religion or observance"
+    },
+    "observanceNotes": {
+      "type": "string",
+      "description": "Notes about religious observances"
+    },
+    "criticalRole": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Security",
+        "Safety"
+      ],
+      "default": "None",
+      "description": "Critical role designation"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the contact is active"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId"
+  ]
+}

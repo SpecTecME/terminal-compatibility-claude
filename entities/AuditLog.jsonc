@@ -1,0 +1,81 @@
+{
+  "name": "AuditLog",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "tableName": {
+      "type": "string",
+      "description": "Name of the table/entity that was modified"
+    },
+    "recordId": {
+      "type": "string",
+      "description": "ID of the modified record"
+    },
+    "recordPublicId": {
+      "type": "string",
+      "description": "Public ID of the modified record"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "Create",
+        "Update",
+        "Delete"
+      ],
+      "description": "Type of action performed"
+    },
+    "fieldName": {
+      "type": "string",
+      "description": "Name of the field that was updated"
+    },
+    "previousValue": {
+      "type": "string",
+      "description": "Previous value before update"
+    },
+    "newValue": {
+      "type": "string",
+      "description": "New value after update"
+    },
+    "userId": {
+      "type": "string",
+      "description": "ID of user who made the change"
+    },
+    "userEmail": {
+      "type": "string",
+      "description": "Email of user who made the change"
+    },
+    "userName": {
+      "type": "string",
+      "description": "Name of user who made the change"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the change"
+    },
+    "ipAddress": {
+      "type": "string",
+      "description": "IP address of the user"
+    },
+    "userAgent": {
+      "type": "string",
+      "description": "Browser/client user agent"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "tableName",
+    "recordId",
+    "action",
+    "userEmail",
+    "timestamp"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "name": "Assignment",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "entityType": {
+      "type": "string",
+      "enum": [
+        "CABIN",
+        "MUSTER_STATION",
+        "LIFEBOAT",
+        "LIFE_RAFT_GROUP",
+        "ACCESS_POINT"
+      ],
+      "description": "Type of entity being assigned to"
+    },
+    "entityId": {
+      "type": "string",
+      "description": "PublicId of the target entity record"
+    },
+    "entityCode": {
+      "type": "string",
+      "description": "Snapshot code for display (e.g., C-801, MS-A)"
+    },
+    "personName": {
+      "type": "string",
+      "description": "Temporary person name field"
+    },
+    "rankName": {
+      "type": "string",
+      "description": "Temporary rank/position name"
+    },
+    "personCategory": {
+      "type": "string",
+      "enum": [
+        "CREW",
+        "SUPERNUMERARY",
+        "PASSENGER",
+        "GUEST_WORKER"
+      ],
+      "description": "Category of person"
+    },
+    "fromDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Assignment start date/time"
+    },
+    "toDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Assignment end date/time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "ENDED"
+      ],
+      "default": "ACTIVE",
+      "description": "Assignment status"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "entityType",
+    "entityId",
+    "entityCode",
+    "personName",
+    "personCategory",
+    "status"
+  ]
+}

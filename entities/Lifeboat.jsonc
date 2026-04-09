@@ -1,0 +1,90 @@
+{
+  "name": "Lifeboat",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "zoneId": {
+      "type": "string",
+      "description": "Base44 reference to VesselZone"
+    },
+    "zonePublicId": {
+      "type": "string",
+      "description": "Zone publicId for migration"
+    },
+    "boatCode": {
+      "type": "string",
+      "description": "Unique boat code per vessel (e.g., LB-P, RB-S)"
+    },
+    "boatType": {
+      "type": "string",
+      "enum": [
+        "LIFEBOAT",
+        "RESCUE_BOAT"
+      ],
+      "description": "Type of boat"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "PORT",
+        "STARBOARD",
+        "CENTER",
+        "NA"
+      ],
+      "description": "Side of vessel"
+    },
+    "deck": {
+      "type": "string",
+      "description": "Deck identifier"
+    },
+    "launchType": {
+      "type": "string",
+      "enum": [
+        "DAVIT",
+        "FREEFALL",
+        "OTHER"
+      ],
+      "description": "Launch mechanism type"
+    },
+    "capacityPersons": {
+      "type": "number",
+      "description": "Capacity in persons (min 0)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "OUT_OF_SERVICE"
+      ],
+      "default": "ACTIVE",
+      "description": "Lifeboat status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "boatCode",
+    "boatType"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "VesselTypeRef",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "primaryType": {
+      "type": "string",
+      "description": "Primary vessel type (e.g., Oil Tanker (Crude))"
+    },
+    "subType": {
+      "type": "string",
+      "description": "Sub-type or size class (e.g., Suezmax)"
+    },
+    "sizeMetric": {
+      "type": "string",
+      "enum": [
+        "DWT",
+        "TEU",
+        "m3",
+        "pax",
+        "LOA_m",
+        "BHP",
+        "BP",
+        "volume",
+        "tonnes",
+        "lane_meters",
+        "CEU",
+        "class"
+      ],
+      "description": "Size metric used"
+    },
+    "typicalSizeRange": {
+      "type": "string",
+      "description": "Typical size range (e.g., 120,000\u2013200,000)"
+    },
+    "definingCharacteristics": {
+      "type": "string",
+      "description": "Key defining characteristics"
+    },
+    "capabilitiesSections": {
+      "type": "string",
+      "description": "Comma-separated capability section labels"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the vessel type is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "primaryType",
+    "subType"
+  ]
+}

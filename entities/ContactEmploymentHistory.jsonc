@@ -1,0 +1,61 @@
+{
+  "name": "ContactEmploymentHistory",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "contactId": {
+      "type": "string",
+      "description": "Base44 reference to Contact"
+    },
+    "contactPublicId": {
+      "type": "string",
+      "description": "Contact publicId for migration"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "positionTitle": {
+      "type": "string",
+      "description": "Position title"
+    },
+    "department": {
+      "type": "string",
+      "description": "Department"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Employment start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Employment end date - null means current"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "contactId",
+    "contactPublicId",
+    "companyId",
+    "companyPublicId",
+    "positionTitle"
+  ]
+}

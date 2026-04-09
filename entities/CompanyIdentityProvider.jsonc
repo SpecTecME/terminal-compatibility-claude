@@ -1,0 +1,168 @@
+{
+  "name": "CompanyIdentityProvider",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (optional for single-tenant deployments)"
+    },
+    "providerName": {
+      "type": "string",
+      "description": "Display name (e.g., Microsoft Entra ID, ADFS, Okta)"
+    },
+    "providerType": {
+      "type": "string",
+      "enum": [
+        "OIDC",
+        "SAML"
+      ],
+      "description": "Identity provider protocol type"
+    },
+    "isEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this provider is currently enabled"
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is the default provider for sign-in routing"
+    },
+    "enforceSSO": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, block local password login (except break-glass admins)"
+    },
+    "allowLocalAdminBypass": {
+      "type": "boolean",
+      "default": true,
+      "description": "Allow break-glass admin accounts to use local login"
+    },
+    "domainAllowlist": {
+      "type": "string",
+      "description": "Comma-separated email domains (e.g., customer.com,customer.ae)"
+    },
+    "jitProvisioningEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Auto-create users on first SSO login"
+    },
+    "jitDefaultRole": {
+      "type": "string",
+      "default": "user",
+      "description": "Default role assigned to JIT-provisioned users"
+    },
+    "groupRoleMappingEnabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Map IdP groups to application roles"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes about this provider"
+    },
+    "issuerUrl": {
+      "type": "string",
+      "description": "OIDC: Issuer URL (e.g., https://login.microsoftonline.com/{tenant}/v2.0)"
+    },
+    "authorizationUrl": {
+      "type": "string",
+      "description": "OIDC: Authorization endpoint URL"
+    },
+    "tokenUrl": {
+      "type": "string",
+      "description": "OIDC: Token endpoint URL"
+    },
+    "userInfoUrl": {
+      "type": "string",
+      "description": "OIDC: UserInfo endpoint URL"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "OIDC: Client ID / Application ID"
+    },
+    "clientSecret": {
+      "type": "string",
+      "description": "OIDC: Client secret (store securely)"
+    },
+    "redirectUri": {
+      "type": "string",
+      "description": "OIDC: Redirect URI registered with IdP"
+    },
+    "scopes": {
+      "type": "string",
+      "default": "openid profile email",
+      "description": "OIDC: Space-separated scopes to request"
+    },
+    "emailClaim": {
+      "type": "string",
+      "default": "email",
+      "description": "OIDC: Claim containing user email"
+    },
+    "nameClaim": {
+      "type": "string",
+      "default": "name",
+      "description": "OIDC: Claim containing user full name"
+    },
+    "groupsClaim": {
+      "type": "string",
+      "description": "OIDC: Claim containing user groups (optional)"
+    },
+    "idpEntityId": {
+      "type": "string",
+      "description": "SAML: IdP Entity ID"
+    },
+    "ssoUrl": {
+      "type": "string",
+      "description": "SAML: Single Sign-On URL"
+    },
+    "x509Certificate": {
+      "type": "string",
+      "description": "SAML: IdP public certificate for signature validation"
+    },
+    "spEntityId": {
+      "type": "string",
+      "description": "SAML: Service Provider Entity ID (this application)"
+    },
+    "acsUrl": {
+      "type": "string",
+      "description": "SAML: Assertion Consumer Service URL"
+    },
+    "logoutUrl": {
+      "type": "string",
+      "description": "SAML: Single Logout URL (optional)"
+    },
+    "emailAttribute": {
+      "type": "string",
+      "default": "email",
+      "description": "SAML: Attribute containing user email"
+    },
+    "nameAttribute": {
+      "type": "string",
+      "default": "displayName",
+      "description": "SAML: Attribute containing user full name"
+    },
+    "groupsAttribute": {
+      "type": "string",
+      "description": "SAML: Attribute containing user groups (optional)"
+    },
+    "nameIdFormat": {
+      "type": "string",
+      "description": "SAML: NameID format (optional)"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "providerName",
+    "providerType"
+  ]
+}

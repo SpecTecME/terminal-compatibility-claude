@@ -1,0 +1,59 @@
+{
+  "name": "ProductTypeRef",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "code": {
+      "type": "string",
+      "description": "Product type code (e.g., LNG, LPG, CONTAINERS)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Product type name"
+    },
+    "productCategory": {
+      "type": "string",
+      "enum": [
+        "GAS",
+        "LIQUID_BULK",
+        "DRY_BULK",
+        "UNITIZED",
+        "PASSENGER",
+        "OTHER"
+      ],
+      "description": "Product category"
+    },
+    "isCryogenic": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the product is cryogenic"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the product type is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "code",
+    "name",
+    "productCategory"
+  ]
+}

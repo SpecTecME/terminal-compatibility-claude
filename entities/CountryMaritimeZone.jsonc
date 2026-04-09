@@ -1,0 +1,51 @@
+{
+  "name": "CountryMaritimeZone",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "countryIso2": {
+      "type": "string",
+      "description": "ISO2 code of the country"
+    },
+    "zonePublicId": {
+      "type": "string",
+      "description": "PublicId of the MaritimeZone entity"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "Coastal",
+        "EEZ",
+        "High Seas"
+      ],
+      "description": "Scope of the maritime zone within the country"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective start date"
+    },
+    "effectiveTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective end date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "countryIso2",
+    "zonePublicId"
+  ]
+}

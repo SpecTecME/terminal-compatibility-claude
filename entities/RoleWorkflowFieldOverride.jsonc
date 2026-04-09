@@ -1,0 +1,51 @@
+{
+  "name": "RoleWorkflowFieldOverride",
+  "type": "object",
+  "properties": {
+    "application_role_id": {
+      "type": "string",
+      "description": "Reference to ApplicationRole"
+    },
+    "workflow_definition_id": {
+      "type": "string",
+      "description": "Reference to WorkflowDefinition"
+    },
+    "workflow_action_id": {
+      "type": "string",
+      "description": "Reference to WorkflowAction that triggers this override"
+    },
+    "resulting_status_id": {
+      "type": "string",
+      "description": "Reference to WorkflowStatus \u2014 the status the entity is IN when this override applies"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "Entity/table name this override applies to"
+    },
+    "field_name": {
+      "type": "string",
+      "description": "Field name within the entity"
+    },
+    "can_read": {
+      "type": "boolean",
+      "default": true,
+      "description": "Override: can the role read this field in this WF status"
+    },
+    "can_update": {
+      "type": "boolean",
+      "default": false,
+      "description": "Override: can the role update this field in this WF status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes about this override"
+    }
+  },
+  "required": [
+    "application_role_id",
+    "workflow_definition_id",
+    "resulting_status_id",
+    "table_name",
+    "field_name"
+  ]
+}

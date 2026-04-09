@@ -1,0 +1,83 @@
+{
+  "name": "VesselTypeCargoPolicy",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to VesselTypeRef"
+    },
+    "vesselTypeRefPublicId": {
+      "type": "string",
+      "description": "VesselTypeRef publicId for migration"
+    },
+    "cargoTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to CargoTypeRef"
+    },
+    "cargoTypeRefPublicId": {
+      "type": "string",
+      "description": "CargoTypeRef publicId for migration"
+    },
+    "isAllowed": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this cargo is allowed"
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a default cargo"
+    },
+    "defaultCapacityValue": {
+      "type": "number",
+      "description": "Default capacity value (min 0)"
+    },
+    "defaultCapacityUnit": {
+      "type": "string",
+      "enum": [
+        "m3",
+        "MT",
+        "TEU",
+        "CEU",
+        "pax",
+        "lane_meters"
+      ],
+      "description": "Default capacity unit"
+    },
+    "capacityBasis": {
+      "type": "string",
+      "enum": [
+        "DESIGN",
+        "NOMINAL",
+        "TYPICAL",
+        "MAX"
+      ],
+      "description": "Capacity basis"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this policy is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselTypeRefId",
+    "vesselTypeRefPublicId",
+    "cargoTypeRefId",
+    "cargoTypeRefPublicId"
+  ]
+}

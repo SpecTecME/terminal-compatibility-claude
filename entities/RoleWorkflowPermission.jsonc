@@ -1,0 +1,30 @@
+{
+  "name": "RoleWorkflowPermission",
+  "type": "object",
+  "properties": {
+    "application_role_id": {
+      "type": "string",
+      "description": "Reference to ApplicationRole (set when assigning a role)"
+    },
+    "application_user_id": {
+      "type": "string",
+      "description": "Reference to ApplicationUser (set when assigning a specific user directly)"
+    },
+    "workflow_definition_id": {
+      "type": "string",
+      "description": "Reference to WorkflowDefinition"
+    },
+    "workflow_action_id": {
+      "type": "string",
+      "description": "Reference to WorkflowAction"
+    },
+    "allowed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "workflow_definition_id",
+    "workflow_action_id"
+  ]
+}

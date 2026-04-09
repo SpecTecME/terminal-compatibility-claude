@@ -1,0 +1,38 @@
+{
+  "name": "SystemTagAssignment",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "contactId": {
+      "type": "string",
+      "description": "Base44 reference to Contact"
+    },
+    "contactPublicId": {
+      "type": "string",
+      "description": "Contact publicId for migration"
+    },
+    "systemTagId": {
+      "type": "string",
+      "description": "Base44 reference to SystemTag"
+    },
+    "systemTagPublicId": {
+      "type": "string",
+      "description": "SystemTag publicId for migration"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "contactId",
+    "contactPublicId",
+    "systemTagId",
+    "systemTagPublicId"
+  ]
+}

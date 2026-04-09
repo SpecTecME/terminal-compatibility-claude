@@ -1,0 +1,103 @@
+{
+  "name": "TerminalDocumentRequirement",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berthId": {
+      "type": "string",
+      "description": "Base44 reference to Berth - null means terminal-wide"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "appliesLevel": {
+      "type": "string",
+      "enum": [
+        "Terminal",
+        "Berth"
+      ],
+      "description": "Whether requirement applies to terminal-wide or specific berth"
+    },
+    "submissionStage": {
+      "type": "string",
+      "enum": [
+        "Registration",
+        "Renewal",
+        "PreVisit"
+      ],
+      "description": "When document must be submitted"
+    },
+    "isRequired": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this document is required"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Date from when this document is required by the terminal"
+    },
+    "validTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective end date - null means current/open-ended"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this requirement is active"
+    },
+    "isMandatory": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this document is mandatory or optional"
+    },
+    "priority": {
+      "type": "number",
+      "description": "Display priority/order"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes and instructions"
+    },
+    "vesselConditionJson": {
+      "type": "string",
+      "description": "Future: JSON rule for conditional requirements based on vessel properties"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "terminalId",
+    "terminalPublicId",
+    "documentTypeId",
+    "documentTypePublicId",
+    "appliesLevel",
+    "submissionStage",
+    "effectiveFrom"
+  ]
+}

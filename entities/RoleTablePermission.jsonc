@@ -1,0 +1,34 @@
+{
+  "name": "RoleTablePermission",
+  "type": "object",
+  "properties": {
+    "application_role_id": {
+      "type": "string",
+      "description": "Reference to ApplicationRole"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "Entity/table name"
+    },
+    "can_read": {
+      "type": "boolean",
+      "default": false
+    },
+    "can_insert": {
+      "type": "boolean",
+      "default": false
+    },
+    "can_update": {
+      "type": "boolean",
+      "default": false
+    },
+    "can_delete": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "application_role_id",
+    "table_name"
+  ]
+}

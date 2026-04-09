@@ -1,0 +1,26 @@
+{
+  "name": "ApplicationRole",
+  "type": "object",
+  "properties": {
+    "role_name": {
+      "type": "string",
+      "description": "Role name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Role description"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the role is active"
+    },
+    "inherits_from_role_id": {
+      "type": "string",
+      "description": "Optional parent role for inheritance"
+    }
+  },
+  "required": [
+    "role_name"
+  ]
+}

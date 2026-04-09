@@ -1,0 +1,142 @@
+{
+  "name": "Document",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability, generate on create, do not edit"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier, auto-filled (e.g., default-tenant)"
+    },
+    "vessel_id": {
+      "type": "string",
+      "description": "Base44 reference to Vessel (Base44 internal id)"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId copied from selected Vessel, do not edit"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType (Base44 internal id)"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId copied from selected DocumentType, do not edit"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal (for terminal/berth-specific documents)"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "berthId": {
+      "type": "string",
+      "description": "Base44 reference to Berth (for berth-specific documents)"
+    },
+    "berthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "terminalFormId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalForm (questionnaire definition/version)"
+    },
+    "terminalFormPublicId": {
+      "type": "string",
+      "description": "TerminalForm publicId for migration"
+    },
+    "intendedVisitDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Intended visit date / ETA (for per-visit/event-driven documents)"
+    },
+    "document_name": {
+      "type": "string",
+      "description": "Document name/title"
+    },
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "Permanent",
+        "Renewable",
+        "Voyage-Specific"
+      ],
+      "description": "LEGACY FIELD, deprecated, read-only, do not write to this field"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Certificates",
+        "SIRE Reports",
+        "Crew Documentation",
+        "Insurance",
+        "Classification",
+        "Safety",
+        "Environmental",
+        "Commercial",
+        "Other"
+      ],
+      "description": "LEGACY FIELD, deprecated, read-only, do not write to this field"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "Uploaded file URL"
+    },
+    "issue_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Document issue date"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Document expiry date"
+    },
+    "issuing_authority": {
+      "type": "string",
+      "description": "LEGACY FIELD, deprecated, read-only, do not write to this field"
+    },
+    "issuingAuthorityId": {
+      "type": "string",
+      "description": "Base44 reference to IssuingAuthority (Base44 internal id)"
+    },
+    "issuingAuthorityPublicId": {
+      "type": "string",
+      "description": "IssuingAuthority publicId copied from selected IssuingAuthority, do not edit"
+    },
+    "reference_number": {
+      "type": "string",
+      "description": "Document reference number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Valid",
+        "Expiring Soon",
+        "Expired",
+        "Superseded"
+      ],
+      "default": "Valid"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the document is active (soft delete flag)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vessel_id",
+    "document_name"
+  ]
+}

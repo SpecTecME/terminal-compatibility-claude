@@ -1,0 +1,99 @@
+{
+  "name": "CompanyLegalEntity",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company"
+    },
+    "companyPublicId": {
+      "type": "string",
+      "description": "Company publicId for migration"
+    },
+    "legalEntityName": {
+      "type": "string",
+      "description": "Legal entity name"
+    },
+    "registrationNo": {
+      "type": "string",
+      "description": "Company registration number"
+    },
+    "taxNo": {
+      "type": "string",
+      "description": "Tax identification number"
+    },
+    "vatNo": {
+      "type": "string",
+      "description": "VAT number"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "legalAddressLine1": {
+      "type": "string",
+      "description": "Legal address line 1"
+    },
+    "legalCity": {
+      "type": "string",
+      "description": "Legal address city"
+    },
+    "legalPostalCode": {
+      "type": "string",
+      "description": "Legal address postal code"
+    },
+    "legalCountryId": {
+      "type": "string",
+      "description": "Legal address country reference"
+    },
+    "billingSameAsLegal": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether billing address is same as legal address"
+    },
+    "billingAddressLine1": {
+      "type": "string",
+      "description": "Billing address line 1"
+    },
+    "billingCity": {
+      "type": "string",
+      "description": "Billing address city"
+    },
+    "billingPostalCode": {
+      "type": "string",
+      "description": "Billing address postal code"
+    },
+    "billingCountryId": {
+      "type": "string",
+      "description": "Billing address country reference"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this legal entity is active"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "companyId",
+    "companyPublicId",
+    "legalEntityName"
+  ]
+}

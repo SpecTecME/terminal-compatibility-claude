@@ -1,0 +1,49 @@
+{
+  "name": "UdfListValue",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "module": {
+      "type": "string",
+      "enum": [
+        "Vessel"
+      ],
+      "description": "Module this value belongs to"
+    },
+    "udfCode": {
+      "type": "string",
+      "enum": [
+        "UDF01",
+        "UDF02"
+      ],
+      "description": "UDF slot this value belongs to"
+    },
+    "value": {
+      "type": "string",
+      "description": "Display value shown in dropdown"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this value is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "module",
+    "udfCode",
+    "value"
+  ]
+}

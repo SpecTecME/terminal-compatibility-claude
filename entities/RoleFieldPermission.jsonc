@@ -1,0 +1,33 @@
+{
+  "name": "RoleFieldPermission",
+  "type": "object",
+  "properties": {
+    "application_role_id": {
+      "type": "string",
+      "description": "Reference to ApplicationRole"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "Entity/table name"
+    },
+    "field_name": {
+      "type": "string",
+      "description": "Field name within the entity"
+    },
+    "can_read": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can the role read this field"
+    },
+    "can_update": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can the role update/edit this field"
+    }
+  },
+  "required": [
+    "application_role_id",
+    "table_name",
+    "field_name"
+  ]
+}

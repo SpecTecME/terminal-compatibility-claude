@@ -1,0 +1,94 @@
+{
+  "name": "Cabin",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "zoneId": {
+      "type": "string",
+      "description": "Base44 reference to VesselZone"
+    },
+    "zonePublicId": {
+      "type": "string",
+      "description": "Zone publicId for migration"
+    },
+    "cabinCode": {
+      "type": "string",
+      "description": "Unique cabin code per vessel (e.g., C-101)"
+    },
+    "cabinName": {
+      "type": "string",
+      "description": "Cabin name"
+    },
+    "deck": {
+      "type": "string",
+      "description": "Deck identifier"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "PORT",
+        "STARBOARD",
+        "CENTER",
+        "NA"
+      ],
+      "description": "Side of vessel"
+    },
+    "cabinType": {
+      "type": "string",
+      "enum": [
+        "SINGLE",
+        "DOUBLE",
+        "MULTI",
+        "OFFICER",
+        "CREW",
+        "GUEST"
+      ],
+      "description": "Type of cabin"
+    },
+    "bedCount": {
+      "type": "number",
+      "description": "Number of beds (min 1)"
+    },
+    "ensuite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has ensuite bathroom"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "OUT_OF_SERVICE"
+      ],
+      "default": "ACTIVE",
+      "description": "Cabin status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "cabinCode",
+    "bedCount"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "HelpContextRule",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier for multi-tenancy."
+    },
+    "pageKey": {
+      "type": "string",
+      "description": "The key of the page where this rule applies (e.g., 'RegistrationWizard', 'VesselDetail')."
+    },
+    "intentId": {
+      "type": "string",
+      "description": "A reference to the HelpIntent that should be prioritized on this page."
+    },
+    "intentPublicId": {
+      "type": "string",
+      "description": "Public UUID of the referenced HelpIntent for migration."
+    },
+    "rank": {
+      "type": "number",
+      "default": 10,
+      "description": "The ranking of this intent for the given page context (lower number is higher rank)."
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Soft delete flag."
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "pageKey",
+    "intentId",
+    "intentPublicId"
+  ]
+}

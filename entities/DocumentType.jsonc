@@ -1,0 +1,138 @@
+{
+  "name": "DocumentType",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Document type name - unique"
+    },
+    "code": {
+      "type": "string",
+      "description": "Optional unique code"
+    },
+    "searchAliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative search terms and industry abbreviations (not displayed in UI)"
+    },
+    "categoryId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentCategory"
+    },
+    "categoryPublicId": {
+      "type": "string",
+      "description": "DocumentCategory publicId for migration"
+    },
+    "appliesTo": {
+      "type": "string",
+      "enum": [
+        "Vessel",
+        "Terminal",
+        "Berth"
+      ],
+      "description": "Where this document type applies"
+    },
+    "documentValidityType": {
+      "type": "string",
+      "enum": [
+        "PermanentStatic",
+        "TerminalEventDriven",
+        "RenewableCertified",
+        "VettingTimeSensitive"
+      ],
+      "description": "Document validity type"
+    },
+    "isExpiryRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether expiry date is required"
+    },
+    "defaultValidityDuration": {
+      "type": "number",
+      "description": "Default validity duration"
+    },
+    "validityUnit": {
+      "type": "string",
+      "enum": [
+        "Days",
+        "Months",
+        "Years"
+      ],
+      "description": "Unit for validity duration"
+    },
+    "reminderLeadTime": {
+      "type": "number",
+      "default": 30,
+      "description": "Lead time for reminders"
+    },
+    "reminderUnit": {
+      "type": "string",
+      "enum": [
+        "Days",
+        "Months"
+      ],
+      "description": "Unit for reminder lead time"
+    },
+    "issuingAuthorityDefault": {
+      "type": "string",
+      "enum": [
+        "Flag State",
+        "Class Society",
+        "OCIMF",
+        "Terminal",
+        "Owner or Operator",
+        "Manufacturer or Shipyard",
+        "Engineering Consultant"
+      ],
+      "description": "Default issuing authority"
+    },
+    "allowedIssuers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Flag State",
+          "Class Society",
+          "OCIMF",
+          "Terminal",
+          "Owner or Operator",
+          "Manufacturer or Shipyard",
+          "Engineering Consultant"
+        ]
+      },
+      "description": "Allowed issuing authorities"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the document type is active"
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "Display sort order"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the document type"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name"
+  ]
+}

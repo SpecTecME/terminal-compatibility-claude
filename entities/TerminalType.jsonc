@@ -1,0 +1,27 @@
+{
+  "name": "TerminalType",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Terminal type name (e.g., LNG, FSRU, LPG)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the terminal type"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "name"
+  ]
+}

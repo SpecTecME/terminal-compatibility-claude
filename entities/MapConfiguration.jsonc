@@ -1,0 +1,56 @@
+{
+  "name": "MapConfiguration",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "mapMode": {
+      "type": "string",
+      "enum": [
+        "BUNDLED",
+        "EXTERNAL"
+      ],
+      "default": "BUNDLED",
+      "description": "Map tile source: BUNDLED (offline PMTiles) or EXTERNAL (OSM tiles)"
+    },
+    "pmtilesUrl": {
+      "type": "string",
+      "default": "/tiles/base-map.pmtiles",
+      "description": "Path to PMTiles file for bundled mode"
+    },
+    "externalTileUrl": {
+      "type": "string",
+      "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "description": "External tile URL (only used if mapMode is EXTERNAL)"
+    },
+    "useMaritimeZones": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to display maritime zone overlays on the map"
+    },
+    "enableExternalGeocoding": {
+      "type": "boolean",
+      "default": false,
+      "description": "DEPRECATED - External geocoding removed, always use internal search"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this configuration is active"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes about map configuration"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId"
+  ]
+}

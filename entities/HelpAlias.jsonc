@@ -1,0 +1,38 @@
+{
+  "name": "HelpAlias",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier for multi-tenancy."
+    },
+    "intentId": {
+      "type": "string",
+      "description": "A reference to the HelpIntent this alias triggers."
+    },
+    "intentPublicId": {
+      "type": "string",
+      "description": "Public UUID of the referenced HelpIntent for migration."
+    },
+    "phrase": {
+      "type": "string",
+      "description": "An informal phrase or question a user might type that maps to the intent (e.g., 'why cant I register')."
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Soft delete flag."
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "intentId",
+    "intentPublicId",
+    "phrase"
+  ]
+}

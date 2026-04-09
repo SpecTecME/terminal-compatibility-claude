@@ -1,0 +1,30 @@
+{
+  "name": "ApplicationFunction",
+  "type": "object",
+  "properties": {
+    "function_name": {
+      "type": "string",
+      "description": "Display name of the function"
+    },
+    "function_key": {
+      "type": "string",
+      "description": "Unique key identifier"
+    },
+    "module_name": {
+      "type": "string",
+      "description": "Module this function belongs to"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the function does"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "function_name",
+    "function_key"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "UserTag",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Base44 reference to User"
+    },
+    "userPublicId": {
+      "type": "string",
+      "description": "User publicId for migration"
+    },
+    "name": {
+      "type": "string",
+      "description": "Tag name - unique per user"
+    },
+    "color": {
+      "type": "string",
+      "description": "Optional color for UI display"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "userId",
+    "userPublicId",
+    "name"
+  ]
+}

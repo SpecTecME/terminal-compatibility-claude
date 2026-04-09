@@ -1,0 +1,26 @@
+{
+  "name": "RoleFunctionPermission",
+  "type": "object",
+  "properties": {
+    "application_role_id": {
+      "type": "string",
+      "description": "Reference to ApplicationRole"
+    },
+    "function_name": {
+      "type": "string",
+      "description": "Function name (from ApplicationFunction catalog)"
+    },
+    "can_execute": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes about this permission"
+    }
+  },
+  "required": [
+    "application_role_id",
+    "function_name"
+  ]
+}

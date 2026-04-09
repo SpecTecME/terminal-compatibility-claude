@@ -1,0 +1,85 @@
+{
+  "name": "VesselZone",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "parentZoneId": {
+      "type": "string",
+      "description": "Base44 reference to parent VesselZone"
+    },
+    "parentZonePublicId": {
+      "type": "string",
+      "description": "Parent zone publicId for migration"
+    },
+    "code": {
+      "type": "string",
+      "description": "Unique zone code per vessel (e.g., ACCOM, ACCOM-AFT, DECK-05)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Zone name"
+    },
+    "zoneType": {
+      "type": "string",
+      "enum": [
+        "VESSEL",
+        "AREA",
+        "DECK",
+        "SECTION",
+        "ROOM_GROUP"
+      ],
+      "description": "Type of zone"
+    },
+    "deck": {
+      "type": "string",
+      "description": "Deck identifier (e.g., Deck 05)"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "PORT",
+        "STARBOARD",
+        "CENTER",
+        "NA"
+      ],
+      "description": "Side of vessel"
+    },
+    "description": {
+      "type": "string",
+      "description": "Zone description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ],
+      "default": "ACTIVE",
+      "description": "Zone status"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselId",
+    "vesselPublicId",
+    "code",
+    "name",
+    "zoneType"
+  ]
+}

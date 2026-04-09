@@ -1,0 +1,103 @@
+{
+  "name": "DocumentUpload",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "uploadedForVesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel (if applicable)"
+    },
+    "uploadedForVesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "uploadedForTerminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal (if applicable)"
+    },
+    "uploadedForTerminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "uploadedForBerthId": {
+      "type": "string",
+      "description": "Base44 reference to Berth (if applicable)"
+    },
+    "uploadedForBerthPublicId": {
+      "type": "string",
+      "description": "Berth publicId for migration"
+    },
+    "appliesTo": {
+      "type": "string",
+      "enum": [
+        "Vessel",
+        "Terminal",
+        "Berth"
+      ],
+      "description": "Derived from which entity is populated"
+    },
+    "originalFileName": {
+      "type": "string",
+      "description": "Original file name from upload"
+    },
+    "userDocumentTitle": {
+      "type": "string",
+      "description": "User-provided document title"
+    },
+    "fileUrl": {
+      "type": "string",
+      "description": "Uploaded file URL"
+    },
+    "issueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Document issue date"
+    },
+    "expiryDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Document expiry date"
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Under Review",
+        "Accepted",
+        "Rejected",
+        "Expired"
+      ],
+      "default": "Draft",
+      "description": "Current review status"
+    },
+    "reviewNotes": {
+      "type": "string",
+      "description": "Review notes and comments"
+    },
+    "uploadedBy": {
+      "type": "string",
+      "description": "Email of user who uploaded"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "documentTypeId"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "TerminalMarineAccess",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal - unique, one record per terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Terminal timezone (e.g., UTC+3)"
+    },
+    "approachChannelDepthMCD": {
+      "type": "number",
+      "description": "Approach channel depth in metres below chart datum"
+    },
+    "basinOrBerthDepthMCD": {
+      "type": "number",
+      "description": "Basin or inner depth in metres below chart datum"
+    },
+    "pilotageRequired": {
+      "type": "boolean",
+      "description": "Whether pilotage is required"
+    },
+    "pilotageNotes": {
+      "type": "string",
+      "description": "Pilotage notes and instructions"
+    },
+    "tugsRequired": {
+      "type": "boolean",
+      "description": "Whether tugs are required"
+    },
+    "tugsNotes": {
+      "type": "string",
+      "description": "Tug requirements notes"
+    },
+    "navigationNotes": {
+      "type": "string",
+      "description": "General navigation notes"
+    },
+    "dataSource": {
+      "type": "string",
+      "description": "Data source reference"
+    },
+    "lastVerifiedDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when data was last verified"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "terminalId",
+    "terminalPublicId"
+  ]
+}

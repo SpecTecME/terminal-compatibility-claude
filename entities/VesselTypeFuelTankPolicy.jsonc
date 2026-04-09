@@ -1,0 +1,75 @@
+{
+  "name": "VesselTypeFuelTankPolicy",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "vesselTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to VesselTypeRef"
+    },
+    "vesselTypeRefPublicId": {
+      "type": "string",
+      "description": "VesselTypeRef publicId for migration"
+    },
+    "fuelTypeRefId": {
+      "type": "string",
+      "description": "Base44 reference to FuelTypeRef"
+    },
+    "fuelTypeRefPublicId": {
+      "type": "string",
+      "description": "FuelTypeRef publicId for migration"
+    },
+    "tankRole": {
+      "type": "string",
+      "enum": [
+        "STORAGE",
+        "SERVICE_DAY_TANK",
+        "SETTLING",
+        "DRAIN",
+        "SLUDGE"
+      ],
+      "description": "Role/type of fuel tank"
+    },
+    "isAllowed": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this configuration is allowed"
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a default configuration"
+    },
+    "minCount": {
+      "type": "number",
+      "description": "Minimum number of tanks"
+    },
+    "recommendedCount": {
+      "type": "number",
+      "description": "Recommended number of tanks"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this policy is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "vesselTypeRefId",
+    "fuelTypeRefId",
+    "tankRole"
+  ]
+}

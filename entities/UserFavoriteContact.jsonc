@@ -1,0 +1,46 @@
+{
+  "name": "UserFavoriteContact",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Base44 reference to User"
+    },
+    "userPublicId": {
+      "type": "string",
+      "description": "User publicId for migration"
+    },
+    "contactId": {
+      "type": "string",
+      "description": "Base44 reference to Contact"
+    },
+    "contactPublicId": {
+      "type": "string",
+      "description": "Contact publicId for migration"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal - optional context"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "userId",
+    "userPublicId",
+    "contactId",
+    "contactPublicId"
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "name": "MaritimeZone",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier - for global zones use 'global'"
+    },
+    "code": {
+      "type": "string",
+      "description": "Unique zone code (e.g., ECA_SECA, ECA_NECA)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Zone name"
+    },
+    "zoneType": {
+      "type": "string",
+      "enum": [
+        "ECA_SECA",
+        "ECA_NECA",
+        "MARPOL_SPECIAL_AREA",
+        "PSSA",
+        "WAR_RISK",
+        "PIRACY_HRA",
+        "COMPANY_TRADING_AREA"
+      ],
+      "description": "Type of maritime zone"
+    },
+    "authority": {
+      "type": "string",
+      "enum": [
+        "IMO",
+        "EU",
+        "US_EPA",
+        "Company",
+        "Other"
+      ],
+      "description": "Governing authority"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective start date"
+    },
+    "effectiveTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective end date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Planned",
+        "Retired"
+      ],
+      "default": "Active",
+      "description": "Zone status"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the zone is active and should be displayed"
+    },
+    "displayOrder": {
+      "type": "number",
+      "description": "Display order in legend (lower numbers first)"
+    },
+    "color": {
+      "type": "string",
+      "description": "Hex color code for zone display (e.g., #FF5733)"
+    },
+    "fillOpacity": {
+      "type": "number",
+      "default": 0.12,
+      "description": "Fill opacity for zone (0-1)"
+    },
+    "strokeOpacity": {
+      "type": "number",
+      "default": 0.7,
+      "description": "Stroke opacity for zone border (0-1)"
+    },
+    "strokeWeight": {
+      "type": "number",
+      "default": 1,
+      "description": "Stroke weight for zone border in pixels"
+    },
+    "geometryType": {
+      "type": "string",
+      "enum": [
+        "Polygon",
+        "MultiPolygon",
+        "BBox"
+      ],
+      "description": "GeoJSON geometry type"
+    },
+    "geoJson": {
+      "type": "string",
+      "description": "GeoJSON FeatureCollection as text"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "code",
+    "name",
+    "zoneType"
+  ]
+}

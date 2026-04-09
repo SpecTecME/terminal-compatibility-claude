@@ -1,0 +1,67 @@
+{
+  "name": "TerminalRegistrationEmailDraft",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "applicationId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalRegistrationApplication"
+    },
+    "applicationPublicId": {
+      "type": "string",
+      "description": "Application publicId for migration"
+    },
+    "to": {
+      "type": "string",
+      "description": "To email addresses (semicolon separated)"
+    },
+    "cc": {
+      "type": "string",
+      "description": "CC email addresses (semicolon separated)"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Email subject"
+    },
+    "body": {
+      "type": "string",
+      "description": "Email body"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "READY",
+        "SENT",
+        "FAILED"
+      ],
+      "default": "DRAFT",
+      "description": "Email status"
+    },
+    "sentAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Sent timestamp"
+    },
+    "lastError": {
+      "type": "string",
+      "description": "Last error message if failed"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "applicationId",
+    "applicationPublicId",
+    "to",
+    "subject",
+    "body"
+  ]
+}

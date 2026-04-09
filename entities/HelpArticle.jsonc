@@ -1,0 +1,60 @@
+{
+  "name": "HelpArticle",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier for multi-tenancy."
+    },
+    "title": {
+      "type": "string",
+      "description": "The main title of the help article."
+    },
+    "summary": {
+      "type": "string",
+      "description": "A short, user-readable summary of the article's content."
+    },
+    "contentMarkdown": {
+      "type": "string",
+      "description": "The full content of the help article, formatted in Markdown."
+    },
+    "category": {
+      "type": "string",
+      "description": "The category this article belongs to (e.g., Registration, Documents, Terminals)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "default": "Active",
+      "description": "Publication status of the article."
+    },
+    "sortOrder": {
+      "type": "number",
+      "description": "The display order of the article within its category."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional internal notes for administrators about the article."
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Soft delete flag."
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "title",
+    "contentMarkdown",
+    "category",
+    "status"
+  ]
+}

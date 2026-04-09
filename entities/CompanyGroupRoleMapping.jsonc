@@ -1,0 +1,59 @@
+{
+  "name": "CompanyGroupRoleMapping",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "companyId": {
+      "type": "string",
+      "description": "Base44 reference to Company (optional for single-tenant deployments)"
+    },
+    "providerId": {
+      "type": "string",
+      "description": "Base44 reference to CompanyIdentityProvider"
+    },
+    "groupKey": {
+      "type": "string",
+      "description": "Group ID or group name from IdP (e.g., TerminalAdmins, VesselEditors)"
+    },
+    "groupDisplayName": {
+      "type": "string",
+      "description": "Human-readable group name for display"
+    },
+    "mappedRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "description": "Application role to assign when user is in this group"
+    },
+    "priority": {
+      "type": "number",
+      "default": 100,
+      "description": "Mapping priority (lower = higher priority, for conflict resolution)"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this mapping is active"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Admin notes about this mapping"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "providerId",
+    "groupKey",
+    "mappedRole"
+  ]
+}

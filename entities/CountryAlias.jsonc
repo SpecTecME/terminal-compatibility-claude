@@ -1,0 +1,37 @@
+{
+  "name": "CountryAlias",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "countryId": {
+      "type": "string",
+      "description": "Base44 reference to Country"
+    },
+    "countryPublicId": {
+      "type": "string",
+      "description": "Country publicId for migration"
+    },
+    "alias": {
+      "type": "string",
+      "description": "Alternative name for the country (e.g., USA, South Korea)"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this alias is active"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "countryId",
+    "alias"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "TerminalRegistrationChecklistItem",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "applicationId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalRegistrationApplication"
+    },
+    "applicationPublicId": {
+      "type": "string",
+      "description": "Application publicId for migration"
+    },
+    "requirementId": {
+      "type": "string",
+      "description": "Base44 reference to TerminalDocumentRequirement"
+    },
+    "requirementPublicId": {
+      "type": "string",
+      "description": "Requirement publicId for migration"
+    },
+    "documentTypeId": {
+      "type": "string",
+      "description": "Base44 reference to DocumentType"
+    },
+    "documentTypePublicId": {
+      "type": "string",
+      "description": "DocumentType publicId for migration"
+    },
+    "isMandatory": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether requirement is mandatory"
+    },
+    "validFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Requirement effective date"
+    },
+    "evaluationStatus": {
+      "type": "string",
+      "enum": [
+        "SATISFIED",
+        "MISSING",
+        "EXPIRED",
+        "NEEDS_REVIEW",
+        "NOT_APPLICABLE"
+      ],
+      "default": "MISSING",
+      "description": "Evaluation status"
+    },
+    "matchedVesselDocumentId": {
+      "type": "string",
+      "description": "Base44 reference to matched Document"
+    },
+    "matchedVesselDocumentPublicId": {
+      "type": "string",
+      "description": "Matched document publicId"
+    },
+    "comments": {
+      "type": "string",
+      "description": "Short comments"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "applicationId",
+    "applicationPublicId",
+    "requirementId",
+    "requirementPublicId"
+  ]
+}

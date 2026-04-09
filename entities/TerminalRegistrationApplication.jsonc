@@ -1,0 +1,105 @@
+{
+  "name": "TerminalRegistrationApplication",
+  "type": "object",
+  "properties": {
+    "publicId": {
+      "type": "string",
+      "description": "UUID for migration portability"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Tenant identifier"
+    },
+    "applicationNumber": {
+      "type": "string",
+      "description": "Auto-generated unique number (e.g., REG-000001)"
+    },
+    "terminalId": {
+      "type": "string",
+      "description": "Base44 reference to Terminal"
+    },
+    "terminalPublicId": {
+      "type": "string",
+      "description": "Terminal publicId for migration"
+    },
+    "vesselId": {
+      "type": "string",
+      "description": "Base44 reference to Vessel"
+    },
+    "vesselPublicId": {
+      "type": "string",
+      "description": "Vessel publicId for migration"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "IN_PROGRESS",
+        "READY_TO_SUBMIT",
+        "SUBMITTED",
+        "UNDER_REVIEW",
+        "APPROVED",
+        "REJECTED",
+        "SUSPENDED"
+      ],
+      "default": "DRAFT",
+      "description": "Application status"
+    },
+    "documentApprovalMode": {
+      "type": "string",
+      "enum": [
+        "COMPLEX",
+        "SIMPLE"
+      ],
+      "description": "The document approval mode used for this application"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Short notes"
+    },
+    "computedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last evaluation time"
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Submission timestamp"
+    },
+    "submittedByUserId": {
+      "type": "string",
+      "description": "User who submitted"
+    },
+    "approvedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Approval timestamp"
+    },
+    "rejectedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Rejection timestamp"
+    },
+    "rejectionReason": {
+      "type": "string",
+      "description": "Reason for rejection"
+    },
+    "document_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of document IDs linked to this application (Simple mode)"
+    }
+  },
+  "required": [
+    "publicId",
+    "tenantId",
+    "applicationNumber",
+    "terminalId",
+    "terminalPublicId",
+    "vesselId",
+    "vesselPublicId"
+  ]
+}
