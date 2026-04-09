@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx vite:*)"
+      "Bash(npx vite:*)",
+      "Bash(dotnet --version)",
+      "Bash(dotnet ef:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)"
     ]
   }
 }

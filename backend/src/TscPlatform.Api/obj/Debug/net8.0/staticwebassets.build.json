@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ehCOMNyZZqVNCA/yyxm9/v8q3zeZbJgkCDeD0PxvdOU=",
+  "Source": "TscPlatform.Api",
+  "BasePath": "_content/TscPlatform.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
