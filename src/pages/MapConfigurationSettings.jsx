@@ -6,7 +6,6 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Loader2, Save, Map } from 'lucide-react';
-import BackToConfiguration from '../components/configuration/BackToConfiguration';
 
 export default function MapConfigurationSettings() {
   const queryClient = useQueryClient();
@@ -57,10 +56,6 @@ export default function MapConfigurationSettings() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <div className="flex items-center gap-3">
-        <BackToConfiguration to="ConfigurationAppSettings" label="Application Settings" />
-      </div>
-
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Map Configuration</h1>
         <p className="text-gray-600 mt-1">Configure map display settings and maritime zone overlays</p>

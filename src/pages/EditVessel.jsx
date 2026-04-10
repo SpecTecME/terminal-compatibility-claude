@@ -133,7 +133,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { ArrowLeft, Ship, Save, Flag, Ruler, Boxes, Plug, Anchor, Gauge, Wind } from 'lucide-react';
+import { Ship, Save, Flag, Ruler, Boxes, Plug, Anchor, Gauge, Wind } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -265,13 +265,8 @@ export default function EditVessel() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link to={createPageUrl(`VesselDetail?id=${vesselId}`)}>
-            <Button type="button" variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-          </Link>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Edit Vessel</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Vessel</h1>
             <p className="text-gray-600 mt-1">{vessel.name}</p>
           </div>
         </div>

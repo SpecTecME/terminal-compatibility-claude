@@ -194,9 +194,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
-  FileText, 
-  Upload, 
-  ArrowLeft,
+  FileText,
+  Upload,
   Ship,
   Calendar,
   Save,
@@ -396,11 +395,6 @@ export default function UploadDocument() {
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link to={preselectedVessel ? createPageUrl(`VesselDetail?id=${preselectedVessel}`) : createPageUrl('Documents')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Upload Document</h1>
           <p className="text-gray-600 mt-1">Add a new document to the registry</p>

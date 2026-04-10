@@ -70,8 +70,7 @@ import {
   LayoutList,
   X,
   Star,
-  ChevronRight,
-  ArrowLeft
+  ChevronRight
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -288,11 +287,6 @@ export default function TerminalComplexes() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('Dashboard')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div className="flex-1 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Terminal Complexes</h1>

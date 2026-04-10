@@ -4,8 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
-  Ship, 
-  ArrowLeft,
+  Ship,
   Building2,
   FileText,
   CheckCircle,
@@ -314,11 +313,6 @@ export default function VesselDetail() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Link to={createPageUrl('Vessels')}>
-            <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-          </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{vessel.name}</h1>
             <p className="text-sm text-gray-600">

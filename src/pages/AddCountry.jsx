@@ -78,7 +78,6 @@ import { base44 } from '@/api/base44Client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -139,13 +138,8 @@ export default function AddCountry() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('Countries')}>
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Add Country</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Country</h1>
           <p className="text-gray-600 mt-1">Create a new country record</p>
         </div>
       </div>

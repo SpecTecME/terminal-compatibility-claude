@@ -99,7 +99,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { ArrowLeft, Edit, Building2, Globe, MapPin, Tag as TagIcon, Mail, Phone, Users } from 'lucide-react';
+import { Edit, Building2, Globe, MapPin, Tag as TagIcon, Mail, Phone, Users } from 'lucide-react';
 import UserTagManager from '../components/tags/UserTagManager';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -166,11 +166,6 @@ export default function CompanyDetail() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Link to={createPageUrl('Companies')}>
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-          </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{company.name}</h1>
             <div className="flex items-center gap-2 mt-1">

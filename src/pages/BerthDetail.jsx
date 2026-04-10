@@ -111,8 +111,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
-  Anchor, 
-  ArrowLeft,
+  Anchor,
   Building2,
   Ship,
   FileText,
@@ -436,14 +435,6 @@ export default function BerthDetail() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link to={fromPage === 'terminal' && terminal ? createPageUrl(`TerminalDetail?id=${terminal.id}&tab=berths`) : createPageUrl(getBerthsReturnUrl())}>
-            <IconButton
-              icon={ArrowLeft}
-              tooltip={fromPage === 'terminal' ? "Back to Terminal" : "Back to Berths"}
-              variant="ghost"
-              className="text-gray-400 hover:text-gray-900"
-            />
-          </Link>
           <div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">

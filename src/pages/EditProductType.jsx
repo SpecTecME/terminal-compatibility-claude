@@ -69,7 +69,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { ArrowLeft, Save } from 'lucide-react';
+import { Save } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -143,13 +143,8 @@ export default function EditProductType() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('ProductTypes')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Edit Product Type</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Product Type</h1>
           <p className="text-gray-600 mt-1">Update product type information</p>
         </div>
       </div>

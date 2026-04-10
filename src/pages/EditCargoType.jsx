@@ -34,7 +34,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function EditCargoType() {
@@ -119,13 +118,8 @@ export default function EditCargoType() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('CargoTypes')}>
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="w-4 h-4" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Edit Cargo Type</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Cargo Type</h1>
           <p className="text-sm text-gray-600 mt-1">Update cargo type details</p>
         </div>
       </div>

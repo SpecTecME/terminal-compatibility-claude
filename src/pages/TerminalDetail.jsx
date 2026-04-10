@@ -12,7 +12,6 @@ import {
   Edit,
   Trash2,
   Plus,
-  ArrowLeft,
   CheckCircle,
   Clock,
   AlertCircle,
@@ -424,14 +423,6 @@ export default function TerminalDetail() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Link to={createPageUrl(returnTo || 'Terminals')}>
-            <IconButton
-              icon={ArrowLeft}
-              tooltip="Back"
-              variant="ghost"
-              className="text-gray-400 hover:text-gray-900"
-            />
-          </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{terminal.name}</h1>
             <div className="flex items-center gap-2 mt-1 text-sm text-gray-600">

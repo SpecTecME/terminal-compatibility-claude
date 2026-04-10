@@ -117,7 +117,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Settings, Pencil, Ship, Check, X } from 'lucide-react';
-import BackToConfiguration from '../components/configuration/BackToConfiguration';
 
 export default function UdfConfigurations() {
   const { data: configs = [], isLoading } = useQuery({
@@ -137,8 +136,6 @@ export default function UdfConfigurations() {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="ConfigurationSystemConfig" label="Back to System Configuration" />
-
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">UDF Configuration</h1>

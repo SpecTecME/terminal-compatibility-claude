@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { Users, Plus, Edit, Trash2, Search, CheckCircle, XCircle, ArrowLeft } from 'lucide-react';
+import { Users, Plus, Edit, Trash2, Search, CheckCircle, XCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,7 +14,6 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import BackToConfiguration from '../components/configuration/BackToConfiguration.jsx';
 import { toast } from 'sonner';
 
 const EMPTY_FORM = {
@@ -91,7 +90,6 @@ export default function ApplicationUsers() {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="ConfigurationSystemConfig" label="Back" />
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Application Users</h1>

@@ -148,7 +148,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, Check, X } from 'lucide-react';
+import { Plus, Pencil, Trash2, GripVertical, Check, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function EditUdfConfiguration() {
@@ -321,13 +321,8 @@ export default function EditUdfConfiguration() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('UdfConfigurations')}>
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="w-4 h-4" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Edit UDF Configuration</h1>
+          <h1 className="text-2xl font-bold text-gray-900">UDF Configuration</h1>
           <p className="text-sm text-gray-600 mt-1">{config.module} - {config.udfCode}</p>
         </div>
       </div>

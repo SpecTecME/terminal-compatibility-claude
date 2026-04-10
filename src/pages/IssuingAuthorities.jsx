@@ -95,7 +95,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { Plus, Search, Eye, Edit, Trash2, Grid3x3, List, LayoutList, Mail, Globe } from 'lucide-react';
-import BackToConfiguration from '../components/configuration/BackToConfiguration';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -210,7 +209,6 @@ export default function IssuingAuthorities() {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="ConfigurationMasterData" label="Back" />
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Issuing Authorities</h1>

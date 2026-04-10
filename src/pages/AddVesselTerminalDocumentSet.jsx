@@ -20,7 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { ArrowLeft, Save, Ship, Building2, Anchor } from 'lucide-react';
+import { Save, Ship, Building2, Anchor } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 export default function AddVesselTerminalDocumentSet() {
@@ -103,11 +103,7 @@ export default function AddVesselTerminalDocumentSet() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-6">
-        <Button variant="ghost" onClick={() => navigate(-1)} className="mb-4">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
-        </Button>
-        <h1 className="text-3xl font-bold text-gray-900">Create Document Set</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Document Set</h1>
         <p className="text-gray-600 mt-1">Define required documents for a vessel-terminal combination</p>
       </div>
 

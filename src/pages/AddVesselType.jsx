@@ -98,7 +98,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function AddVesselType() {
@@ -140,13 +139,8 @@ export default function AddVesselType() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('VesselTypes')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Add Vessel Type</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Vessel Type</h1>
           <p className="text-sm text-gray-600 mt-1">Create a new vessel type reference</p>
         </div>
       </div>

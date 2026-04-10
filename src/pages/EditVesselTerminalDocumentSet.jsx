@@ -38,7 +38,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ArrowLeft, Save, Plus, Trash2, CheckCircle2, XCircle, Upload, Link as LinkIcon, Loader2, Archive } from 'lucide-react';
+import { Save, Plus, Trash2, CheckCircle2, XCircle, Upload, Link as LinkIcon, Loader2, Archive } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 export default function EditVesselTerminalDocumentSet() {
@@ -215,13 +215,9 @@ export default function EditVesselTerminalDocumentSet() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-6">
-        <Button variant="ghost" onClick={() => navigate(-1)} className="mb-4">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
-        </Button>
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Manage Document Set</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Document Set</h1>
             <p className="text-gray-600 mt-1">
               {vessel?.name} → {terminal?.name}
             </p>

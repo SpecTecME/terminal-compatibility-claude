@@ -13,7 +13,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import BackToConfiguration from '../components/configuration/BackToConfiguration.jsx';
 import WorkflowStatusesTab from '../components/workflow/WorkflowStatusesTab.jsx';
 import WorkflowActionsTab from '../components/workflow/WorkflowActionsTab.jsx';
 import WorkflowTransitionsTab from '../components/workflow/WorkflowTransitionsTab.jsx';
@@ -225,7 +224,6 @@ export default function Workflow() {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="ConfigurationSystemConfig" label="Back" />
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Workflow Engine</h1>
@@ -492,7 +490,6 @@ function WorkflowEditor({ workflow, onBack }) {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="Workflow" label="Back to Workflows" onClickOverride={onBack} />
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-3">

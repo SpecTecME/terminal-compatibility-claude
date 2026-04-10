@@ -128,7 +128,6 @@ import {
 import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { toast } from 'sonner';
 import SearchableSelect from '../components/ui/SearchableSelect';
-import BackToConfiguration from '../components/configuration/BackToConfiguration';
 
 export default function CountryAliases() {
   const queryClient = useQueryClient();
@@ -289,7 +288,6 @@ export default function CountryAliases() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <BackToConfiguration />
             <h1 className="text-2xl font-bold text-gray-900">Country Aliases</h1>
           </div>
           <p className="text-gray-600 mt-1">

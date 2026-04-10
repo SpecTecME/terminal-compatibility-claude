@@ -9,7 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import BackToConfiguration from '../components/configuration/BackToConfiguration.jsx';
 import { toast } from 'sonner';
 
 const ALL_ENTITIES = [
@@ -124,7 +123,6 @@ export default function PermissionMatrix() {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="ConfigurationSystemConfig" label="Back" />
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Permission Matrix</h1>
         <p className="text-gray-600 mt-1">Configure role-based access rights for tables, functions, and workflows</p>

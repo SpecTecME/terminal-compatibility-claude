@@ -113,8 +113,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
-  FileText, 
-  ArrowLeft,
+  FileText,
   Download,
   Upload,
   X,
@@ -242,11 +241,6 @@ export default function DocumentDetail() {
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Link to={fromPage === 'documents' ? createPageUrl('Documents') : createPageUrl(`VesselDetail?id=${document.vessel_id}#documents`)}>
-            <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-          </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{document.document_name}</h1>
             <p className="text-sm text-gray-600 mt-1">{vessel?.name}</p>

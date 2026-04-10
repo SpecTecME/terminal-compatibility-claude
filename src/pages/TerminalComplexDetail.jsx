@@ -98,11 +98,10 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { Building2, ArrowLeft, Edit, MapPin, Plus } from 'lucide-react';
+import { Building2, Edit, MapPin, Plus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import IconButton from '../components/ui/IconButton';
 
 export default function TerminalComplexDetail() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -138,14 +137,6 @@ export default function TerminalComplexDetail() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link to={createPageUrl('TerminalComplexes')}>
-            <IconButton
-              icon={ArrowLeft}
-              tooltip="Back to Terminal Complexes"
-              variant="ghost"
-              className="text-gray-400 hover:text-gray-900"
-            />
-          </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{complex.name}</h1>
             {complex.code && (

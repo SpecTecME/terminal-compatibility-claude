@@ -129,7 +129,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { FileText, Search, Eye, Calendar, User as UserIcon, ArrowLeft } from 'lucide-react';
+import { FileText, Search, Eye, Calendar, User as UserIcon } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -201,11 +201,6 @@ export default function AuditLog() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('Dashboard')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div className="flex-1 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Audit Log</h1>

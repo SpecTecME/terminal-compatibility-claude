@@ -67,7 +67,6 @@ import { base44 } from '@/api/base44Client';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -130,13 +129,8 @@ export default function AddIssuingAuthority() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('IssuingAuthorities')}>
-          <Button variant="ghost" size="icon" className="text-gray-700 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Add Issuing Authority</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Issuing Authority</h1>
           <p className="text-gray-600 mt-1">Create a new document issuing authority</p>
         </div>
       </div>

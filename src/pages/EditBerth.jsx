@@ -61,7 +61,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { ArrowLeft, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -222,15 +222,8 @@ export default function EditBerth() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate(createPageUrl(`BerthDetail?id=${berthId}`))}
-        >
-          <ArrowLeft className="w-4 h-4" />
-        </Button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Edit Berth</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Berth</h1>
           <p className="text-gray-600 mt-1">{berth.berthName || berth.berth_number}</p>
         </div>
       </div>

@@ -27,7 +27,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function EditFuelType() {
@@ -98,13 +97,8 @@ export default function EditFuelType() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('FuelTypes')}>
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Edit Fuel Type</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Fuel Type</h1>
           <p className="text-sm text-gray-600 mt-1">Update fuel type reference</p>
         </div>
       </div>

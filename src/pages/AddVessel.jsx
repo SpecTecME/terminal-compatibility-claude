@@ -95,9 +95,8 @@ import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
-  Ship, 
+  Ship,
   Save,
-  ArrowLeft,
   Anchor,
   Building2
 } from 'lucide-react';
@@ -235,13 +234,8 @@ export default function AddVessel() {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('Vessels')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Register New Vessel</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Vessel</h1>
           <p className="text-gray-600 mt-1">Add a new LNG vessel to your fleet</p>
         </div>
       </div>

@@ -14,7 +14,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'react-router-dom';
-import BackToConfiguration from '../components/configuration/BackToConfiguration.jsx';
 import { setBreadcrumbSubPage, clearBreadcrumbSubPage } from '../components/ui/Breadcrumbs.jsx';
 import RoleTablePermissionsTab from '../components/roles/RoleTablePermissionsTab.jsx';
 import RoleFunctionPermissionsTab from '../components/roles/RoleFunctionPermissionsTab.jsx';
@@ -90,7 +89,6 @@ export default function Roles() {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="ConfigurationSystemConfig" label="Back" />
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Application Roles</h1>
@@ -241,7 +239,6 @@ function RoleEditor({ role, onBack, roles }) {
 
   return (
     <div className="space-y-6">
-      <BackToConfiguration to="Roles" label="Back to Roles" onClickOverride={onBack} />
       <div>
         <h1 className="text-2xl font-bold text-gray-900">{role.role_name}</h1>
         <p className="text-gray-600 mt-1">{role.description || 'Configure permissions and assignments for this role'}</p>

@@ -9,9 +9,8 @@ import CountrySelector from '../components/ui/CountrySelector';
 import SearchableSelect from '../components/ui/SearchableSelect';
 import { 
   Building2, 
-  MapPin, 
+  MapPin,
   Save,
-  ArrowLeft,
   Plus,
   Trash2,
   Anchor
@@ -431,13 +430,8 @@ export default function AddTerminal() {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('Terminals')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Add New Terminal</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Terminal</h1>
           <p className="text-gray-600 mt-1">
             {selectedComplex ? `Create a new terminal for ${selectedComplex.name}` : 'Create a new LNG terminal with berths'}
           </p>

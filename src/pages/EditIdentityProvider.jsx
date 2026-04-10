@@ -22,7 +22,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { Shield, Save, ArrowLeft, AlertCircle } from 'lucide-react';
+import { Shield, Save, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -172,13 +172,8 @@ export default function EditIdentityProvider() {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('IdentityProviders')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Edit Identity Provider</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Identity Provider</h1>
           <p className="text-gray-600 mt-1">{provider.providerName}</p>
         </div>
       </div>

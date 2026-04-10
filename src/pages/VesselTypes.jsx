@@ -102,7 +102,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
-import { Plus, Search, Edit, Trash2, Grid3x3, List, LayoutList, X, ArrowLeft } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Grid3x3, List, LayoutList, X } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
 
@@ -159,11 +159,6 @@ export default function VesselTypes() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Link to={createPageUrl('ConfigurationVesselConfig')}>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-        </Link>
         <div className="flex-1 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Vessel Types</h1>
