@@ -205,7 +205,7 @@ export default function BerthDetail() {
   const { data: berth, isLoading } = useQuery({
     queryKey: ['berth', berthId],
     queryFn: async () => {
-      const berths = await base44.entities.Berth.filter({ id: berthId });
+      const berths = await base44.entities.Berth.filter({ publicId: berthId });
       return berths[0];
     },
     enabled: !!berthId,
@@ -321,7 +321,7 @@ export default function BerthDetail() {
     onSuccess: () => {
       toast.success('Berth permanently deleted');
       if (terminal) {
-        window.location.href = createPageUrl(`TerminalDetail?id=${terminal.id}`);
+        window.location.href = createPageUrl(`TerminalDetail?id=${terminal.publicId}`);
       } else {
         window.location.href = createPageUrl('Berths');
       }
@@ -446,7 +446,7 @@ export default function BerthDetail() {
                 )}
               </h1>
               {terminal && (
-                <Link to={createPageUrl(`TerminalDetail?id=${terminal.id}`)}>
+                <Link to={createPageUrl(`TerminalDetail?id=${terminal.publicId}`)}>
                   <p className="text-sm text-gray-600 hover:text-cyan-600 transition-colors">
                     {terminal.name}
                   </p>

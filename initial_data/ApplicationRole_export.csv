@@ -1,0 +1,5 @@
+role_name,inherits_from_role_id,description,is_active,id,created_date,updated_date,created_by_id,created_by,is_sample
+"User","","Can create and manage data in Terminal Complexes, Terminals, Berths, Fleet, Documents, Companies and Contacts. Can initiate vessel registrations.","true","69b3be52096630002ea9b65f","2026-03-13T07:35:46.608000","2026-03-13T07:35:46.608000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"Manager","","All User permissions plus ability to approve records and archive/scrap where applicable.","true","69b3be52096630002ea9b660","2026-03-13T07:35:46.608000","2026-03-13T07:35:46.608000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"Admin","","Full access to all functions in the system.","true","69b3be52096630002ea9b661","2026-03-13T07:35:46.608000","2026-03-13T07:35:46.608000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"Creator","","User which updates document and initiate registration","true","69b2abf6ed07155a0004996e","2026-03-12T12:05:10.076000","2026-03-12T12:05:10.076000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

@@ -1,0 +1,6 @@
+tenantId,name,description,publicId,id,created_date,updated_date,created_by_id,created_by,is_sample
+"default-tenant","LPG","Liquefied Petroleum Gas terminal","6dcd668b-8624-4afe-8208-d4f092b034f4","697b729d955ccbeabd88499c","2026-01-29T14:45:49.137000","2026-01-29T14:45:49.137000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"default-tenant","LNG","Liquefied Natural Gas terminal","d82ec0f7-f7fe-4872-985a-7d01308dc53b","697b729d955ccbeabd88499d","2026-01-29T14:45:49.137000","2026-01-29T14:45:49.137000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"default-tenant","FSRU","Floating Storage and Regasification Unit","10bd7cb3-92d0-4de3-a815-342bb0449b1b","697b729d955ccbeabd88499e","2026-01-29T14:45:49.137000","2026-01-29T14:45:49.137000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"default-tenant","LNG Export","Liquefied Natural Gas export terminal","850e8400-e29b-41d4-a716-446655440002","697b729d955ccbeabd88499a","2026-01-29T14:45:49.136000","2026-01-29T14:45:49.136000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"default-tenant","LNG Import","Liquefied Natural Gas import terminal","850e8400-e29b-41d4-a716-446655440001","697b729d955ccbeabd88499b","2026-01-29T14:45:49.136000","2026-01-29T14:45:49.136000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

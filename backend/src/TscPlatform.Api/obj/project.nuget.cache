@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Dks10R7vjoY=",
+  "dgSpecHash": "Qgzf7prksSE=",
   "success": true,
   "projectFilePath": "/Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/TscPlatform.Api.csproj",
   "expectedPackageFiles": [
+    "/Users/veselin/.nuget/packages/csvhelper/33.0.1/csvhelper.33.0.1.nupkg.sha512",
     "/Users/veselin/.nuget/packages/efcore.namingconventions/8.0.3/efcore.namingconventions.8.0.3.nupkg.sha512",
     "/Users/veselin/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/veselin/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

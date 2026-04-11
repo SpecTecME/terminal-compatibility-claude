@@ -1,0 +1,3 @@
+parent_workflow_id,is_active,workflow_name,description,version_number,lifecycle_status,table_name,published_date,id,created_date,updated_date,created_by_id,created_by,is_sample
+"","true","Fleet","","VSL-001","DRAFT","Vessel","","69b2e85fe173814f030f6527","2026-03-12T16:22:55.823000","2026-03-12T16:22:55.823000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"","true","Terminal Creation Ver. 1.0","","TRM-001","PUBLISHED","Terminal","2026-03-12","69b2b6e66b08773b3a4b9fd3","2026-03-12T12:51:50.963000","2026-03-12T16:16:52.676000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

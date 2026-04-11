@@ -205,7 +205,7 @@ export default function DocumentTypes() {
 
   const handleConfirmDelete = () => {
     if (typeToDelete) {
-      deleteMutation.mutate(typeToDelete.id);
+      deleteMutation.mutate(typeToDelete.publicId);
     }
   };
 
@@ -434,12 +434,12 @@ export default function DocumentTypes() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Link to={createPageUrl(`DocumentTypeDetail?id=${docType.id}`)}>
+                        <Link to={createPageUrl(`DocumentTypeDetail?id=${docType.publicId}`)}>
                           <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
                             <Eye className="w-4 h-4" />
                           </Button>
                         </Link>
-                        <Link to={createPageUrl(`EditDocumentType?id=${docType.id}`)}>
+                        <Link to={createPageUrl(`EditDocumentType?id=${docType.publicId}`)}>
                           <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
                             <Edit className="w-4 h-4" />
                           </Button>
@@ -496,13 +496,13 @@ export default function DocumentTypes() {
                   )}
                 </div>
                 <div className="flex gap-2">
-                  <Link to={createPageUrl(`DocumentTypeDetail?id=${docType.id}`)} className="flex-1">
+                  <Link to={createPageUrl(`DocumentTypeDetail?id=${docType.publicId}`)} className="flex-1">
                     <Button size="sm" variant="outline" className="w-full border-gray-300 text-gray-700">
                       <Eye className="w-3.5 h-3.5 mr-2" />
                       View
                     </Button>
                   </Link>
-                  <Link to={createPageUrl(`EditDocumentType?id=${docType.id}`)} className="flex-1">
+                  <Link to={createPageUrl(`EditDocumentType?id=${docType.publicId}`)} className="flex-1">
                     <Button size="sm" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600">
                       <Edit className="w-3.5 h-3.5 mr-2" />
                       Edit
@@ -540,12 +540,12 @@ export default function DocumentTypes() {
                     <Badge className={`${docType.isActive ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-gray-500/10 text-gray-400 border-gray-500/30'} border text-xs`}>
                       {docType.isActive ? 'Active' : 'Inactive'}
                     </Badge>
-                    <Link to={createPageUrl(`DocumentTypeDetail?id=${docType.id}`)}>
+                    <Link to={createPageUrl(`DocumentTypeDetail?id=${docType.publicId}`)}>
                       <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900 h-8 w-8">
                         <Eye className="w-3.5 h-3.5" />
                       </Button>
                     </Link>
-                    <Link to={createPageUrl(`EditDocumentType?id=${docType.id}`)}>
+                    <Link to={createPageUrl(`EditDocumentType?id=${docType.publicId}`)}>
                       <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900 h-8 w-8">
                         <Edit className="w-3.5 h-3.5" />
                       </Button>

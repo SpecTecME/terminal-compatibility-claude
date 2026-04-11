@@ -1,0 +1,4 @@
+tenantId,name,userPublicId,color,userId,publicId,id,created_date,updated_date,created_by_id,created_by,is_sample
+"default-tenant","test","0b2d867e-cf78-484b-9096-fca3c173c236","","697b18d70b1739675ee7f599","4eb58f60-8127-414a-9cfb-72e1765d3d67","69c16aec33ea1d5dc6aaa7d9","2026-03-23T16:31:40.657000","2026-03-23T16:31:40.657000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"default-tenant","Good","bb6b4ecb-4ee8-4472-862e-fa5e28a7baba","","694cf20cbcec6a3e8b37160b","b8fdf899-ab79-4599-91de-d448426b57f3","697c99535dcfa5082abb9c28","2026-01-30T11:43:15.863000","2026-01-30T11:43:15.863000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"default-tenant","GoodBoy","418e81aa-87e4-4311-bd6c-5ef3f5efa957","","694cf20cbcec6a3e8b37160b","db6d6538-0f9a-42de-913d-51fd511f2102","697c99535dcfa5082abb9c29","2026-01-30T11:43:15.863000","2026-01-30T11:43:15.863000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

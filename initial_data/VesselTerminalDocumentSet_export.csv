@@ -1,0 +1,2 @@
+publicId,tenantId,vesselId,vesselPublicId,terminalId,terminalPublicId,berthId,berthPublicId,status,notes,id,created_date,updated_date,created_by_id,created_by,is_sample
+"91ed9525-53b5-4a7c-b710-23c74103d9dc","default-tenant","697b569b2a72857c481dc4f4","550e8400-e29b-41d4-a716-446655770019","697b3beb704acf2a3aef53e1","c57b6321-67b0-4cbf-8689-ec457e650162","","","DRAFT","Demo document set for testing simple approval mode","698ad9921c6e351e28b3842f","2026-02-10T07:09:06.891000","2026-02-10T07:09:06.891000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

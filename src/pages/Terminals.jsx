@@ -764,7 +764,7 @@ export default function Terminals() {
             if (archivedFilter !== 'active') params.set('archived', archivedFilter);
             const returnUrl = `Terminals${params.toString() ? '?' + params.toString() : ''}`;
             return (
-            <Link key={terminal.id} to={createPageUrl(`TerminalDetail?id=${terminal.id}&returnTo=${encodeURIComponent(returnUrl)}`)}>
+            <Link key={terminal.id} to={createPageUrl(`TerminalDetail?id=${terminal.publicId}&returnTo=${encodeURIComponent(returnUrl)}`)}>
               <Card className="bg-white border-gray-200 hover:border-cyan-500/50 hover:shadow-lg transition-all group cursor-pointer h-full">
               <CardContent className="p-5">
                 <div className="flex items-start justify-between mb-4">
@@ -873,7 +873,7 @@ export default function Terminals() {
                   if (archivedFilter !== 'active') params.set('archived', archivedFilter);
                   const returnUrl = `Terminals${params.toString() ? '?' + params.toString() : ''}`;
                   return (
-                  <TableRow key={terminal.id} className="border-gray-200 cursor-pointer hover:bg-gray-50" onClick={() => window.location.href = createPageUrl(`TerminalDetail?id=${terminal.id}&returnTo=${encodeURIComponent(returnUrl)}`)}>
+                  <TableRow key={terminal.id} className="border-gray-200 cursor-pointer hover:bg-gray-50" onClick={() => window.location.href = createPageUrl(`TerminalDetail?id=${terminal.publicId}&returnTo=${encodeURIComponent(returnUrl)}`)}>
                     <TableCell className="font-medium text-gray-900">
                       <div className="flex items-center gap-2">
                         <div onClick={(e) => e.stopPropagation()}>
@@ -977,7 +977,7 @@ export default function Terminals() {
                 const returnUrl = `Terminals${params.toString() ? '?' + params.toString() : ''}`;
                 return (
                 <div key={terminal.id} className="relative">
-                  <Link to={createPageUrl(`TerminalDetail?id=${terminal.id}&returnTo=${encodeURIComponent(returnUrl)}`)}>
+                  <Link to={createPageUrl(`TerminalDetail?id=${terminal.publicId}&returnTo=${encodeURIComponent(returnUrl)}`)}>
                     <div className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group">
                       <div className="flex items-center gap-3">
                         <div onClick={(e) => {

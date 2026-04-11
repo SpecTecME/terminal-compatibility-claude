@@ -1,0 +1,4 @@
+active,valid_from,application_user_id,assigned_from,application_role_id,valid_to,id,created_date,updated_date,created_by_id,created_by,is_sample
+"true","","69b3be75096630002ea9b6b7","manual","69b3be52096630002ea9b65f","","69b3be7c096630002ea9b6bc","2026-03-13T07:36:28.615000","2026-03-13T07:36:28.615000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"true","","69b3be75096630002ea9b6b8","manual","69b3be52096630002ea9b660","","69b3be7c096630002ea9b6bd","2026-03-13T07:36:28.615000","2026-03-13T07:36:28.615000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"true","","69b3be75096630002ea9b6b9","manual","69b3be52096630002ea9b661","","69b3be7c096630002ea9b6be","2026-03-13T07:36:28.615000","2026-03-13T07:36:28.615000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

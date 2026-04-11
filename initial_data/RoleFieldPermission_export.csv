@@ -1,0 +1,2 @@
+can_read,table_name,can_update,application_role_id,field_name,id,created_date,updated_date,created_by_id,created_by,is_sample
+"false","Vessel","false","69b3be52096630002ea9b65f","imoNumber","69b3dcee78279fd980a03f5e","2026-03-13T09:46:22.734000","2026-03-13T09:46:27.724000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

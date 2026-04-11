@@ -104,3 +104,4 @@
 /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/obj/Debug/net8.0/TscPlatform.Api.pdb
 /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/obj/Debug/net8.0/TscPlatform.Api.genruntimeconfig.cache
 /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/obj/Debug/net8.0/ref/TscPlatform.Api.dll
+/Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/bin/Debug/net8.0/CsvHelper.dll

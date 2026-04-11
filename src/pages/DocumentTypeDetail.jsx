@@ -16,7 +16,7 @@ export default function DocumentTypeDetail() {
 
   const { data: docType, isLoading } = useQuery({
     queryKey: ['documentType', docTypeId],
-    queryFn: () => base44.entities.DocumentType.filter({ id: docTypeId }).then(r => r[0]),
+    queryFn: () => base44.entities.DocumentType.filter({ publicId: docTypeId }).then(r => r[0]),
     enabled: !!docTypeId
   });
 
@@ -33,7 +33,7 @@ export default function DocumentTypeDetail() {
     );
   }
 
-  const category = categories.find(c => c.id === docType.categoryId);
+  const category = categories.find(c => c.publicId === docType.categoryPublicId);
 
   const validityTypeLabels = {
     'PermanentStatic': 'Permanent Static',

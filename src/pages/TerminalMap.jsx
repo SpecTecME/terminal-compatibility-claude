@@ -309,7 +309,7 @@ export default function TerminalMap() {
                           t.legacyCountryName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           t.port?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = filterType === 'all' || t.operation_type === filterType;
-    const matchesTerminalType = filterTerminalType === 'all' || t.terminal_type_id === filterTerminalType;
+    const matchesTerminalType = filterTerminalType === 'all' || t.terminalTypePublicId === filterTerminalType;
     return matchesSearch && matchesType && matchesTerminalType;
   });
 
@@ -350,7 +350,7 @@ export default function TerminalMap() {
           <SelectContent className="bg-white border-gray-200">
             <SelectItem value="all" className="text-gray-900">All Types</SelectItem>
             {terminalTypes.map(tt => (
-              <SelectItem key={tt.id} value={tt.id} className="text-gray-900">{tt.name}</SelectItem>
+              <SelectItem key={tt.publicId} value={tt.publicId} className="text-gray-900">{tt.name}</SelectItem>
             ))}
           </SelectContent>
         </Select>

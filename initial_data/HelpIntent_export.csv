@@ -1,0 +1,85 @@
+intentKey,actionType,actionPayload,answerMarkdown,tenantId,priority,isActive,publicId,id,created_date,updated_date,created_by_id,created_by,is_sample
+"terminal_vs_berth","None","","**Terminal Approval vs Berth Compatibility**
+
+These are two different checks:
+
+**Terminal Approval** (Registration):
+- One-time check when you apply
+- Evaluates your vessel's documents
+- Result: ""Approved for terminal"" or ""Pending""
+
+**Berth Compatibility**:
+- Checks if your vessel fits the **physical constraints** of specific berths
+- Examples: Length, beam, draft, cargo capacity, manifold heights
+- Result: ""Compatible"", ""Compatible with restrictions"", or ""Not compatible""
+
+You can be approved for a terminal but incompatible with some of its berths. Each berth is evaluated separately.","global","12","true","b396a23c-ac59-4505-b288-e83e16284045","69846d8017633355fef25c90","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"update_documents_registration","None","","**Updating Documents During Registration**
+
+You can update documents without restarting the registration process:
+
+1. Go to the Documents tab
+2. Upload or update the document
+3. The system automatically recalculates registration eligibility
+4. If all required documents are now present and valid, registration approval is triggered
+
+There's no need to re-apply or restart. The system continuously checks your document status.","global","18","true","ba550bed-6fa3-4946-abc0-955306513fec","69846d8017633355fef25c91","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"compatibility_restrictions","None","","**Berth Compatibility & Restrictions**
+
+If a berth shows ""Compatible with restrictions"", it means:
+
+- Your vessel **can** use the berth
+- But one or more **constraints** apply
+- Common examples:
+  - **Manifold height**: Your vessel's manifolds are near the berth's limits
+  - **Draft**: You may only berth at certain tide levels
+  - **Beam or length**: You're close to maximum dimensions
+
+Restrictions are warnings, not blockers. Check the details to understand what operational constraints apply (e.g., berth only available at high tide).","global","25","true","a69b03c0-ef3d-4ea6-885b-4c4592e3a677","69846d8017633355fef25c92","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"registration_fail_reasons","None","","**Why Registration Fails**
+
+Registration approval is blocked if:
+
+- **Missing documents**: Required documents haven't been uploaded
+- **Expired documents**: Documents are past their expiry date
+- **Document status**: Documents must be ""Active"", not archived or rejected
+
+All three conditions must be met. Missing just one required document or having one expired document blocks the entire registration.
+
+**What to do**: Check the Documents tab and upload or renew the missing/expired documents.","global","15","true","a8591cff-e80d-4f59-a04b-5ccc8b5c13d3","69846d8017633355fef25c93","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"status_meanings","None","","**Status Meanings**
+
+- **Operational**: Fully available for use
+- **Maintenance**: Temporarily unavailable; can be returned to Operational
+- **Inactive**: No longer in use (archived, but data preserved)
+
+**Important**: Changing a terminal or berth status is separate from editing other details. Status changes are treated as significant operational decisions and are logged separately in the audit trail.
+
+Terminals and berths cannot be deleted—only archived—to preserve historical data and regulatory compliance.","global","20","true","f5cc7df4-b625-4d9e-8ff4-699555875820","69846d8017633355fef25c94","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"archive_philosophy","None","","**Archive vs Delete Philosophy**
+
+Terminals and berths **cannot be deleted**. Instead, they are **archived**.
+
+**Why?**
+- Regulatory compliance: Historical data must be preserved
+- Audit trail: All decisions must be traceable
+- Data integrity: Removing entities would break relationships
+
+**What happens when archived?**
+- The entity is hidden from normal lists
+- It's still in the database and queryable
+- Historical references remain intact
+- You can un-archive if needed
+
+This is intentional and by design. Think of it as ""decommissioning"" rather than deletion.","global","30","true","1b1d4e31-e83d-4100-856d-850045a37ea5","69846d8017633355fef25c95","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"registration_overview","None","","**Terminal Registration Overview**
+
+Registration is a **terminal-level approval process**. It works like this:
+
+1. You apply on behalf of a terminal
+2. The system checks specific documents marked with ""Submission Stage = Registration""
+3. Both missing and expired documents block approval
+4. Once approved, your vessel is cleared for that terminal
+5. You can then check which **berths** are compatible with your vessel
+
+Approval is just the first step—berth compatibility is checked separately.","global","10","true","5ff77da6-cc93-4ed2-bf66-a9a0e72ff9fa","69846d8017633355fef25c96","2026-02-05T10:14:24.631000","2026-02-05T10:14:24.631000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

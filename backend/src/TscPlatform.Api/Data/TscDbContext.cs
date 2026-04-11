@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TscPlatform.Api.Models.Audit;
 using TscPlatform.Api.Models.Phase1;
+using TscPlatform.Api.Models.Phase3;
 
 namespace TscPlatform.Api.Data;
 
@@ -40,6 +41,14 @@ public class TscDbContext : DbContext
     public DbSet<MapConfiguration> MapConfigurations => Set<MapConfiguration>();
     public DbSet<UdfConfiguration> UdfConfigurations => Set<UdfConfiguration>();
     public DbSet<UdfListValue> UdfListValues => Set<UdfListValue>();
+
+    // Phase 3 — Terminals & Berths
+    public DbSet<TerminalComplex> TerminalComplexes => Set<TerminalComplex>();
+    public DbSet<Terminal> Terminals => Set<Terminal>();
+    public DbSet<Berth> Berths => Set<Berth>();
+
+    // Phase 3 — Document Requirements
+    public DbSet<TerminalDocumentRequirement> TerminalDocumentRequirements => Set<TerminalDocumentRequirement>();
 
     // Audit
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
@@ -112,6 +121,24 @@ public class TscDbContext : DbContext
 
         modelBuilder.Entity<UdfListValue>().HasIndex(e => e.TenantId);
         modelBuilder.Entity<UdfListValue>().HasIndex(e => e.PublicId).IsUnique();
+
+        modelBuilder.Entity<TerminalComplex>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<TerminalComplex>().HasIndex(e => e.PublicId).IsUnique();
+
+        modelBuilder.Entity<Terminal>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<Terminal>().HasIndex(e => e.PublicId).IsUnique();
+
+        modelBuilder.Entity<Berth>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<Berth>().HasIndex(e => e.PublicId).IsUnique();
+
+        modelBuilder.Entity<Berth>()
+            .Property(e => e.ProductTypeRefIds)
+            .HasColumnType("text[]");
+
+        modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.PublicId).IsUnique();
+        modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.TerminalPublicId);
+        modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.DocumentTypePublicId);
 
         modelBuilder.Entity<AuditLog>().HasIndex(e => e.TenantId);
         modelBuilder.Entity<AuditLog>().HasIndex(e => e.PublicId).IsUnique();

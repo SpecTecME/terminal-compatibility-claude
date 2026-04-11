@@ -1,0 +1,120 @@
+summary,notes,contentMarkdown,sortOrder,tenantId,title,category,isActive,publicId,status,id,created_date,updated_date,created_by_id,created_by,is_sample
+"What different statuses mean and why status changes are separate from edits.","","# Status Meanings and Operations
+
+## Status Values
+
+- **Operational**: Fully available for use
+- **Maintenance**: Temporarily unavailable; can be returned to Operational
+- **Inactive**: No longer in use (archived)
+
+## Why Status is Separate
+
+Changing a terminal or berth status is treated as a significant **operational decision**:
+- It's logged separately in the audit trail
+- It requires explicit action (not a side effect of editing other fields)
+- It signals intent to operations teams
+
+## Delete vs Archive
+
+**You cannot delete** terminals or berths. Instead, you **archive** them.
+
+### Why Archive Only?
+
+- **Regulatory compliance**: Historical data must be preserved
+- **Audit trail**: All decisions traceable
+- **Data integrity**: Relationships cannot be broken
+
+### What Happens When Archived?
+
+- Entity hidden from normal lists
+- Still in database and queryable
+- Historical references remain intact
+- Can be un-archived if needed
+
+Think of archiving as ""decommissioning"" rather than deletion.
+","4","global","Status Meanings and Operations","Operations","true","805eb431-df1a-4cf6-bc7c-affc767fe4a4","Active","69846d56f605041aa5143b00","2026-02-05T10:13:42.434000","2026-02-05T10:13:42.434000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"Learn how vessel registration works at the terminal level.","","# Terminal Registration Guide
+
+Registration is a **terminal-level approval** process that determines if your vessel can operate at a specific terminal.
+
+## How It Works
+
+1. **Submit Registration**: Apply on behalf of a terminal
+2. **Document Check**: System validates required documents with ""Submission Stage = Registration""
+3. **Status Check**: Both missing and expired documents block approval
+4. **Approval Decision**: Either approved or pending
+5. **Berth Compatibility**: Once approved, you can check individual berth compatibility
+
+## Key Points
+
+- Registration is **terminal-specific**, not global
+- You must re-register for each terminal
+- Document status is continuously monitored
+- You can update documents without restarting the process
+
+## Next Steps
+
+- Upload all required documents
+- Check the status in the Registrations tab
+- Once approved, view compatible berths
+","1","global","Terminal Registration Guide","Registration","true","f26f2a37-03ef-43fc-b731-db48fa5c6349","Active","69846d56f605041aa5143b01","2026-02-05T10:13:42.434000","2026-02-05T10:13:42.434000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"How to update documents and what happens automatically.","","# Document Management During Registration
+
+## Updating Documents
+
+You can update documents at any time during the registration process:
+
+1. Go to the **Documents** tab
+2. Upload or update the document
+3. The system **automatically recalculates** registration eligibility
+4. If all requirements are now met, approval is triggered
+
+No need to re-apply or restart the process.
+
+## Document Requirements
+
+Documents must have:
+- **Status**: Active (not archived or rejected)
+- **Expiry**: Not expired (or no expiry requirement)
+- **Submission Stage**: Marked as ""Registration"" if required
+
+## Expired Documents
+
+If a document expires:
+- Registration status changes to ""Pending""
+- You must upload a renewed document
+- Status updates automatically once renewed document is uploaded
+
+## Continuous Monitoring
+
+The system continuously checks your documents. You don't need to manually trigger anything—changes are detected and processed automatically.
+","3","global","Document Management During Registration","Documents","true","eb688337-d942-43d9-ac17-f33cdf26ec89","Active","69846d56f605041aa5143afe","2026-02-05T10:13:42.433000","2026-02-05T10:13:42.433000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"How vessel physical constraints are evaluated against berth limits.","","# Understanding Berth Compatibility
+
+Berth compatibility is a **physical constraint check** separate from terminal registration approval.
+
+## What Gets Checked
+
+- **Dimensions**: Length, beam, draft
+- **Cargo**: Capacity in cubic meters
+- **Manifolds**: Height, spacing, flange sizes
+- **Moorings**: Winch capacity, line types
+- **Fenders**: Contact zones and load limits
+
+## Compatibility Status
+
+- **Compatible**: Vessel fits all berth constraints
+- **Compatible with Restrictions**: Vessel fits but with operational limits (e.g., tide-dependent)
+- **Not Compatible**: Vessel cannot safely use this berth
+
+## Restrictions Example
+
+If manifold height is a restriction:
+- Your vessel's manifolds are near the berth's operational limits
+- You may need to coordinate with terminal operations
+- Some operational constraints may apply
+
+## Important
+
+You can be **approved for a terminal** but **incompatible with some berths** at that terminal. Each berth is evaluated separately.
+","2","global","Understanding Berth Compatibility","Terminals","true","527c9db4-8a0e-4ecb-bac7-1f4c0ccb2b5c","Active","69846d56f605041aa5143aff","2026-02-05T10:13:42.433000","2026-02-05T10:13:42.433000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

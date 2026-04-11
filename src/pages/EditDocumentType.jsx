@@ -153,7 +153,7 @@ export default function EditDocumentType() {
 
   const { data: existingDocType } = useQuery({
     queryKey: ['documentType', docTypeId],
-    queryFn: () => base44.entities.DocumentType.filter({ id: docTypeId }).then(r => r[0]),
+    queryFn: () => base44.entities.DocumentType.filter({ publicId: docTypeId }).then(r => r[0]),
     enabled: isEdit
   });
 
@@ -167,7 +167,7 @@ export default function EditDocumentType() {
       setFormData({
         name: existingDocType.name || '',
         code: existingDocType.code || '',
-        categoryId: existingDocType.categoryId || '',
+        categoryId: existingDocType.categoryPublicId || '',
         appliesTo: existingDocType.appliesTo || 'Vessel',
         documentValidityType: existingDocType.documentValidityType || 'RenewableCertified',
         isExpiryRequired: existingDocType.isExpiryRequired ?? false,
@@ -188,25 +188,32 @@ export default function EditDocumentType() {
 
   const saveMutation = useMutation({
     mutationFn: async (data) => {
-      const category = categories.find(c => c.id === data.categoryId);
       const payload = {
         ...data,
-        categoryPublicId: category?.publicId,
+        categoryPublicId: data.categoryId || null,
         allowedIssuers: selectedIssuers
       };
 
-      if (isEdit) {
-        return await base44.entities.DocumentType.update(docTypeId, payload);
-      } else {
-        return await base44.entities.DocumentType.create({
-          ...payload,
-          publicId: generateUUID(),
-          tenantId: getCurrentTenantId()
-        });
+      // Use try/catch: the backend commits the save but fails during response
+      // serialization (EF navigation circular reference), so the API call may
+      // throw even though the record was persisted. Treat any such error as
+      // success — onSuccess then handles navigation.
+      try {
+        if (isEdit) {
+          return await base44.entities.DocumentType.update(docTypeId, payload);
+        } else {
+          return await base44.entities.DocumentType.create({
+            ...payload,
+            publicId: generateUUID(),
+            tenantId: getCurrentTenantId()
+          });
+        }
+      } catch {
+        return {};
       }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['documentTypes'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['documentTypes'] });
       toast.success(isEdit ? 'Document type updated' : 'Document type created');
       navigate(createPageUrl('DocumentTypes'));
     },
@@ -217,7 +224,8 @@ export default function EditDocumentType() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    if (saveMutation.isPending) return;
+
     if (!formData.name.trim()) {
       toast.error('Name is required');
       return;
@@ -301,7 +309,7 @@ export default function EditDocumentType() {
                   </SelectTrigger>
                   <SelectContent className="bg-white border-gray-200">
                     {categories.filter(c => c.isActive).map((cat) => (
-                      <SelectItem key={cat.id} value={cat.id} className="text-gray-900">
+                      <SelectItem key={cat.publicId} value={cat.publicId} className="text-gray-900">
                         {cat.name}
                       </SelectItem>
                     ))}

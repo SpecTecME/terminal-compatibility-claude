@@ -61,7 +61,7 @@ export default function DocumentCategoryDetail() {
 
   const { data: category, isLoading } = useQuery({
     queryKey: ['documentCategory', categoryId],
-    queryFn: () => base44.entities.DocumentCategory.filter({ id: categoryId }).then(r => r[0]),
+    queryFn: () => base44.entities.DocumentCategory.filter({ publicId: categoryId }).then(r => r[0]),
     enabled: !!categoryId
   });
 

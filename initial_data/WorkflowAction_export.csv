@@ -1,0 +1,9 @@
+workflow_definition_id,action_code,description,sort_order,action_name,id,created_date,updated_date,created_by_id,created_by,is_sample
+"69b2e85fe173814f030f6527","ACTIVATE","","3","Activate","69b2f5c408bcb91c14c4e559","2026-03-12T17:20:04.255000","2026-03-12T17:20:04.255000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2e85fe173814f030f6527","SCRAP","","10","Scrap","69b2e913f8a2f1d57c1b401f","2026-03-12T16:25:55.834000","2026-03-12T16:25:55.834000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2e85fe173814f030f6527","ARCHIVE","","4","Archive","69b2e907f4f3d1c21009851e","2026-03-12T16:25:43.406000","2026-03-12T16:25:43.406000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2e85fe173814f030f6527","SUBMIT","","2","Approve","69b2e8f45c24982b6c1555cc","2026-03-12T16:25:24.166000","2026-03-12T16:25:24.166000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2e85fe173814f030f6527","CREATE","","1","Create","69b2e8dc133fcd917ef8e039","2026-03-12T16:25:00.937000","2026-03-12T16:25:00.937000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2b6e66b08773b3a4b9fd3","ARCHIVE","","3","Archive Terminal","69b2b76f3fb5e4f0be4ab478","2026-03-12T12:54:07.445000","2026-03-12T12:54:07.445000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2b6e66b08773b3a4b9fd3","ACTIVATE","","2","Active","69b2b762774d3435d273bb5f","2026-03-12T12:53:54.329000","2026-03-12T12:53:54.329000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"69b2b6e66b08773b3a4b9fd3","CREATE","","1","Create Terminal","69b2b72881586248248b58f8","2026-03-12T12:52:56.107000","2026-03-12T12:52:56.107000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

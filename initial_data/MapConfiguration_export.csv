@@ -1,0 +1,2 @@
+mapMode,notes,tenantId,useMaritimeZones,enableExternalGeocoding,pmtilesUrl,isActive,publicId,externalTileUrl,id,created_date,updated_date,created_by_id,created_by,is_sample
+"BUNDLED","","default-tenant","false","false","/tiles/base-map.pmtiles","true","1ee6c3da-c249-4a8f-b150-9e36d26caffc","https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png","69b4358a7493c01dcd076732","2026-03-13T16:04:26.354000","2026-03-13T16:04:26.354000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

@@ -5,7 +5,24 @@
       "Bash(dotnet --version)",
       "Bash(dotnet ef:*)",
       "Bash(dotnet restore:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(python3:*)",
+      "Bash(psql:*)",
+      "Bash(git -C .claude/worktrees/agent-ae33b0c6 status --short)",
+      "Bash(git -C /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude stash)",
+      "Bash(git -C /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude merge worktree-agent-ae33b0c6 --no-edit)",
+      "Bash(grep -rn \"Phase1Importer\\\\|ImportAsync\\\\|import\" /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/*.cs)",
+      "Bash(dotnet add:*)",
+      "Bash(dotnet run:*)",
+      "Bash(curl -s http://localhost:5254/api/terminals)",
+      "Bash(curl -s http://localhost:5254/api/berths)",
+      "Bash(curl -s http://localhost:5254/api/terminal-complexes)",
+      "Bash(grep:*)",
+      "Bash(curl -s http://localhost:5254/api/terminal-types)",
+      "Bash(curl -s http://localhost:5254/api/terminal-document-requirements)",
+      "Bash(curl:*)",
+      "Bash(npm run:*)"
     ]
   }
 }

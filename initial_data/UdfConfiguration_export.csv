@@ -1,0 +1,3 @@
+createList,includeInSearch,module,sortOrder,tenantId,label,fieldType,publicId,maxLength,udfCode,id,created_date,updated_date,created_by_id,created_by,is_sample
+"true","true","Vessel","10","default-tenant","NSQL Class","Text","udf-config-vessel-01","10","UDF01","69844c7df488d8217eb8ed20","2026-02-05T07:53:33.048000","2026-02-05T07:53:33.048000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"
+"false","true","Vessel","20","default-tenant","","Text","udf-config-vessel-02","12","UDF02","69844c7df488d8217eb8ed21","2026-02-05T07:53:33.048000","2026-02-05T07:53:33.048000","697b18d70b1739675ee7f599","veselin@tidisolutions.rs","false"

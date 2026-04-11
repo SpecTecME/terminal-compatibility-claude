@@ -115,20 +115,20 @@ export default function TerminalDetail() {
 
   const { data: terminal, isLoading } = useQuery({
     queryKey: ['terminal', terminalId],
-    queryFn: () => base44.entities.Terminal.filter({ id: terminalId }).then(r => r[0]),
+    queryFn: () => base44.entities.Terminal.filter({ publicId: terminalId }).then(r => r[0]),
     enabled: !!terminalId
   });
 
   const { data: country } = useQuery({
-    queryKey: ['country', terminal?.countryId],
-    queryFn: () => base44.entities.Country.filter({ id: terminal.countryId }).then(r => r[0]),
-    enabled: !!terminal?.countryId
+    queryKey: ['country', terminal?.countryPublicId],
+    queryFn: () => base44.entities.Country.filter({ publicId: terminal.countryPublicId }).then(r => r[0]),
+    enabled: !!terminal?.countryPublicId
   });
 
   const { data: productType } = useQuery({
-    queryKey: ['productType', terminal?.productTypeRefId],
-    queryFn: () => base44.entities.ProductTypeRef.filter({ id: terminal.productTypeRefId }).then(r => r[0]),
-    enabled: !!terminal?.productTypeRefId
+    queryKey: ['productType', terminal?.productTypeRefPublicId],
+    queryFn: () => base44.entities.ProductTypeRef.filter({ publicId: terminal.productTypeRefPublicId }).then(r => r[0]),
+    enabled: !!terminal?.productTypeRefPublicId
   });
 
   const { data: berths = [] } = useQuery({
@@ -578,7 +578,7 @@ export default function TerminalDetail() {
                        <TableRow 
                          key={berth.id} 
                          className="border-gray-200 cursor-pointer hover:bg-gray-50" 
-                         onClick={() => window.location.href = createPageUrl(`BerthDetail?id=${berth.id}&from=terminal`)}
+                         onClick={() => window.location.href = createPageUrl(`BerthDetail?id=${berth.publicId}&from=terminal`)}
                        >
                           <TableCell className="font-medium text-gray-900">{berth.berthName || berth.berth_name || berth.berthCode || berth.berth_number}</TableCell>
                           <TableCell className="text-gray-700 text-right">{berth.max_loa ? `${berth.max_loa}m` : '-'}</TableCell>

@@ -478,16 +478,134 @@ const genericEntityHandler = {
 };
 
 // ---------------------------------------------------------------------------
+// API-backed read stores (replace seed data with live backend calls)
+// ---------------------------------------------------------------------------
+
+function makeApiStore(endpoint) {
+  return {
+    async list(sortBy, limit) {
+      const res = await fetch(`http://localhost:5254${endpoint}`);
+      let rows = await res.json();
+      rows = applySort(rows, sortBy);
+      if (limit) rows = rows.slice(0, limit);
+      return rows;
+    },
+    async filter(query, sortBy, limit) {
+      const res = await fetch(`http://localhost:5254${endpoint}`);
+      let rows = await res.json();
+      rows = applyFilter(rows, query);
+      rows = applySort(rows, sortBy);
+      if (limit) rows = rows.slice(0, limit);
+      return rows;
+    },
+    async create(data) {
+      const res = await fetch(`http://localhost:5254${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      try { return await res.json(); } catch { return {}; }
+    },
+    async update(id, data) {
+      const res = await fetch(`http://localhost:5254${endpoint}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      try { return await res.json(); } catch { return {}; }
+    },
+    delete:     noop,
+    bulkCreate: (items) => Promise.resolve(items.map(d => ({ id: genId(), ...d }))),
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Named entity stores (override the generic proxy for key entities)
 // ---------------------------------------------------------------------------
 
 const namedStores = {
-  Terminal:  terminals,
+  // In-memory seed stores (write-capable for this session)
   Vessel:    vessels,
   Company:   companies,
   Document:  documents,
-  Berth:     berths,
-  Country:   countries,
+
+  // API-backed stores — Phase 1 reference data
+  Country:             countries,
+  CountryAlias:        makeApiStore('/api/country-aliases'),
+  IssuingAuthority:    makeApiStore('/api/issuing-authorities'),
+  SystemTag:           makeApiStore('/api/system-tags'),
+  DocumentType:        makeApiStore('/api/document-types'),
+  DocumentCategory:         makeApiStore('/api/document-categories'),
+  DocumentTypeExternalCode: makeApiStore('/api/document-type-external-codes'),
+  ProductTypeRef:      makeApiStore('/api/product-types'),
+  FuelTypeRef:         makeApiStore('/api/fuel-types'),
+  CargoTypeRef:        makeApiStore('/api/cargo-types'),
+  VesselTypeRef:       makeApiStore('/api/vessel-types'),
+  MaritimeZone:        makeApiStore('/api/maritime-zones'),
+  UdfConfiguration:    makeApiStore('/api/udf-configurations'),
+  UdfListValue:        makeApiStore('/api/udf-list-values'),
+  TerminalType:        makeApiStore('/api/terminal-types'),
+
+  // API-backed stores — Phase 3 terminals & berths
+  TerminalComplex:     makeApiStore('/api/terminal-complexes'),
+  Terminal:            makeApiStore('/api/terminals'),
+  Berth:               makeApiStore('/api/berths'),
+
+  // API-backed stores — Phase 3 document requirements
+  // Custom store: frontend filters by { terminalId } which maps to terminalPublicId on the backend
+  TerminalDocumentRequirement: {
+    async list() {
+      const res = await fetch('http://localhost:5254/api/terminal-document-requirements');
+      return res.json();
+    },
+    async filter(query = {}) {
+      const params = new URLSearchParams();
+      if (query.terminalId)   params.set('terminalPublicId', query.terminalId);
+      if (query.berthId)      params.set('berthPublicId', query.berthId);
+      const url = `http://localhost:5254/api/terminal-document-requirements${params.toString() ? '?' + params.toString() : ''}`;
+      const res = await fetch(url);
+      let rows = await res.json();
+      // Apply any remaining client-side filters not handled by query params
+      const remaining = Object.fromEntries(
+        Object.entries(query).filter(([k]) => k !== 'terminalId' && k !== 'berthId')
+      );
+      return applyFilter(rows, remaining);
+    },
+    async create(data) {
+      const res = await fetch('http://localhost:5254/api/terminal-document-requirements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      try { return await res.json(); } catch { return {}; }
+    },
+    async update(id, data) {
+      const res = await fetch(`http://localhost:5254/api/terminal-document-requirements/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      try { return await res.json(); } catch { return {}; }
+    },
+    async bulkCreate(items) {
+      const results = [];
+      for (const item of items) {
+        const res = await fetch('http://localhost:5254/api/terminal-document-requirements', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        try { results.push(await res.json()); } catch { results.push({}); }
+      }
+      return results;
+    },
+    delete: noop,
+  },
 };
 
 const entityProxy = new Proxy({}, {

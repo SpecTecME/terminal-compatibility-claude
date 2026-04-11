@@ -1,0 +1,1 @@
+/Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/backend/src/TscPlatform.Api/obj/Release/net8.0/TscPlatform.Api.csproj.AssemblyReference.cache

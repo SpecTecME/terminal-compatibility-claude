@@ -1739,6 +1739,607 @@ namespace TscPlatform.Api.Migrations
                     b.ToTable("VesselTypeRef");
                 });
 
+            modelBuilder.Entity("TscPlatform.Api.Models.Phase3.Berth", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ArchivedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("archivedAt");
+
+                    b.Property<string>("ArchivedReason")
+                        .HasColumnType("text")
+                        .HasColumnName("archivedReason");
+
+                    b.Property<string>("BerthCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("berthCode");
+
+                    b.Property<string>("BerthName")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("berthName");
+
+                    b.Property<string>("BerthNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("berthNumber");
+
+                    b.Property<string>("BerthType")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("berthType");
+
+                    b.Property<double?>("BollardsCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("bollardsCapacity");
+
+                    b.Property<string>("DataSource")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("dataSource");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("FendersType")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("fendersType");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isArchived");
+
+                    b.Property<DateOnly?>("LastVerifiedDate")
+                        .HasColumnType("date")
+                        .HasColumnName("lastVerifiedDate");
+
+                    b.Property<int?>("LoadingArms")
+                        .HasColumnType("integer")
+                        .HasColumnName("loadingArms");
+
+                    b.Property<int?>("LoadingArmsLngCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("loadingArmsLngCount");
+
+                    b.Property<double?>("ManifoldHeightMax")
+                        .HasColumnType("double precision")
+                        .HasColumnName("manifoldHeightMax");
+
+                    b.Property<double?>("ManifoldHeightMin")
+                        .HasColumnType("double precision")
+                        .HasColumnName("manifoldHeightMin");
+
+                    b.Property<string>("ManifoldLimitsNotes")
+                        .HasColumnType("text")
+                        .HasColumnName("manifoldLimitsNotes");
+
+                    b.Property<double?>("MaxArrivalDisplacementT")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxArrivalDisplacementT");
+
+                    b.Property<double?>("MaxArrivalDraftM")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxArrivalDraftM");
+
+                    b.Property<double?>("MaxBeam")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxBeam");
+
+                    b.Property<double?>("MaxBeamM")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxBeamM");
+
+                    b.Property<double?>("MaxCargoCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxCargoCapacity");
+
+                    b.Property<double?>("MaxCargoCapacityM3")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxCargoCapacityM3");
+
+                    b.Property<double?>("MaxDraft")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxDraft");
+
+                    b.Property<double?>("MaxLoa")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxLoa");
+
+                    b.Property<double?>("MaxLoaM")
+                        .HasColumnType("double precision")
+                        .HasColumnName("maxLoaM");
+
+                    b.Property<double?>("MinCargoCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("minCargoCapacity");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text")
+                        .HasColumnName("notes");
+
+                    b.Property<string>("Operator")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("operator");
+
+                    b.Property<string[]>("ProductTypeRefIds")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("productTypeRefIds");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("publicId");
+
+                    b.Property<bool>("QflexCapable")
+                        .HasColumnType("boolean")
+                        .HasColumnName("qflexCapable");
+
+                    b.Property<bool>("QmaxCapable")
+                        .HasColumnType("boolean")
+                        .HasColumnName("qmaxCapable");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("TenantId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("tenantId");
+
+                    b.Property<string>("TerminalPublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("terminalPublicId");
+
+                    b.Property<string>("TypicalLoadingRateNotes")
+                        .HasColumnType("text")
+                        .HasColumnName("typicalLoadingRateNotes");
+
+                    b.Property<bool>("VapourReturnAvailable")
+                        .HasColumnType("boolean")
+                        .HasColumnName("vapourReturnAvailable");
+
+                    b.HasKey("Id")
+                        .HasName("pK_Berth");
+
+                    b.HasIndex("PublicId")
+                        .IsUnique()
+                        .HasDatabaseName("iX_Berth_publicId");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("iX_Berth_tenantId");
+
+                    b.ToTable("Berth");
+                });
+
+            modelBuilder.Entity("TscPlatform.Api.Models.Phase3.Terminal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<double?>("ApproachChannelDepth")
+                        .HasColumnType("double precision")
+                        .HasColumnName("approachChannelDepth");
+
+                    b.Property<DateTime?>("ArchivedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("archivedAt");
+
+                    b.Property<string>("ArchivedReason")
+                        .HasColumnType("text")
+                        .HasColumnName("archivedReason");
+
+                    b.Property<double?>("CapacityMtpa")
+                        .HasColumnType("double precision")
+                        .HasColumnName("capacityMtpa");
+
+                    b.Property<string>("ContactEmail")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("contactEmail");
+
+                    b.Property<string>("ContactPhone")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("contactPhone");
+
+                    b.Property<string>("CountryId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("countryId");
+
+                    b.Property<string>("CountryPublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("countryPublicId");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("FormsNotes")
+                        .HasColumnType("text")
+                        .HasColumnName("formsNotes");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isActive");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isArchived");
+
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("latitude");
+
+                    b.Property<string>("LegacyCountryCode")
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("legacyCountryCode");
+
+                    b.Property<string>("LegacyCountryName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("legacyCountryName");
+
+                    b.Property<double?>("LoadingRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("loadingRate");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("longitude");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text")
+                        .HasColumnName("notes");
+
+                    b.Property<int?>("NumberOfTanks")
+                        .HasColumnType("integer")
+                        .HasColumnName("numberOfTanks");
+
+                    b.Property<string>("OperationType")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("operationType");
+
+                    b.Property<string>("Operator")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("operator");
+
+                    b.Property<bool>("PilotageRequired")
+                        .HasColumnType("boolean")
+                        .HasColumnName("pilotageRequired");
+
+                    b.Property<string>("Port")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("port");
+
+                    b.Property<string>("ProcedureNotes")
+                        .HasColumnType("text")
+                        .HasColumnName("procedureNotes");
+
+                    b.Property<string>("ProductTypeRefId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("productTypeRefId");
+
+                    b.Property<string>("ProductTypeRefPublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("productTypeRefPublicId");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("publicId");
+
+                    b.Property<string>("SiteId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("siteId");
+
+                    b.Property<string>("SitePublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("sitePublicId");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
+
+                    b.Property<double?>("StorageCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("storageCapacity");
+
+                    b.Property<string>("TenantId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("tenantId");
+
+                    b.Property<string>("TerminalComplexId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("terminalComplexId");
+
+                    b.Property<string>("TerminalComplexPublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("terminalComplexPublicId");
+
+                    b.Property<string>("TerminalTypeId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("terminalTypeId");
+
+                    b.Property<string>("TerminalTypePublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("terminalTypePublicId");
+
+                    b.Property<string>("Timezone")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("timezone");
+
+                    b.Property<bool>("TugsAvailable")
+                        .HasColumnType("boolean")
+                        .HasColumnName("tugsAvailable");
+
+                    b.Property<string>("Website")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("website");
+
+                    b.HasKey("Id")
+                        .HasName("pK_Terminal");
+
+                    b.HasIndex("PublicId")
+                        .IsUnique()
+                        .HasDatabaseName("iX_Terminal_publicId");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("iX_Terminal_tenantId");
+
+                    b.ToTable("Terminal");
+                });
+
+            modelBuilder.Entity("TscPlatform.Api.Models.Phase3.TerminalComplex", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text")
+                        .HasColumnName("address");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("city");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("CountryId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("countryId");
+
+                    b.Property<string>("CountryPublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("countryPublicId");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isActive");
+
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("latitude");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("longitude");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text")
+                        .HasColumnName("notes");
+
+                    b.Property<string>("OperatorAuthority")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("operatorAuthority");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("publicId");
+
+                    b.Property<string>("Region")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("region");
+
+                    b.Property<string>("TenantId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("tenantId");
+
+                    b.HasKey("Id")
+                        .HasName("pK_TerminalComplex");
+
+                    b.HasIndex("PublicId")
+                        .IsUnique()
+                        .HasDatabaseName("iX_TerminalComplex_publicId");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("iX_TerminalComplex_tenantId");
+
+                    b.ToTable("TerminalComplex");
+                });
+
+            modelBuilder.Entity("TscPlatform.Api.Models.Phase3.TerminalDocumentRequirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppliesLevel")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("appliesLevel");
+
+                    b.Property<string>("BerthId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("berthId");
+
+                    b.Property<string>("BerthPublicId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("berthPublicId");
+
+                    b.Property<string>("DocumentTypeId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("documentTypeId");
+
+                    b.Property<string>("DocumentTypePublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("documentTypePublicId");
+
+                    b.Property<DateOnly?>("EffectiveFrom")
+                        .HasColumnType("date")
+                        .HasColumnName("effectiveFrom");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isActive");
+
+                    b.Property<bool>("IsMandatory")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isMandatory");
+
+                    b.Property<bool>("IsRequired")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isRequired");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text")
+                        .HasColumnName("notes");
+
+                    b.Property<int?>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("publicId");
+
+                    b.Property<string>("SubmissionStage")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("submissionStage");
+
+                    b.Property<string>("TenantId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("tenantId");
+
+                    b.Property<string>("TerminalId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("terminalId");
+
+                    b.Property<string>("TerminalPublicId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("terminalPublicId");
+
+                    b.Property<DateOnly?>("ValidTo")
+                        .HasColumnType("date")
+                        .HasColumnName("validTo");
+
+                    b.Property<string>("VesselConditionJson")
+                        .HasColumnType("text")
+                        .HasColumnName("vesselConditionJson");
+
+                    b.HasKey("Id")
+                        .HasName("pK_TerminalDocumentRequirement");
+
+                    b.HasIndex("DocumentTypePublicId")
+                        .HasDatabaseName("iX_TerminalDocumentRequirement_documentTypePublicId");
+
+                    b.HasIndex("PublicId")
+                        .IsUnique()
+                        .HasDatabaseName("iX_TerminalDocumentRequirement_publicId");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("iX_TerminalDocumentRequirement_tenantId");
+
+                    b.HasIndex("TerminalPublicId")
+                        .HasDatabaseName("iX_TerminalDocumentRequirement_terminalPublicId");
+
+                    b.ToTable("TerminalDocumentRequirement");
+                });
+
             modelBuilder.Entity("TscPlatform.Api.Models.Phase1.CargoTypeRef", b =>
                 {
                     b.HasOne("TscPlatform.Api.Models.Phase1.ProductTypeRef", "ProductType")

@@ -313,12 +313,12 @@ export default function DocumentCategories() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Link to={createPageUrl(`DocumentCategoryDetail?id=${category.id}`)}>
+                        <Link to={createPageUrl(`DocumentCategoryDetail?id=${category.publicId}`)}>
                           <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
                             <Eye className="w-4 h-4" />
                           </Button>
                         </Link>
-                        <Link to={createPageUrl(`EditDocumentCategory?id=${category.id}`)}>
+                        <Link to={createPageUrl(`EditDocumentCategory?id=${category.publicId}`)}>
                           <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
                             <Edit className="w-4 h-4" />
                           </Button>
@@ -359,13 +359,13 @@ export default function DocumentCategories() {
                   <span>{category.updated_date ? format(new Date(category.updated_date), 'MMM d') : '-'}</span>
                 </div>
                 <div className="flex gap-2">
-                  <Link to={createPageUrl(`DocumentCategoryDetail?id=${category.id}`)} className="flex-1">
+                  <Link to={createPageUrl(`DocumentCategoryDetail?id=${category.publicId}`)} className="flex-1">
                     <Button size="sm" variant="outline" className="w-full border-gray-300 text-gray-700">
                       <Eye className="w-3.5 h-3.5 mr-2" />
                       View
                     </Button>
                   </Link>
-                  <Link to={createPageUrl(`EditDocumentCategory?id=${category.id}`)} className="flex-1">
+                  <Link to={createPageUrl(`EditDocumentCategory?id=${category.publicId}`)} className="flex-1">
                     <Button size="sm" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600">
                       <Edit className="w-3.5 h-3.5 mr-2" />
                       Edit
@@ -403,12 +403,12 @@ export default function DocumentCategories() {
                     <Badge className={`${category.isActive ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-gray-500/10 text-gray-400 border-gray-500/30'} border text-xs`}>
                       {category.isActive ? 'Active' : 'Inactive'}
                     </Badge>
-                    <Link to={createPageUrl(`DocumentCategoryDetail?id=${category.id}`)}>
+                    <Link to={createPageUrl(`DocumentCategoryDetail?id=${category.publicId}`)}>
                       <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900 h-8 w-8">
                         <Eye className="w-3.5 h-3.5" />
                       </Button>
                     </Link>
-                    <Link to={createPageUrl(`EditDocumentCategory?id=${category.id}`)}>
+                    <Link to={createPageUrl(`EditDocumentCategory?id=${category.publicId}`)}>
                       <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900 h-8 w-8">
                         <Edit className="w-3.5 h-3.5" />
                       </Button>

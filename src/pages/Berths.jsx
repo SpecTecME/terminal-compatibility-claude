@@ -640,7 +640,7 @@ export default function Berths() {
                     <TableRow 
                       key={berth.id} 
                       className="border-gray-200 cursor-pointer hover:bg-gray-50"
-                      onClick={() => window.location.href = getBerthDetailUrl(berth.id)}
+                      onClick={() => window.location.href = getBerthDetailUrl(berth.publicId)}
                     >
                       <TableCell>
                         <div onClick={(e) => e.stopPropagation()}>
@@ -726,7 +726,7 @@ export default function Berths() {
             const terminal = berth.terminal;
             return (
               <Card key={berth.id} className="bg-white border-gray-200 hover:border-cyan-500/50 hover:shadow-lg transition-all cursor-pointer"
-                onClick={() => window.location.href = createPageUrl(`BerthDetail?id=${berth.id}`)}>
+                onClick={() => window.location.href = createPageUrl(`BerthDetail?id=${berth.publicId}`)}>
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -823,7 +823,7 @@ export default function Berths() {
               return (
                 <div key={berth.id} 
                   className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-                  onClick={() => window.location.href = getBerthDetailUrl(berth.id)}>
+                  onClick={() => window.location.href = getBerthDetailUrl(berth.publicId)}>
                   <div className="flex items-center gap-3 flex-1">
                     <div onClick={(e) => {
                       e.preventDefault();
