@@ -143,8 +143,7 @@ export default function IssuingAuthorities() {
 
   const { data: authorities = [], isLoading } = useQuery({
     queryKey: ['issuingAuthorities'],
-    queryFn: () => base44.entities.IssuingAuthority.list(),
-    enabled: companies.length > 0
+    queryFn: () => base44.entities.IssuingAuthority.list()
   });
 
   const companiesMap = useMemo(() => {

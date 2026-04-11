@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TscPlatform.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64f4c140cb8bfa62961be134f7ec1c287c5a4e91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38c67aa16f8f9bde9159de3210df906e1c722f60")]
 [assembly: System.Reflection.AssemblyProductAttribute("TscPlatform.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TscPlatform.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

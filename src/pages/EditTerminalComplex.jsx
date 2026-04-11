@@ -93,7 +93,7 @@ export default function EditTerminalComplex() {
 
   const { data: complex, isLoading } = useQuery({
     queryKey: ['terminalComplex', complexId],
-    queryFn: () => base44.entities.TerminalComplex.filter({ id: complexId }).then(r => r[0]),
+    queryFn: () => base44.entities.TerminalComplex.filter({ id: parseInt(complexId) }).then(r => r[0]),
     enabled: !!complexId
   });
 

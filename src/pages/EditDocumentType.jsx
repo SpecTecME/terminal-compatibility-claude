@@ -98,7 +98,7 @@
  * - Rare documents: sortOrder 200+
  * - Unlisted: null (bottom)
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -150,6 +150,8 @@ export default function EditDocumentType() {
   });
 
   const [selectedIssuers, setSelectedIssuers] = useState([]);
+  // Stores the publicId generated just before a create call so onSuccess can reference it.
+  const pendingNewPublicId = useRef(null);
 
   const { data: existingDocType } = useQuery({
     queryKey: ['documentType', docTypeId],
@@ -202,9 +204,11 @@ export default function EditDocumentType() {
         if (isEdit) {
           return await base44.entities.DocumentType.update(docTypeId, payload);
         } else {
+          const newPublicId = generateUUID();
+          pendingNewPublicId.current = newPublicId;
           return await base44.entities.DocumentType.create({
             ...payload,
-            publicId: generateUUID(),
+            publicId: newPublicId,
             tenantId: getCurrentTenantId()
           });
         }
@@ -215,6 +219,23 @@ export default function EditDocumentType() {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['documentTypes'] });
       toast.success(isEdit ? 'Document type updated' : 'Document type created');
+
+      const ctxRaw = sessionStorage.getItem('uploadDocumentContext');
+      if (ctxRaw) {
+        let ctx = {};
+        try { ctx = JSON.parse(ctxRaw); } catch {}
+        if (ctx.returnTo === 'UploadDocument') {
+          const returnType = isEdit ? { publicId: docTypeId } : { publicId: pendingNewPublicId.current };
+          sessionStorage.setItem('uploadDocumentReturnType', JSON.stringify(returnType));
+          sessionStorage.removeItem('uploadDocumentContext');
+          let url = 'UploadDocument';
+          if (ctx.editId) url += `?edit=${ctx.editId}`;
+          else if (ctx.vesselId) url += `?vessel=${ctx.vesselId}`;
+          navigate(createPageUrl(url));
+          return;
+        }
+      }
+
       navigate(createPageUrl('DocumentTypes'));
     },
     onError: (error) => {

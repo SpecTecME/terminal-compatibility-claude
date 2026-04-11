@@ -51,6 +51,16 @@ if (args.Contains("--import-phase3"))
     return;
 }
 
+if (args.Contains("--import-phase4"))
+{
+    var dataDir = args.SkipWhile(a => a != "--data-dir").Skip(1).FirstOrDefault()
+        ?? Path.Combine(AppContext.BaseDirectory, "../../../../../../../../initial_data");
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<TscDbContext>();
+    await Phase4Importer.ImportAsync(db, dataDir);
+    return;
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

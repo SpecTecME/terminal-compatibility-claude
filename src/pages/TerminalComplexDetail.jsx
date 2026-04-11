@@ -109,19 +109,19 @@ export default function TerminalComplexDetail() {
 
   const { data: complex, isLoading } = useQuery({
     queryKey: ['terminalComplex', complexId],
-    queryFn: () => base44.entities.TerminalComplex.filter({ id: complexId }).then(r => r[0]),
+    queryFn: () => base44.entities.TerminalComplex.filter({ id: parseInt(complexId) }).then(r => r[0]),
     enabled: !!complexId
   });
 
   const { data: country } = useQuery({
     queryKey: ['country', complex?.countryId],
-    queryFn: () => base44.entities.Country.filter({ id: complex.countryId }).then(r => r[0]),
+    queryFn: () => base44.entities.Country.filter({ publicId: complex.countryPublicId }).then(r => r[0]),
     enabled: !!complex?.countryId
   });
 
   const { data: terminals = [] } = useQuery({
     queryKey: ['terminals', complexId],
-    queryFn: () => base44.entities.Terminal.filter({ terminalComplexId: complexId }),
+    queryFn: () => base44.entities.Terminal.filter({ terminalComplexPublicId: complex?.publicId }),
     enabled: !!complexId
   });
 

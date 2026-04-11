@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { 
+import {
   Ship,
   Building2,
   FileText,
@@ -20,8 +20,7 @@ import {
   Flag,
   Plus,
   Trash2,
-  Upload,
-  X,
+  Eye,
   Users,
   Home,
   MapPin,
@@ -33,22 +32,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -61,8 +44,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { differenceInDays, format } from 'date-fns';
 import { toast } from 'sonner';
-import SearchableSelect from '../components/ui/SearchableSelect';
-
 import VesselIdentityView from '../components/vessel/VesselIdentityView';
 import VesselDimensionsView from '../components/vessel/VesselDimensionsView';
 import VesselCargoSystemView from '../components/vessel/VesselCargoSystemView';
@@ -88,19 +69,8 @@ export default function VesselDetail() {
   const returnTo = urlParams.get('returnTo');
   const queryClient = useQueryClient();
 
-  const [showAddDocument, setShowAddDocument] = useState(false);
-  const [editingDocument, setEditingDocument] = useState(null);
+  const [activeTab, setActiveTab] = useState(() => urlParams.get('tab') || 'terminals');
   const [deletingDocument, setDeletingDocument] = useState(null);
-  const [documentForm, setDocumentForm] = useState({
-    document_name: '',
-    documentTypeId: '',
-    issue_date: '',
-    expiry_date: '',
-    reference_number: '',
-    file_url: '',
-    notes: '',
-    status: 'Valid'
-  });
 
   const { data: vessel, isLoading } = useQuery({
     queryKey: ['vessel', vesselId],
@@ -118,11 +88,6 @@ export default function VesselDetail() {
     queryKey: ['documents', vesselId],
     queryFn: () => base44.entities.Document.filter({ vessel_id: parseInt(vesselId) }),
     enabled: !!vesselId
-  });
-
-  const { data: documentTypes = [] } = useQuery({
-    queryKey: ['documentTypes'],
-    queryFn: () => base44.entities.DocumentType.list()
   });
 
   const { data: terminals = [] } = useQuery({
@@ -153,48 +118,10 @@ export default function VesselDetail() {
   const getTerminalById = (id) => terminals.find(t => t.id === id);
   const getBerthById = (id) => berths.find(b => b.id === id);
 
-  const createDocumentMutation = useMutation({
-    mutationFn: (data) => {
-      const docType = documentTypes.find(dt => dt.id === data.documentTypeId);
-      return base44.entities.Document.create({
-        ...data,
-        vessel_id: vesselId,
-        vesselPublicId: vessel.publicId,
-        documentTypePublicId: docType?.publicId,
-        publicId: crypto.randomUUID(),
-        tenantId: vessel.tenantId
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['documents', vesselId]);
-      setShowAddDocument(false);
-      setEditingDocument(null);
-      resetDocumentForm();
-      toast.success('Document added successfully');
-    },
-    onError: (error) => {
-      toast.error('Failed to add document: ' + error.message);
-    }
-  });
-
-  const updateDocumentMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.Document.update(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['documents', vesselId]);
-      setShowAddDocument(false);
-      setEditingDocument(null);
-      resetDocumentForm();
-      toast.success('Document updated successfully');
-    },
-    onError: (error) => {
-      toast.error('Failed to update document: ' + error.message);
-    }
-  });
-
   const deleteDocumentMutation = useMutation({
     mutationFn: (id) => base44.entities.Document.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['documents', vesselId]);
+      queryClient.invalidateQueries({ queryKey: ['documents', vesselId] });
       setDeletingDocument(null);
       toast.success('Document deleted successfully');
     },
@@ -202,70 +129,6 @@ export default function VesselDetail() {
       toast.error('Failed to delete document: ' + error.message);
     }
   });
-
-  const resetDocumentForm = () => {
-    setDocumentForm({
-      document_name: '',
-      documentTypeId: '',
-      issue_date: '',
-      expiry_date: '',
-      reference_number: '',
-      file_url: '',
-      notes: '',
-      status: 'Valid'
-    });
-  };
-
-  const handleAddDocument = () => {
-    setEditingDocument(null);
-    resetDocumentForm();
-    setShowAddDocument(true);
-  };
-
-  const handleEditDocument = (doc) => {
-    setEditingDocument(doc);
-    setDocumentForm({
-      document_name: doc.document_name || '',
-      documentTypeId: doc.documentTypeId || '',
-      issue_date: doc.issue_date || '',
-      expiry_date: doc.expiry_date || '',
-      reference_number: doc.reference_number || '',
-      file_url: doc.file_url || '',
-      notes: doc.notes || '',
-      status: doc.status || 'Valid'
-    });
-    setShowAddDocument(true);
-  };
-
-  const handleSubmitDocument = (e) => {
-    e.preventDefault();
-    if (!documentForm.document_name || !documentForm.documentTypeId) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-
-    if (editingDocument) {
-      updateDocumentMutation.mutate({
-        id: editingDocument.id,
-        data: documentForm
-      });
-    } else {
-      createDocumentMutation.mutate(documentForm);
-    }
-  };
-
-  const handleFileUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      const result = await base44.integrations.Core.UploadFile({ file });
-      setDocumentForm({ ...documentForm, file_url: result.file_url });
-      toast.success('File uploaded successfully');
-    } catch (error) {
-      toast.error('Failed to upload file: ' + error.message);
-    }
-  };
 
   const statusConfig = {
     Approved: { icon: CheckCircle, color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30' },
@@ -394,7 +257,7 @@ export default function VesselDetail() {
       </div>
 
       {/* Tabs */}
-      <Tabs defaultValue="terminals" className="space-y-4">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList className="bg-white border border-gray-200 p-1">
           <TabsTrigger value="terminals" className="data-[state=active]:bg-gray-100 data-[state=active]:text-gray-900">
             <Building2 className="w-4 h-4 mr-2" />
@@ -501,10 +364,12 @@ export default function VesselDetail() {
           <Card className="bg-white border-gray-200">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-lg font-semibold text-gray-900">Vessel Documents</CardTitle>
-              <Button onClick={handleAddDocument} size="sm" className="bg-gradient-to-r from-cyan-500 to-blue-600">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Document
-              </Button>
+              <Link to={createPageUrl(`UploadDocument?vessel=${vesselId}`)}>
+                <Button size="sm" className="bg-gradient-to-r from-cyan-500 to-blue-600">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Document
+                </Button>
+              </Link>
             </CardHeader>
             <CardContent>
               {documents.length === 0 ? (
@@ -541,14 +406,20 @@ export default function VesselDetail() {
                             {status}
                           </Badge>
                           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => handleEditDocument(doc)}
-                              className="h-8 w-8"
-                            >
-                              <Edit className="w-4 h-4 text-gray-600" />
-                            </Button>
+                            <Link to={createPageUrl(`DocumentDetail?id=${doc.id}&from=vessel`)}>
+                              <Button variant="ghost" size="icon" className="h-8 w-8">
+                                <Eye className="w-4 h-4 text-gray-600" />
+                              </Button>
+                            </Link>
+                            <Link to={createPageUrl(`UploadDocument?edit=${doc.id}&vessel=${vesselId}`)}>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8"
+                              >
+                                <Edit className="w-4 h-4 text-gray-600" />
+                              </Button>
+                            </Link>
                             <Button
                               variant="ghost"
                               size="icon"
@@ -735,148 +606,6 @@ export default function VesselDetail() {
           </Card>
         </TabsContent>
         </Tabs>
-
-      {/* Add/Edit Document Dialog */}
-      <Dialog open={showAddDocument} onOpenChange={setShowAddDocument}>
-        <DialogContent className="bg-white border-gray-200 max-w-2xl">
-          <DialogHeader>
-            <DialogTitle className="text-gray-900">
-              {editingDocument ? 'Edit Document' : 'Add Document'}
-            </DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleSubmitDocument} className="space-y-4">
-            <div className="space-y-2">
-              <Label className="text-gray-700">Document Name *</Label>
-              <Input
-                value={documentForm.document_name}
-                onChange={(e) => setDocumentForm({...documentForm, document_name: e.target.value})}
-                className="bg-white border-gray-300"
-                placeholder="Enter document name"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-gray-700">Document Type *</Label>
-              <SearchableSelect
-                value={documentForm.documentTypeId}
-                onValueChange={(value) => setDocumentForm({...documentForm, documentTypeId: value})}
-                options={documentTypes.filter(dt => dt.isActive).map(dt => ({ value: dt.id, label: dt.name }))}
-                placeholder="Select document type"
-                searchPlaceholder="Search document types..."
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-gray-700">Issue Date</Label>
-                <Input
-                  type="date"
-                  value={documentForm.issue_date}
-                  onChange={(e) => setDocumentForm({...documentForm, issue_date: e.target.value})}
-                  className="bg-white border-gray-300"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-gray-700">Expiry Date</Label>
-                <Input
-                  type="date"
-                  value={documentForm.expiry_date}
-                  onChange={(e) => setDocumentForm({...documentForm, expiry_date: e.target.value})}
-                  className="bg-white border-gray-300"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-gray-700">Reference Number</Label>
-              <Input
-                value={documentForm.reference_number}
-                onChange={(e) => setDocumentForm({...documentForm, reference_number: e.target.value})}
-                className="bg-white border-gray-300"
-                placeholder="Enter reference number"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-gray-700">Upload File</Label>
-              <div className="flex gap-2">
-                <Input
-                  type="file"
-                  onChange={handleFileUpload}
-                  className="bg-white border-gray-300"
-                />
-                {documentForm.file_url && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="icon"
-                    onClick={() => window.open(documentForm.file_url, '_blank')}
-                    className="flex-shrink-0"
-                  >
-                    <FileText className="w-4 h-4" />
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-gray-700">Status</Label>
-              <Select
-                value={documentForm.status}
-                onValueChange={(value) => setDocumentForm({...documentForm, status: value})}
-              >
-                <SelectTrigger className="bg-white border-gray-300">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Valid">Valid</SelectItem>
-                  <SelectItem value="Expiring Soon">Expiring Soon</SelectItem>
-                  <SelectItem value="Expired">Expired</SelectItem>
-                  <SelectItem value="Superseded">Superseded</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-gray-700">Notes</Label>
-              <Textarea
-                value={documentForm.notes}
-                onChange={(e) => setDocumentForm({...documentForm, notes: e.target.value})}
-                className="bg-white border-gray-300"
-                placeholder="Additional notes"
-                rows={3}
-              />
-            </div>
-
-            <div className="flex justify-end gap-3 pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  setShowAddDocument(false);
-                  setEditingDocument(null);
-                  resetDocumentForm();
-                }}
-                className="border-gray-300"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                disabled={createDocumentMutation.isPending || updateDocumentMutation.isPending}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600"
-              >
-                {createDocumentMutation.isPending || updateDocumentMutation.isPending
-                  ? 'Saving...'
-                  : editingDocument
-                  ? 'Update Document'
-                  : 'Add Document'}
-              </Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
 
       {/* Delete Document Confirmation */}
       <AlertDialog open={!!deletingDocument} onOpenChange={() => setDeletingDocument(null)}>

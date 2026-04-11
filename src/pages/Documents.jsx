@@ -157,9 +157,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { 
-  FileText, 
-  Upload, 
-  Search, 
+  FileText,
+  Upload,
+  Search,
   Filter,
   Calendar,
   AlertTriangle,
@@ -169,6 +169,7 @@ import {
   ExternalLink,
   Ship,
   Trash2,
+  Edit,
   List,
   Grid3x3,
   LayoutList,
@@ -240,7 +241,7 @@ export default function Documents() {
   };
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Document.update(id, { isActive: false }),
+    mutationFn: (doc) => base44.entities.Document.update(doc.id, { ...doc, isActive: false }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['documents'] });
       toast.success('Document deactivated');
@@ -261,7 +262,7 @@ export default function Documents() {
 
   const handleConfirmDelete = () => {
     if (documentToDelete) {
-      deleteMutation.mutate(documentToDelete.id);
+      deleteMutation.mutate(documentToDelete);
     }
   };
 
@@ -569,9 +570,14 @@ export default function Documents() {
                             </Button>
                           </a>
                         )}
-                        <Button 
-                          variant="ghost" 
-                          size="icon" 
+                        <Link to={createPageUrl(`UploadDocument?edit=${doc.id}`)} onClick={(e) => e.stopPropagation()}>
+                          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-900">
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           className="text-red-500 hover:text-red-700"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -643,9 +649,14 @@ export default function Documents() {
                         </Button>
                       </a>
                     )}
-                    <Button 
+                    <Link to={createPageUrl(`UploadDocument?edit=${doc.id}`)} onClick={(e) => e.stopPropagation()}>
+                      <Button size="sm" variant="outline" className="border-gray-300 text-gray-700">
+                        <Edit className="w-3 h-3" />
+                      </Button>
+                    </Link>
+                    <Button
                       size="sm"
-                      variant="outline" 
+                      variant="outline"
                       className="text-red-500 hover:text-red-700 hover:bg-red-50"
                       onClick={(e) => handleDeleteClick(doc, e)}
                     >
@@ -691,9 +702,14 @@ export default function Documents() {
                           </Button>
                         </a>
                       )}
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
+                      <Link to={createPageUrl(`UploadDocument?edit=${doc.id}`)} onClick={(e) => e.stopPropagation()}>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-900">
+                          <Edit className="w-3.5 h-3.5" />
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         className="h-8 w-8 text-red-500 hover:text-red-700"
                         onClick={(e) => handleDeleteClick(doc, e)}
                       >

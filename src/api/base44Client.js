@@ -545,7 +545,7 @@ function makeApiStoreFull(endpoint) {
 const namedStores = {
   // In-memory seed stores (write-capable for this session)
   Vessel:    makeApiStoreFull('/api/vessels'),
-  Document:  makeApiStore('/api/documents'),
+  Document:  makeApiStoreFull('/api/documents'),
 
   // API-backed stores — Phase 2 CRM
   Company:   makeApiStoreFull('/api/companies'),
@@ -649,7 +649,7 @@ const namedStores = {
   TerminalType:        makeApiStore('/api/terminal-types'),
 
   // API-backed stores — Phase 3 terminals & berths
-  TerminalComplex:     makeApiStore('/api/terminal-complexes'),
+  TerminalComplex:     makeApiStoreFull('/api/terminal-complexes'),
   Terminal:            makeApiStore('/api/terminals'),
   Berth:               makeApiStore('/api/berths'),
 
@@ -739,5 +739,13 @@ export const base44 = {
 
   appLogs: {
     logUserInApp: noop,
+  },
+
+  integrations: {
+    Core: {
+      // File storage not yet implemented. Returns null file_url so document records
+      // still save. Replace with real upload endpoint when storage is ready.
+      UploadFile: () => Promise.resolve({ file_url: null }),
+    },
   },
 };

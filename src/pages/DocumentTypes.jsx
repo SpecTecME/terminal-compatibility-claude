@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { generateUUID } from '../components/utils/uuid';
 import { getCurrentTenantId } from '../components/utils/tenant';
@@ -144,8 +144,17 @@ import { format } from 'date-fns';
  */
 export default function DocumentTypes() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  // Read returnTo from sessionStorage (set by UploadDocument when clicking Manage Types).
+  // Using sessionStorage survives navigation to AddDocumentType and back without URL stripping.
+  const [returnTo] = useState(() => {
+    const raw = sessionStorage.getItem('uploadDocumentContext');
+    if (raw) { try { return JSON.parse(raw).returnTo || null; } catch { return null; } }
+    return null;
+  });
+
   const urlParams = new URLSearchParams(window.location.search);
-  
   // Filter and display state
   const [searchQuery, setSearchQuery] = useState(urlParams.get('search') || '');
   const [statusFilter, setStatusFilter] = useState(urlParams.get('status') || 'active');
@@ -306,6 +315,24 @@ export default function DocumentTypes() {
             <p className="text-gray-600 mt-1">Master registry of document types</p>
           </div>
           <div className="flex gap-3">
+            {returnTo === 'UploadDocument' && (
+              <Button
+                variant="outline"
+                className="border-gray-300 text-gray-700"
+                onClick={() => {
+                  const raw = sessionStorage.getItem('uploadDocumentContext');
+                  let ctx = {};
+                  try { ctx = JSON.parse(raw || '{}'); } catch {}
+                  sessionStorage.removeItem('uploadDocumentContext');
+                  let url = 'UploadDocument';
+                  if (ctx.editId) url += `?edit=${ctx.editId}`;
+                  else if (ctx.vesselId) url += `?vessel=${ctx.vesselId}`;
+                  navigate(createPageUrl(url));
+                }}
+              >
+                ← Back to Add Document
+              </Button>
+            )}
             <Link to={createPageUrl('DocumentCategories')}>
               <Button variant="outline" className="border-gray-300 text-gray-700">
                 <FileText className="w-4 h-4 mr-2" />

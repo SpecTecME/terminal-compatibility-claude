@@ -1,206 +1,41 @@
 /**
- * Upload Document Page (Document Creation Form)
- * 
+ * Upload Document Page (Document Creation / Edit Form)
+ *
  * PURPOSE:
  * Multi-step form for uploading vessel documents.
  * Auto-calculates expiry dates based on document type.
- * 
- * PRESELECTION SUPPORT (line 38):
- * 
- * URL parameter: ?vessel=xxx
- * Pre-selects vessel in form.
- * 
- * USE CASE:
- * User on VesselDetail page clicks "Upload Document".
- * Navigates here with vessel pre-selected.
- * Saves time, reduces errors.
- * 
+ * Supports both create (default) and edit (?edit=<id>) modes.
+ *
+ * PRESELECTION SUPPORT:
+ * URL parameter: ?vessel=xxx  — Pre-selects vessel in form.
+ * URL parameter: ?edit=xxx   — Loads existing document for editing.
+ *
+ * MANAGE TYPES RETURN FLOW:
+ * When user clicks "Manage Types", the current draft is saved to
+ * sessionStorage under 'uploadDocumentDraft'. On remount, the draft
+ * is restored automatically and sessionStorage is cleared.
+ *
  * FOUR-SECTION FORM:
- * 
- * ========================================
- * 1. VESSEL SELECTION (lines 220-245)
- * ========================================
- * 
- * Vessel picker with IMO number.
- * Format: "Vessel Name (IMO: 1234567)".
- * 
- * IMO DISPLAY:
- * Helps distinguish vessels with similar names.
- * 
- * ========================================
- * 2. DOCUMENT TYPE (lines 247-354)
- * ========================================
- * 
- * DOCUMENT TYPE SELECTOR (lines 263-280):
- * Shows all active document types.
- * Display format: "Name (Lifecycle)".
- * 
- * EXAMPLE:
- * "Certificate of Class (Renewable)"
- * "Vessel Design Drawings (Permanent)"
- * 
- * TYPE CHANGE HANDLER (lines 135-147):
- * 
- * When user selects type:
- * 1. Loads DocumentType details
- * 2. Auto-fills document_name (line 142)
- * 3. Pre-selects issuing authority (line 143)
- * 4. Sets permanent flag (line 144)
- * 5. Clears expiry if permanent (line 145)
- * 
- * REDUCES DATA ENTRY:
- * Document type defines defaults.
- * User overrides if needed.
- * 
- * TYPE METADATA DISPLAY (lines 282-311):
- * 
- * Shows selected type's attributes:
- * - Category
- * - Lifecycle type
- * - Default issuing authority
- * - Validity duration (if renewable)
- * - Reminder window (if configured)
- * 
- * TRANSPARENCY:
- * User sees type's configuration.
- * Understands auto-calculated values.
- * 
- * ISSUING AUTHORITY (lines 313-343):
- * 
- * SEARCHABLE DROPDOWN:
- * Not standard Select (too many authorities).
- * 
- * SEARCH INPUT (lines 316-321):
- * Filters authority list.
- * 
- * FILTERED LIST (lines 322-341):
- * Scrollable box (max-h-32).
- * Click to select.
- * Selected item highlighted (cyan background).
- * 
- * SEARCH FIELD DUAL PURPOSE:
- * - Type to filter
- * - Shows selected authority name
- * 
- * REFERENCE NUMBER (lines 345-353):
- * Optional certificate identifier.
- * Examples: "DNV-2026-001", "Class-Cert-12345".
- * 
- * ========================================
- * 3. VALIDITY DATES (lines 357-412)
- * ========================================
- * 
- * PERMANENT CHECKBOX (lines 366-379):
- * 
- * Checked → No expiry date needed.
- * Unchecked → Expiry date enabled.
- * 
- * AUTO-CHECKED:
- * If document type is Permanent (line 138).
- * 
- * ISSUE DATE (lines 381-389):
- * When document issued.
- * Triggers expiry calculation (if renewable).
- * 
- * EXPIRY DATE (lines 390-399):
- * When document expires.
- * 
- * DISABLED IF:
- * - Permanent checkbox checked (line 397)
- * - Document type is Permanent (line 397)
- * 
- * AUTO-CALCULATION (lines 99-133):
- * 
- * TRIGGER CONDITIONS:
- * - Issue date set
- * - Document type is Renewable
- * - validity_duration configured
- * 
- * CALCULATION LOGIC (lines 109-124):
- * Adds duration to issue date:
- * - Days: addDays()
- * - Weeks: addWeeks()
- * - Months: addMonths()
- * - Years: addYears()
- * 
- * SETS EXPIRY (lines 126-130):
- * Auto-populates expiry_date field.
- * ISO format (yyyy-mm-dd).
- * 
- * CONFIRMATION MESSAGES (lines 401-410):
- * 
- * RENEWABLE AUTO-CALC (lines 401-404):
- * Green checkmark message.
- * "✓ Expiry date auto-calculated..."
- * 
- * PERMANENT NOTICE (lines 406-409):
- * Gray info message.
- * "This is a permanent document..."
- * 
- * USER AWARENESS:
- * Explains why fields disabled/auto-filled.
- * 
- * ========================================
- * 4. FILE UPLOAD (lines 414-460)
- * ========================================
- * 
- * FILE SELECTED (lines 423-441):
- * Shows file info:
- * - Name
- * - Size in MB
- * - X button to remove
- * 
- * FILE PICKER (lines 443-457):
- * Drag-drop zone.
- * Accepts: PDF, PNG, JPG, JPEG.
- * Size limit: 10MB (stated in help text).
- * 
- * UPLOAD FLOW (lines 160-192):
- * 
- * 1. User submits form
- * 2. If file selected: Upload file first (lines 166-175)
- * 3. Get file_url from upload
- * 4. Create document record with file_url (line 190)
- * 5. Navigate back to source (lines 88-92)
- * 
- * DATA TRANSFORMATION (lines 177-191):
- * 
- * BACKWARD COMPATIBILITY (lines 184-187):
- * Fills deprecated fields:
- * - document_type: From DocumentType.lifecycle_type
- * - category: From DocumentType.category
- * - issuing_authority: From IssuingAuthority.name
- * 
- * WHY KEEP:
- * Old code may read these fields.
- * Gradual migration strategy.
- * 
- * EXPIRY HANDLING (line 183):
- * Permanent docs: Set expiry to null (not empty string).
- * Database null means "no expiry" distinctly.
- * 
- * SUBMIT VALIDATION (line 484):
- * Disabled if:
- * - Uploading
- * - Mutation pending
- * - No vessel selected
- * - No document type selected
- * 
- * Prevents incomplete submissions.
+ * 1. VESSEL SELECTION
+ * 2. DOCUMENT TYPE (includes Document Name, metadata preview, Issuing Authority, Reference)
+ * 3. VALIDITY DATES (Permanent checkbox, Issue Date, Expiry Date with auto-calc)
+ * 4. FILE UPLOAD
+ * + NOTES
  */
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '../utils';
-import { 
+import {
   FileText,
   Upload,
   Ship,
   Calendar,
   Save,
   File,
-  X
+  X,
+  ChevronRight
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -219,12 +54,14 @@ import { toast } from 'sonner';
 import { addMonths, addYears, addWeeks, addDays } from 'date-fns';
 import { generateUUID } from '../components/utils/uuid';
 import { getCurrentTenantId } from '../components/utils/tenant';
+import { formatDocValidityType } from '../components/utils/docValidityType';
 
 export default function UploadDocument() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const urlParams = new URLSearchParams(window.location.search);
   const preselectedVessel = urlParams.get('vessel');
+  const editId = urlParams.get('edit');
 
   const [document, setDocument] = useState({
     vessel_id: preselectedVessel || '',
@@ -242,6 +79,18 @@ export default function UploadDocument() {
   const [uploading, setUploading] = useState(false);
   const [selectedDocType, setSelectedDocType] = useState(null);
   const [authoritySearch, setAuthoritySearch] = useState('');
+  const [showAuthorityList, setShowAuthorityList] = useState(false);
+
+  // After returning from EditDocumentType via Manage Types flow, auto-select the saved type.
+  // Read from sessionStorage immediately on mount and clear the key.
+  const [returnDocTypePending] = useState(() => {
+    const raw = sessionStorage.getItem('uploadDocumentReturnType');
+    if (raw) {
+      sessionStorage.removeItem('uploadDocumentReturnType');
+      try { return JSON.parse(raw); } catch { return null; }
+    }
+    return null;
+  });
 
   const { data: vessels = [] } = useQuery({
     queryKey: ['vessels'],
@@ -259,30 +108,149 @@ export default function UploadDocument() {
     queryFn: () => base44.entities.IssuingAuthority.list()
   });
 
+  // Load existing document for edit mode
+  const { data: editDocument } = useQuery({
+    queryKey: ['document', editId],
+    queryFn: () => base44.entities.Document.filter({ id: parseInt(editId) }).then(r => r[0]),
+    enabled: !!editId
+  });
+
+  // Restore sessionStorage draft (after returning from Manage Types)
+  useEffect(() => {
+    const draft = sessionStorage.getItem('uploadDocumentDraft');
+    if (draft) {
+      try {
+        const parsed = JSON.parse(draft);
+        setDocument(parsed.document);
+        if (parsed.authoritySearch) setAuthoritySearch(parsed.authoritySearch);
+        if (parsed.selectedDocType) setSelectedDocType(parsed.selectedDocType);
+      } catch (e) {}
+      sessionStorage.removeItem('uploadDocumentDraft');
+    }
+  }, []);
+
+  // Pre-fill form fields when edit document loads (depends on documentTypes for is_permanent)
+  useEffect(() => {
+    if (editDocument && documentTypes.length > 0) {
+      const docType = documentTypes.find(dt => dt.id === parseInt(editDocument.documentTypeId));
+      const isPermanent = docType?.documentValidityType === 'PermanentStatic' || (!editDocument.expiry_date && !editDocument.documentTypeId);
+      setSelectedDocType(docType || null);
+      setDocument({
+        vessel_id: String(editDocument.vessel_id || ''),
+        documentTypeId: String(editDocument.documentTypeId || ''),
+        document_name: editDocument.document_name || '',
+        issue_date: editDocument.issue_date || '',
+        expiry_date: editDocument.expiry_date || '',
+        issuingAuthorityId: editDocument.issuingAuthorityId || '',
+        reference_number: editDocument.reference_number || '',
+        notes: editDocument.notes || '',
+        is_permanent: isPermanent
+      });
+    }
+  }, [editDocument, documentTypes]);
+
+  // Set authority search label when both editDocument and authorities are loaded
+  useEffect(() => {
+    if (editDocument?.issuingAuthorityId && authorities.length > 0) {
+      const auth = authorities.find(a => a.id === editDocument.issuingAuthorityId);
+      if (auth) setAuthoritySearch(auth.name);
+    }
+  }, [editDocument, authorities]);
+
+  // Auto-select type returned from EditDocumentType (Manage Types flow)
+  useEffect(() => {
+    if (!returnDocTypePending || documentTypes.length === 0) return;
+    let dt;
+    if (returnDocTypePending.publicId) {
+      dt = documentTypes.find(t => t.publicId === returnDocTypePending.publicId);
+    } else if (returnDocTypePending.name) {
+      dt = documentTypes.find(t => t.name === returnDocTypePending.name);
+    }
+    if (!dt) return;
+    const isPermanent = dt.documentValidityType === 'PermanentStatic';
+    setSelectedDocType(dt);
+    setDocument(prev => ({
+      ...prev,
+      documentTypeId: String(dt.id),
+      document_name: dt.name || prev.document_name,
+      is_permanent: isPermanent,
+      expiry_date: isPermanent ? '' : prev.expiry_date,
+    }));
+  }, [returnDocTypePending, documentTypes]);
+
   const createDocumentMutation = useMutation({
     mutationFn: async (data) => {
-      const vessel = vessels.find(v => v.id === data.vessel_id);
-      const docType = documentTypes.find(dt => dt.id === data.documentTypeId);
-      const authority = authorities.find(a => a.id === data.issuingAuthorityId);
-      
+      const vesselIdInt    = parseInt(data.vessel_id) || null;
+      const docTypeIdInt   = data.documentTypeId    ? parseInt(data.documentTypeId)    : null;
+      const authorityIdInt = data.issuingAuthorityId ? parseInt(data.issuingAuthorityId) : null;
+
+      const vessel    = vessels.find(v => v.id === vesselIdInt);
+      const docType   = documentTypes.find(dt => dt.id === docTypeIdInt);
+      const authority = authorities.find(a => a.id === authorityIdInt);
+
       return await base44.entities.Document.create({
         ...data,
-        vesselPublicId: vessel?.publicId,
-        documentTypePublicId: docType?.publicId,
-        issuingAuthorityPublicId: authority?.publicId
+        vessel_id:                vesselIdInt,
+        documentTypeId:           docTypeIdInt,
+        issuingAuthorityId:       authorityIdInt,
+        vesselPublicId:           vessel?.publicId,
+        documentTypePublicId:     docType?.publicId,
+        issuingAuthorityPublicId: authority?.publicId,
+        issue_date:  data.issue_date || null,
+        expiry_date: data.is_permanent ? null : (data.expiry_date || null),
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['documents'] });
+      // Remove cache so the list fetches fresh data on next mount
+      queryClient.removeQueries({ queryKey: ['documents'] });
       toast.success('Document uploaded successfully');
       if (preselectedVessel) {
-        navigate(createPageUrl(`VesselDetail?id=${preselectedVessel}`));
+        navigate(createPageUrl(`VesselDetail?id=${preselectedVessel}&tab=documents`));
       } else {
         navigate(createPageUrl('Documents'));
       }
     },
-    onError: (error) => {
+    onError: () => {
       toast.error('Failed to upload document');
+    }
+  });
+
+  const updateDocumentMutation = useMutation({
+    mutationFn: async (data) => {
+      const vesselIdInt    = parseInt(data.vessel_id) || null;
+      const docTypeIdInt   = data.documentTypeId    ? parseInt(data.documentTypeId)    : null;
+      const authorityIdInt = data.issuingAuthorityId ? parseInt(data.issuingAuthorityId) : null;
+
+      const vessel    = vessels.find(v => v.id === vesselIdInt);
+      const docType   = documentTypes.find(dt => dt.id === docTypeIdInt);
+      const authority = authorities.find(a => a.id === authorityIdInt);
+
+      return await base44.entities.Document.update(parseInt(editId), {
+        ...editDocument,
+        ...data,
+        vessel_id:                vesselIdInt,
+        documentTypeId:           docTypeIdInt,
+        issuingAuthorityId:       authorityIdInt,
+        vesselPublicId:           vessel?.publicId,
+        documentTypePublicId:     docType?.publicId,
+        issuingAuthorityPublicId: authority?.publicId,
+        issue_date:  data.issue_date || null,
+        expiry_date: data.is_permanent ? null : (data.expiry_date || null),
+      });
+    },
+    onSuccess: () => {
+      // Remove cache so list and detail fetch fresh data on next mount
+      queryClient.removeQueries({ queryKey: ['documents'] });
+      queryClient.removeQueries({ queryKey: ['document', editId] });
+      toast.success('Document updated successfully');
+      if (preselectedVessel) {
+        navigate(createPageUrl(`VesselDetail?id=${preselectedVessel}&tab=documents`));
+      } else {
+        navigate(createPageUrl('Documents'));
+      }
+    },
+    onError: () => {
+      toast.error('Failed to update document');
     }
   });
 
@@ -292,27 +260,27 @@ export default function UploadDocument() {
       setDocument(prev => ({ ...prev, expiry_date: '' }));
       return;
     }
-    if (document.issue_date && selectedDocType?.lifecycle_type === 'Renewable' && selectedDocType.validity_duration) {
+    if (document.issue_date && (selectedDocType?.documentValidityType === 'RenewableCertified' || selectedDocType?.documentValidityType === 'VettingTimeSensitive') && selectedDocType.defaultValidityDuration) {
       const issueDate = new Date(document.issue_date);
       let expiryDate;
-      
-      switch (selectedDocType.validity_unit) {
+
+      switch (selectedDocType.validityUnit) {
         case 'Days':
-          expiryDate = addDays(issueDate, selectedDocType.validity_duration);
+          expiryDate = addDays(issueDate, selectedDocType.defaultValidityDuration);
           break;
         case 'Weeks':
-          expiryDate = addWeeks(issueDate, selectedDocType.validity_duration);
+          expiryDate = addWeeks(issueDate, selectedDocType.defaultValidityDuration);
           break;
         case 'Months':
-          expiryDate = addMonths(issueDate, selectedDocType.validity_duration);
+          expiryDate = addMonths(issueDate, selectedDocType.defaultValidityDuration);
           break;
         case 'Years':
-          expiryDate = addYears(issueDate, selectedDocType.validity_duration);
+          expiryDate = addYears(issueDate, selectedDocType.defaultValidityDuration);
           break;
         default:
           expiryDate = null;
       }
-      
+
       if (expiryDate) {
         setDocument(prev => ({
           ...prev,
@@ -320,23 +288,23 @@ export default function UploadDocument() {
         }));
       }
     }
-  }, [document.issue_date, selectedDocType]);
+  }, [document.issue_date, document.is_permanent, selectedDocType]);
 
   const handleDocTypeChange = (docTypeId) => {
-    const docType = documentTypes.find(dt => dt.id === docTypeId);
+    const docType = documentTypes.find(dt => dt.id === parseInt(docTypeId));
     setSelectedDocType(docType);
-    const isPermanent = docType?.lifecycle_type === 'Permanent';
-    setDocument({
-      ...document,
+    const isPermanent = docType?.documentValidityType === 'PermanentStatic';
+    setDocument(prev => ({
+      ...prev,
       documentTypeId: docTypeId,
-      document_name: docType?.name || '',
-      issuingAuthorityId: docType?.issuingAuthorityId || '',
+      document_name: docType?.name || prev.document_name,
       is_permanent: isPermanent,
-      expiry_date: isPermanent ? '' : document.expiry_date
-    });
+      expiry_date: isPermanent ? '' : prev.expiry_date,
+    }));
+    setShowAuthorityList(false);
   };
 
-  const filteredAuthorities = authorities.filter(auth => 
+  const filteredAuthorities = authorities.filter(auth =>
     auth.name?.toLowerCase().includes(authoritySearch.toLowerCase())
   );
 
@@ -351,8 +319,8 @@ export default function UploadDocument() {
     e.preventDefault();
     setUploading(true);
 
-    let fileUrl = null;
-    
+    let fileUrl = editDocument?.file_url || null;
+
     if (file) {
       try {
         const uploadResult = await base44.integrations.Core.UploadFile({ file });
@@ -364,26 +332,22 @@ export default function UploadDocument() {
       }
     }
 
+    const { is_permanent, ...docFields } = document;
     const docData = {
-      ...document,
-      publicId: generateUUID(),
-      tenantId: getCurrentTenantId(),
+      ...docFields,
+      publicId: editDocument?.publicId || generateUUID(),
+      tenantId: editDocument?.tenantId || getCurrentTenantId(),
       file_url: fileUrl,
-      status: 'Valid',
-      expiry_date: document.is_permanent ? null : document.expiry_date,
-      // Keep backward compatibility with deprecated fields (read-only)
-      document_type: selectedDocType?.lifecycle_type,
-      category: selectedDocType?.category,
-      issuing_authority: authorities.find(a => a.id === document.issuingAuthorityId)?.name
+      status: editDocument?.status || 'Valid',
+      expiry_date: is_permanent ? null : document.expiry_date,
     };
 
-    createDocumentMutation.mutate(docData);
+    if (editId) {
+      updateDocumentMutation.mutate(docData);
+    } else {
+      createDocumentMutation.mutate(docData);
+    }
     setUploading(false);
-  };
-
-  const getAuthorityName = (id) => {
-    const auth = authorities.find(a => a.id === id);
-    return auth?.name || 'Not specified';
   };
 
   const { data: user } = useQuery({
@@ -391,13 +355,28 @@ export default function UploadDocument() {
     queryFn: () => base44.auth.me()
   });
 
+  const backUrl = preselectedVessel
+    ? createPageUrl(`VesselDetail?id=${preselectedVessel}&tab=documents`)
+    : createPageUrl('Documents');
+
+  const isPending = uploading || createDocumentMutation.isPending || updateDocumentMutation.isPending;
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-1.5 text-sm text-gray-500">
+        <Link to={backUrl} className="hover:text-gray-900 transition-colors">
+          {preselectedVessel ? 'Vessel' : 'Documents'}
+        </Link>
+        <ChevronRight className="w-3 h-3" />
+        <span className="text-gray-900">{editId ? 'Edit Document' : 'Upload Document'}</span>
+      </div>
+
       {/* Header */}
       <div className="flex items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Upload Document</h1>
-          <p className="text-gray-600 mt-1">Add a new document to the registry</p>
+          <h1 className="text-2xl font-bold text-gray-900">{editId ? 'Edit Document' : 'Upload Document'}</h1>
+          <p className="text-gray-600 mt-1">{editId ? 'Update document details' : 'Add a new document to the registry'}</p>
         </div>
       </div>
 
@@ -411,17 +390,18 @@ export default function UploadDocument() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Select 
+            <Select
               value={document.vessel_id}
               onValueChange={(v) => setDocument({...document, vessel_id: v})}
+              disabled={!!preselectedVessel}
             >
-              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900 disabled:opacity-60 disabled:cursor-not-allowed">
                 <SelectValue placeholder="Select a vessel" />
               </SelectTrigger>
               <SelectContent className="bg-white border-gray-200">
                 {vessels.map((vessel) => (
-                  <SelectItem key={vessel.id} value={vessel.id} className="text-gray-900">
-                    {vessel.name} (IMO: {vessel.imo_number})
+                  <SelectItem key={vessel.id} value={String(vessel.id)} className="text-gray-900">
+                    {vessel.name} (IMO: {vessel.imoNumber})
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -437,17 +417,29 @@ export default function UploadDocument() {
                 <FileText className="w-5 h-5 text-cyan-400" />
                 Document Type
               </CardTitle>
-              <Link to={createPageUrl('DocumentTypes')}>
-                <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 text-xs">
-                  Manage Types
-                </Button>
-              </Link>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  sessionStorage.setItem('uploadDocumentDraft', JSON.stringify({ document, authoritySearch, selectedDocType }));
+                  sessionStorage.setItem('uploadDocumentContext', JSON.stringify({
+                    returnTo: 'UploadDocument',
+                    editId: editId || null,
+                    vesselId: preselectedVessel || null,
+                  }));
+                  navigate(createPageUrl('DocumentTypes'));
+                }}
+                className="border-gray-300 text-gray-700 text-xs"
+              >
+                Manage Types
+              </Button>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label className="text-gray-700">Select Document Type *</Label>
-              <Select 
+              <Select
                 value={document.documentTypeId}
                 onValueChange={handleDocTypeChange}
               >
@@ -456,38 +448,48 @@ export default function UploadDocument() {
                 </SelectTrigger>
                 <SelectContent className="bg-white border-gray-200">
                   {documentTypes.filter(dt => dt.isActive).map((docType) => (
-                    <SelectItem key={docType.id} value={docType.id} className="text-gray-900">
-                      {docType.name} ({docType.lifecycle_type})
+                    <SelectItem key={docType.id} value={String(docType.id)} className="text-gray-900">
+                      {docType.name}{docType.documentValidityType ? ` (${docType.documentValidityType})` : ''}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
 
-            {selectedDocType && (
+            <div className="space-y-2">
+              <Label className="text-gray-700">Document Name *</Label>
+              <Input
+                value={document.document_name}
+                onChange={(e) => setDocument({...document, document_name: e.target.value})}
+                className="bg-white border-gray-300 text-gray-900"
+                placeholder="Document name"
+              />
+            </div>
+
+            {selectedDocType && (selectedDocType.documentValidityType || selectedDocType.defaultValidityDuration) && (
               <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Category:</span>
-                  <span className="text-gray-900">{selectedDocType.category}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Lifecycle:</span>
-                  <span className="text-gray-900">{selectedDocType.lifecycle_type}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Issuing Authority:</span>
-                  <span className="text-gray-900">{getAuthorityName(selectedDocType.issuingAuthorityId)}</span>
-                </div>
-                {selectedDocType.lifecycle_type === 'Renewable' && selectedDocType.validity_duration && (
+                {selectedDocType.documentValidityType && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Validity Type:</span>
+                    <span className="text-gray-900">{formatDocValidityType(selectedDocType.documentValidityType)}</span>
+                  </div>
+                )}
+                {selectedDocType.issuingAuthorityDefault && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Default Authority:</span>
+                    <span className="text-gray-900">{selectedDocType.issuingAuthorityDefault}</span>
+                  </div>
+                )}
+                {selectedDocType.defaultValidityDuration && (
                   <>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Valid For:</span>
-                      <span className="text-gray-900">{selectedDocType.validity_duration} {selectedDocType.validity_unit}</span>
+                      <span className="text-gray-900">{selectedDocType.defaultValidityDuration} {selectedDocType.validityUnit}</span>
                     </div>
-                    {selectedDocType.reminder_window && (
+                    {selectedDocType.reminderLeadTime && (
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Reminder:</span>
-                        <span className="text-gray-900">{selectedDocType.reminder_window} {selectedDocType.reminder_unit} before expiry</span>
+                        <span className="text-gray-900">{selectedDocType.reminderLeadTime} {selectedDocType.reminderUnit} before expiry</span>
                       </div>
                     )}
                   </>
@@ -496,34 +498,38 @@ export default function UploadDocument() {
             )}
 
             <div className="space-y-2">
-              <Label className="text-gray-700">Issuing Authority *</Label>
+              <Label className="text-gray-700">Issuing Authority</Label>
               <div className="space-y-2">
                 <Input
                   placeholder="Search authority..."
                   value={authoritySearch}
-                  onChange={(e) => setAuthoritySearch(e.target.value)}
+                  onChange={(e) => { setAuthoritySearch(e.target.value); setShowAuthorityList(true); }}
+                  onFocus={() => setShowAuthorityList(true)}
                   className="bg-white border-gray-300 text-gray-900"
                 />
-                <div className="max-h-32 overflow-y-auto border border-gray-300 rounded-md">
-                  {filteredAuthorities.length === 0 ? (
-                    <p className="text-sm text-gray-500 p-2">No authorities found</p>
-                  ) : (
-                    filteredAuthorities.map((auth) => (
-                      <div
-                        key={auth.id}
-                        onClick={() => {
-                          setDocument({...document, issuingAuthorityId: auth.id});
-                          setAuthoritySearch(auth.name);
-                        }}
-                        className={`p-2 cursor-pointer hover:bg-gray-50 text-sm ${
-                          document.issuingAuthorityId === auth.id ? 'bg-cyan-50' : ''
-                        }`}
-                      >
-                        {auth.name}
-                      </div>
-                    ))
-                  )}
-                </div>
+                {showAuthorityList && (
+                  <div className="max-h-32 overflow-y-auto border border-gray-300 rounded-md">
+                    {filteredAuthorities.length === 0 ? (
+                      <p className="text-sm text-gray-500 p-2">No authorities found</p>
+                    ) : (
+                      filteredAuthorities.map((auth) => (
+                        <div
+                          key={auth.id}
+                          onClick={() => {
+                            setDocument({...document, issuingAuthorityId: auth.id});
+                            setAuthoritySearch(auth.name);
+                            setShowAuthorityList(false);
+                          }}
+                          className={`p-2 cursor-pointer hover:bg-gray-50 text-sm ${
+                            document.issuingAuthorityId === auth.id ? 'bg-cyan-50' : ''
+                          }`}
+                        >
+                          {auth.name}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -554,7 +560,7 @@ export default function UploadDocument() {
                 id="is_permanent"
                 checked={document.is_permanent}
                 onChange={(e) => setDocument({
-                  ...document, 
+                  ...document,
                   is_permanent: e.target.checked,
                   expiry_date: e.target.checked ? '' : document.expiry_date
                 })}
@@ -579,16 +585,16 @@ export default function UploadDocument() {
                   value={document.expiry_date}
                   onChange={(e) => setDocument({...document, expiry_date: e.target.value})}
                   className="bg-white border-gray-300 text-gray-900"
-                  disabled={document.is_permanent || selectedDocType?.lifecycle_type === 'Permanent'}
+                  disabled={document.is_permanent || selectedDocType?.documentValidityType === 'PermanentStatic'}
                 />
               </div>
             </div>
-            {selectedDocType?.lifecycle_type === 'Renewable' && document.issue_date && !document.is_permanent && (
+            {(selectedDocType?.documentValidityType === 'RenewableCertified' || selectedDocType?.documentValidityType === 'VettingTimeSensitive') && document.issue_date && !document.is_permanent && (
               <p className="text-xs text-cyan-600">
                 ✓ Expiry date auto-calculated based on document type validity period
               </p>
             )}
-            {(selectedDocType?.lifecycle_type === 'Permanent' || document.is_permanent) && (
+            {(selectedDocType?.documentValidityType === 'PermanentStatic' || document.is_permanent) && (
               <p className="text-xs text-gray-600">
                 This is a permanent document - no expiry date required
               </p>
@@ -605,6 +611,9 @@ export default function UploadDocument() {
             </CardTitle>
           </CardHeader>
           <CardContent>
+            <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded px-3 py-2 mb-3">
+              File storage is not yet configured. Selecting a file here will not persist it.
+            </p>
             {file ? (
               <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="flex items-center gap-3">
@@ -614,9 +623,9 @@ export default function UploadDocument() {
                     <p className="text-xs text-gray-600">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                   </div>
                 </div>
-                <Button 
+                <Button
                   type="button"
-                  variant="ghost" 
+                  variant="ghost"
                   size="icon"
                   onClick={() => setFile(null)}
                   className="text-gray-400 hover:text-gray-900"
@@ -633,9 +642,9 @@ export default function UploadDocument() {
                   </p>
                   <p className="text-xs text-gray-500 mt-1">PDF, PNG, JPG up to 10MB</p>
                 </div>
-                <input 
-                  type="file" 
-                  className="hidden" 
+                <input
+                  type="file"
+                  className="hidden"
                   onChange={handleFileChange}
                   accept=".pdf,.png,.jpg,.jpeg"
                 />
@@ -659,18 +668,18 @@ export default function UploadDocument() {
 
         {/* Submit */}
         <div className="flex justify-end gap-3">
-          <Link to={preselectedVessel ? createPageUrl(`VesselDetail?id=${preselectedVessel}`) : createPageUrl('Documents')}>
+          <Link to={backUrl}>
             <Button type="button" variant="outline" className="border-gray-300 text-gray-700">
               Cancel
             </Button>
           </Link>
-          <Button 
+          <Button
             type="submit"
-            disabled={uploading || createDocumentMutation.isPending || !document.vessel_id || !document.documentTypeId}
+            disabled={isPending || !document.vessel_id || !document.documentTypeId}
             className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"
           >
             <Save className="w-4 h-4 mr-2" />
-            {uploading || createDocumentMutation.isPending ? 'Uploading...' : 'Upload Document'}
+            {isPending ? 'Saving...' : editId ? 'Update Document' : 'Upload Document'}
           </Button>
         </div>
       </form>

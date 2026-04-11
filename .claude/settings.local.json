@@ -24,7 +24,10 @@
       "Bash(curl:*)",
       "Bash(npm run:*)",
       "Bash(echo \"Exit: $?\")",
-      "Bash(xargs -I {} basename {})"
+      "Bash(xargs -I {} basename {})",
+      "Bash(kill %1)",
+      "Bash(ls /Users/veselin/Library/CloudStorage/OneDrive-SpecTecMiddleEast/tidi_dev/GitHub/terminal-compatibility-claude/entities/Terminal*.jsonc)",
+      "Bash(ls:*)"
     ]
   }
 }

@@ -130,6 +130,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { format, differenceInDays } from 'date-fns';
+import { formatDocValidityType } from '../components/utils/docValidityType';
 import { toast } from 'sonner';
 
 export default function DocumentDetail() {
@@ -156,31 +157,29 @@ export default function DocumentDetail() {
   });
 
   const { data: documentType } = useQuery({
-    queryKey: ['documentType', document?.document_type_id],
-    queryFn: () => base44.entities.DocumentType.filter({ id: document.document_type_id }).then(r => r[0]),
-    enabled: !!document?.document_type_id
+    queryKey: ['documentType', document?.documentTypeId],
+    queryFn: () => base44.entities.DocumentType.filter({ id: document.documentTypeId }).then(r => r[0]),
+    enabled: !!document?.documentTypeId
   });
 
   const { data: authority } = useQuery({
-    queryKey: ['authority', document?.issuing_authority_id],
-    queryFn: () => base44.entities.IssuingAuthority.filter({ id: document.issuing_authority_id }).then(r => r[0]),
-    enabled: !!document?.issuing_authority_id
+    queryKey: ['authority', document?.issuingAuthorityId],
+    queryFn: () => base44.entities.IssuingAuthority.filter({ id: document.issuingAuthorityId }).then(r => r[0]),
+    enabled: !!document?.issuingAuthorityId
   });
 
   const renewDocumentMutation = useMutation({
     mutationFn: async () => {
       const renewedDoc = {
         vessel_id: document.vessel_id,
-        document_type_id: document.document_type_id,
+        documentTypeId: document.documentTypeId,
         document_name: document.document_name,
-        issuing_authority_id: document.issuing_authority_id,
+        issuingAuthorityId: document.issuingAuthorityId,
         reference_number: '',
-        issue_date: '',
-        expiry_date: '',
+        issue_date: null,
+        expiry_date: null,
         status: 'Valid',
         notes: `Renewed from document ${document.reference_number || document.id}`,
-        document_type: documentType?.lifecycle_type,
-        category: documentType?.category
       };
       return await base44.entities.Document.create(renewedDoc);
     },
@@ -196,6 +195,12 @@ export default function DocumentDetail() {
       return uploadResult.file_url;
     },
     onSuccess: (fileUrl) => {
+      if (!fileUrl) {
+        toast.warning('File storage is not yet configured. The file was not persisted.');
+        setShowUploadDialog(false);
+        setFile(null);
+        return;
+      }
       queryClient.invalidateQueries({ queryKey: ['document', documentId] });
       setShowUploadDialog(false);
       setFile(null);
@@ -234,13 +239,22 @@ export default function DocumentDetail() {
     'Expired': 'bg-red-500/10 text-red-600 border-red-500/30'
   };
 
-  const canRenew = (documentType?.lifecycle_type === 'Renewable' || document.document_type === 'Renewable') && (isExpired || isExpiring);
+  const canRenew = (documentType?.documentValidityType === 'RenewableCertified' || documentType?.documentValidityType === 'VettingTimeSensitive') && (isExpired || isExpiring);
+
+  const backUrl = fromPage === 'vessel'
+    ? createPageUrl(`VesselDetail?id=${document.vessel_id}&tab=documents`)
+    : createPageUrl('Documents');
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
+          <Link to={backUrl}>
+            <Button variant="outline" size="sm" className="border-gray-300 text-gray-700">
+              ← Back
+            </Button>
+          </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{document.document_name}</h1>
             <p className="text-sm text-gray-600 mt-1">{vessel?.name}</p>
@@ -276,12 +290,8 @@ export default function DocumentDetail() {
                 <p className="text-gray-900 font-medium">{documentType?.name || document.document_name}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Category</p>
-                <p className="text-gray-900 font-medium">{documentType?.category || document.category || '-'}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Lifecycle Type</p>
-                <p className="text-gray-900 font-medium">{documentType?.lifecycle_type || document.document_type || '-'}</p>
+                <p className="text-sm text-gray-600">Validity Type</p>
+                <p className="text-gray-900 font-medium">{formatDocValidityType(documentType?.documentValidityType)}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600">Reference Number</p>
@@ -302,8 +312,8 @@ export default function DocumentDetail() {
               <div>
                 <p className="text-sm text-gray-600">Expiry Date</p>
                 <p className="text-gray-900 font-medium">
-                  {document.expiry_date ? format(new Date(document.expiry_date), 'MMM d, yyyy') : 
-                   documentType?.lifecycle_type === 'Permanent' ? 'Permanent' : '-'}
+                  {document.expiry_date ? format(new Date(document.expiry_date), 'MMM d, yyyy') :
+                   documentType?.documentValidityType === 'PermanentStatic' ? 'Permanent' : '-'}
                 </p>
               </div>
               {isExpired && (
@@ -371,6 +381,9 @@ export default function DocumentDetail() {
             <DialogTitle className="text-gray-900">Upload Attachment</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
+            <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded px-3 py-2">
+              File storage is not yet configured. Selecting a file here will not persist it.
+            </p>
             {file ? (
               <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="flex items-center gap-3">
@@ -380,8 +393,8 @@ export default function DocumentDetail() {
                     <p className="text-xs text-gray-600">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                   </div>
                 </div>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   size="icon"
                   onClick={() => setFile(null)}
                   className="text-gray-400 hover:text-gray-900"
@@ -397,9 +410,9 @@ export default function DocumentDetail() {
                     <span className="font-medium text-cyan-600">Click to upload</span> or drag and drop
                   </p>
                 </div>
-                <input 
-                  type="file" 
-                  className="hidden" 
+                <input
+                  type="file"
+                  className="hidden"
                   onChange={handleFileChange}
                 />
               </label>
