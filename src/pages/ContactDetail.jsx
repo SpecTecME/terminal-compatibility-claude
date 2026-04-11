@@ -110,7 +110,7 @@ export default function ContactDetail() {
 
   const { data: contact, isLoading } = useQuery({
     queryKey: ['contact', contactId],
-    queryFn: () => base44.entities.Contact.filter({ id: contactId }).then(r => r[0]),
+    queryFn: () => base44.entities.Contact.filter({ id: parseInt(contactId) }).then(r => r[0]),
     enabled: !!contactId
   });
 

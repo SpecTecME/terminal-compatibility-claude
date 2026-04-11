@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TscPlatform.Api.Models.Audit;
 using TscPlatform.Api.Models.Phase1;
+using TscPlatform.Api.Models.Phase2;
 using TscPlatform.Api.Models.Phase3;
+using TscPlatform.Api.Models.Phase4;
 
 namespace TscPlatform.Api.Data;
 
@@ -42,6 +44,12 @@ public class TscDbContext : DbContext
     public DbSet<UdfConfiguration> UdfConfigurations => Set<UdfConfiguration>();
     public DbSet<UdfListValue> UdfListValues => Set<UdfListValue>();
 
+    // Phase 2 — CRM
+    public DbSet<Company> Companies => Set<Company>();
+    public DbSet<Contact> Contacts => Set<Contact>();
+    public DbSet<CompanySystemTagAssignment> CompanySystemTagAssignments => Set<CompanySystemTagAssignment>();
+    public DbSet<SystemTagAssignment> SystemTagAssignments => Set<SystemTagAssignment>();
+
     // Phase 3 — Terminals & Berths
     public DbSet<TerminalComplex> TerminalComplexes => Set<TerminalComplex>();
     public DbSet<Terminal> Terminals => Set<Terminal>();
@@ -49,6 +57,10 @@ public class TscDbContext : DbContext
 
     // Phase 3 — Document Requirements
     public DbSet<TerminalDocumentRequirement> TerminalDocumentRequirements => Set<TerminalDocumentRequirement>();
+
+    // Phase 4 — Fleet
+    public DbSet<Vessel> Vessels => Set<Vessel>();
+    public DbSet<Document> Documents => Set<Document>();
 
     // Audit
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
@@ -139,6 +151,30 @@ public class TscDbContext : DbContext
         modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.PublicId).IsUnique();
         modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.TerminalPublicId);
         modelBuilder.Entity<TerminalDocumentRequirement>().HasIndex(e => e.DocumentTypePublicId);
+
+        modelBuilder.Entity<Company>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<Company>().HasIndex(e => e.PublicId).IsUnique();
+
+        modelBuilder.Entity<Contact>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<Contact>().HasIndex(e => e.PublicId).IsUnique();
+        modelBuilder.Entity<Contact>().HasIndex(e => e.CompanyId);
+
+        modelBuilder.Entity<CompanySystemTagAssignment>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<CompanySystemTagAssignment>().HasIndex(e => e.PublicId).IsUnique();
+        modelBuilder.Entity<CompanySystemTagAssignment>().HasIndex(e => e.CompanyId);
+        modelBuilder.Entity<CompanySystemTagAssignment>().HasIndex(e => e.SystemTagId);
+
+        modelBuilder.Entity<SystemTagAssignment>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<SystemTagAssignment>().HasIndex(e => e.PublicId).IsUnique();
+        modelBuilder.Entity<SystemTagAssignment>().HasIndex(e => e.ContactId);
+        modelBuilder.Entity<SystemTagAssignment>().HasIndex(e => e.SystemTagId);
+
+        modelBuilder.Entity<Vessel>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<Vessel>().HasIndex(e => e.PublicId).IsUnique();
+
+        modelBuilder.Entity<Document>().HasIndex(e => e.TenantId);
+        modelBuilder.Entity<Document>().HasIndex(e => e.PublicId).IsUnique();
+        modelBuilder.Entity<Document>().HasIndex(e => e.VesselId);
 
         modelBuilder.Entity<AuditLog>().HasIndex(e => e.TenantId);
         modelBuilder.Entity<AuditLog>().HasIndex(e => e.PublicId).IsUnique();

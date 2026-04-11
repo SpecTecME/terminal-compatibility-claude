@@ -107,7 +107,7 @@ export default function CargoTypes() {
   const deleteMutation = useMutation({
     mutationFn: (id) => base44.entities.CargoTypeRef.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['cargoTypes']);
+      queryClient.invalidateQueries({ queryKey: ['cargoTypes'] });
       setDeletingCargo(null);
       toast.success('Cargo type deleted');
     },

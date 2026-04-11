@@ -154,7 +154,7 @@ export default function EditVessel() {
 
   const { data: vessel, isLoading } = useQuery({
     queryKey: ['vessel', vesselId],
-    queryFn: () => base44.entities.Vessel.filter({ id: vesselId }).then(r => r[0]),
+    queryFn: () => base44.entities.Vessel.filter({ id: parseInt(vesselId) }).then(r => r[0]),
     enabled: !!vesselId
   });
 
@@ -233,8 +233,8 @@ export default function EditVessel() {
   const updateMutation = useMutation({
     mutationFn: (data) => base44.entities.Vessel.update(vesselId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['vessel', vesselId]);
-      queryClient.invalidateQueries(['vessels']);
+      queryClient.invalidateQueries({ queryKey: ['vessel', vesselId] });
+      queryClient.invalidateQueries({ queryKey: ['vessels'] });
       toast.success('Vessel updated successfully');
       window.location.href = createPageUrl(`VesselDetail?id=${vesselId}`);
     },

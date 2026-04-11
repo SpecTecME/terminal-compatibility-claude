@@ -35,7 +35,7 @@ export default function EditVesselType() {
 
   const { data: vesselType, isLoading } = useQuery({
     queryKey: ['vesselType', vesselTypeId],
-    queryFn: () => base44.entities.VesselTypeRef.filter({ id: vesselTypeId }).then(r => r[0]),
+    queryFn: () => base44.entities.VesselTypeRef.filter({ id: parseInt(vesselTypeId) }).then(r => r[0]),
     enabled: !!vesselTypeId
   });
 
@@ -71,8 +71,8 @@ export default function EditVesselType() {
       sortOrder: data.sortOrder ? parseInt(data.sortOrder) : null
     }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['vesselType', vesselTypeId]);
-      queryClient.invalidateQueries(['vesselTypes']);
+      queryClient.invalidateQueries({ queryKey: ['vesselType', vesselTypeId] });
+      queryClient.invalidateQueries({ queryKey: ['vesselTypes'] });
       toast.success('Vessel type updated');
       navigate(createPageUrl('VesselTypes'));
     },

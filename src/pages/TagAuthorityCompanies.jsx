@@ -83,7 +83,7 @@ export default function TagAuthorityCompanies() {
     },
     onSuccess: (data) => {
       setResults(data);
-      queryClient.invalidateQueries(['companySystemTagAssignments']);
+      queryClient.invalidateQueries({ queryKey: ['companySystemTagAssignments'] });
       toast.success('Authority companies tagged successfully');
     },
     onError: (error) => {

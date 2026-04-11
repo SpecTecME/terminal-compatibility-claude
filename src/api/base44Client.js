@@ -521,29 +521,129 @@ function makeApiStore(endpoint) {
   };
 }
 
+/**
+ * Same as makeApiStore but with a real DELETE /{id} endpoint wired.
+ * Used for entities that have full CRUD on the backend.
+ */
+function makeApiStoreFull(endpoint) {
+  const base = makeApiStore(endpoint);
+  return {
+    ...base,
+    async delete(id) {
+      const res = await fetch(`http://localhost:5254${endpoint}/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok && res.status !== 404) throw new Error(await res.text());
+    },
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Named entity stores (override the generic proxy for key entities)
 // ---------------------------------------------------------------------------
 
 const namedStores = {
   // In-memory seed stores (write-capable for this session)
-  Vessel:    vessels,
-  Company:   companies,
-  Document:  documents,
+  Vessel:    makeApiStoreFull('/api/vessels'),
+  Document:  makeApiStore('/api/documents'),
+
+  // API-backed stores — Phase 2 CRM
+  Company:   makeApiStoreFull('/api/companies'),
+  Contact:   makeApiStoreFull('/api/contacts'),
+
+  CompanySystemTagAssignment: {
+    async list() {
+      const res = await fetch('http://localhost:5254/api/company-system-tag-assignments');
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async filter(query = {}) {
+      const params = new URLSearchParams();
+      if (query.companyId !== undefined) params.set('companyId', query.companyId);
+      const url = `http://localhost:5254/api/company-system-tag-assignments${params.toString() ? '?' + params.toString() : ''}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async create(data) {
+      const res = await fetch('http://localhost:5254/api/company-system-tag-assignments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async bulkCreate(items) {
+      const res = await fetch('http://localhost:5254/api/company-system-tag-assignments/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(items),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async delete(id) {
+      const res = await fetch(`http://localhost:5254/api/company-system-tag-assignments/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok && res.status !== 404) throw new Error(await res.text());
+    },
+  },
+
+  SystemTagAssignment: {
+    async list() {
+      const res = await fetch('http://localhost:5254/api/system-tag-assignments');
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async filter(query = {}) {
+      const params = new URLSearchParams();
+      if (query.contactId !== undefined) params.set('contactId', query.contactId);
+      const url = `http://localhost:5254/api/system-tag-assignments${params.toString() ? '?' + params.toString() : ''}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async create(data) {
+      const res = await fetch('http://localhost:5254/api/system-tag-assignments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async bulkCreate(items) {
+      const res = await fetch('http://localhost:5254/api/system-tag-assignments/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(items),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    },
+    async delete(id) {
+      const res = await fetch(`http://localhost:5254/api/system-tag-assignments/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok && res.status !== 404) throw new Error(await res.text());
+    },
+  },
 
   // API-backed stores — Phase 1 reference data
   Country:             countries,
   CountryAlias:        makeApiStore('/api/country-aliases'),
-  IssuingAuthority:    makeApiStore('/api/issuing-authorities'),
-  SystemTag:           makeApiStore('/api/system-tags'),
+  IssuingAuthority:    makeApiStoreFull('/api/issuing-authorities'),
+  SystemTag:           makeApiStoreFull('/api/system-tags'),
   DocumentType:        makeApiStore('/api/document-types'),
   DocumentCategory:         makeApiStore('/api/document-categories'),
   DocumentTypeExternalCode: makeApiStore('/api/document-type-external-codes'),
   ProductTypeRef:      makeApiStore('/api/product-types'),
-  FuelTypeRef:         makeApiStore('/api/fuel-types'),
-  CargoTypeRef:        makeApiStore('/api/cargo-types'),
-  VesselTypeRef:       makeApiStore('/api/vessel-types'),
-  MaritimeZone:        makeApiStore('/api/maritime-zones'),
+  FuelTypeRef:         makeApiStoreFull('/api/fuel-types'),
+  CargoTypeRef:        makeApiStoreFull('/api/cargo-types'),
+  VesselTypeRef:       makeApiStoreFull('/api/vessel-types'),
+  MaritimeZone:        makeApiStoreFull('/api/maritime-zones'),
   UdfConfiguration:    makeApiStore('/api/udf-configurations'),
   UdfListValue:        makeApiStore('/api/udf-list-values'),
   TerminalType:        makeApiStore('/api/terminal-types'),
@@ -604,7 +704,12 @@ const namedStores = {
       }
       return results;
     },
-    delete: noop,
+    async delete(id) {
+      const res = await fetch(`http://localhost:5254/api/terminal-document-requirements/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok && res.status !== 404) throw new Error(await res.text());
+    },
   },
 };
 

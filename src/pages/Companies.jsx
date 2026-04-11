@@ -154,9 +154,9 @@ export default function Companies() {
   };
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Company.update(id, { isActive: false }),
+    mutationFn: (company) => base44.entities.Company.update(company.id, { ...company, isActive: false }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['companies']);
+      queryClient.invalidateQueries({ queryKey: ['companies'] });
       toast.success('Company deactivated');
       setDeleteDialogOpen(false);
       setCompanyToDelete(null);
@@ -175,7 +175,7 @@ export default function Companies() {
 
   const handleConfirmDelete = () => {
     if (companyToDelete) {
-      deleteMutation.mutate(companyToDelete.id);
+      deleteMutation.mutate(companyToDelete);
     }
   };
 

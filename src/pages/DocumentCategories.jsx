@@ -146,9 +146,9 @@ export default function DocumentCategories() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.DocumentCategory.update(id, { isActive: false }),
+    mutationFn: (category) => base44.entities.DocumentCategory.update(category.publicId, { ...category, isActive: false }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['documentCategories']);
+      queryClient.invalidateQueries({ queryKey: ['documentCategories'] });
       toast.success('Category deactivated');
       setDeleteDialogOpen(false);
       setCategoryToDelete(null);
@@ -167,7 +167,7 @@ export default function DocumentCategories() {
 
   const handleConfirmDelete = () => {
     if (categoryToDelete) {
-      deleteMutation.mutate(categoryToDelete.id);
+      deleteMutation.mutate(categoryToDelete);
     }
   };
 

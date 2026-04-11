@@ -92,7 +92,7 @@ export default function EditSystemTag() {
 
   const { data: tag, isLoading } = useQuery({
     queryKey: ['systemTag', tagId],
-    queryFn: () => base44.entities.SystemTag.filter({ id: tagId }).then(r => r[0]),
+    queryFn: () => base44.entities.SystemTag.filter({ id: parseInt(tagId) }).then(r => r[0]),
     enabled: !!tagId
   });
 
@@ -117,8 +117,8 @@ export default function EditSystemTag() {
       sortOrder: data.sortOrder ? parseInt(data.sortOrder) : undefined
     }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['systemTags']);
-      queryClient.invalidateQueries(['systemTag', tagId]);
+      queryClient.invalidateQueries({ queryKey: ['systemTags'] });
+      queryClient.invalidateQueries({ queryKey: ['systemTag', tagId] });
       toast.success('System tag updated successfully');
       navigate(createPageUrl(`SystemTagDetail?id=${tagId}`));
     },

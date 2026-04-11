@@ -50,6 +50,16 @@ public class DocumentCategoriesController : ControllerBase
         await _db.SaveChangesAsync();
         return Ok(entity);
     }
+
+    [HttpDelete("{publicId}")]
+    public async Task<IActionResult> Delete(string publicId)
+    {
+        var entity = await _db.DocumentCategories.FirstOrDefaultAsync(c => c.PublicId == publicId);
+        if (entity is null) return NotFound();
+        _db.DocumentCategories.Remove(entity);
+        await _db.SaveChangesAsync();
+        return NoContent();
+    }
 }
 
 public record DocumentCategoryBody(

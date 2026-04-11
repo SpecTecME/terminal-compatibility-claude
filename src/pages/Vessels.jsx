@@ -257,9 +257,9 @@ export default function Vessels() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Vessel.update(id, { isActive: false }),
+    mutationFn: (vessel) => base44.entities.Vessel.update(vessel.id, { ...vessel, isActive: false }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['vessels']);
+      queryClient.invalidateQueries({ queryKey: ['vessels'] });
       toast.success('Vessel deactivated');
       setDeleteDialogOpen(false);
       setVesselToDelete(null);
@@ -278,7 +278,7 @@ export default function Vessels() {
 
   const handleConfirmDelete = () => {
     if (vesselToDelete) {
-      deleteMutation.mutate(vesselToDelete.id);
+      deleteMutation.mutate(vesselToDelete);
     }
   };
 

@@ -115,7 +115,7 @@ export default function CompanyDetail() {
 
   const { data: company, isLoading } = useQuery({
     queryKey: ['company', companyId],
-    queryFn: () => base44.entities.Company.filter({ id: companyId }).then(r => r[0]),
+    queryFn: () => base44.entities.Company.filter({ id: parseInt(companyId) }).then(r => r[0]),
     enabled: !!companyId
   });
 
@@ -126,7 +126,7 @@ export default function CompanyDetail() {
 
   const { data: contacts = [] } = useQuery({
     queryKey: ['contacts', companyId],
-    queryFn: () => base44.entities.Contact.filter({ companyId }),
+    queryFn: () => base44.entities.Contact.filter({ companyId: parseInt(companyId) }),
     enabled: !!companyId
   });
 

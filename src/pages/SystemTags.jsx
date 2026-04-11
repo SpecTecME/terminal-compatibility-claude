@@ -156,9 +156,9 @@ export default function SystemTags() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.SystemTag.update(id, { isActive: false }),
+    mutationFn: (tag) => base44.entities.SystemTag.update(tag.id, { ...tag, isActive: false }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['systemTags']);
+      queryClient.invalidateQueries({ queryKey: ['systemTags'] });
       toast.success('Tag deactivated');
       setDeleteDialogOpen(false);
       setTagToDelete(null);
@@ -177,7 +177,7 @@ export default function SystemTags() {
 
   const handleConfirmDelete = () => {
     if (tagToDelete) {
-      deleteMutation.mutate(tagToDelete.id);
+      deleteMutation.mutate(tagToDelete);
     }
   };
 

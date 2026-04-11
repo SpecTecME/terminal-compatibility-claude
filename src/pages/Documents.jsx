@@ -242,7 +242,7 @@ export default function Documents() {
   const deleteMutation = useMutation({
     mutationFn: (id) => base44.entities.Document.update(id, { isActive: false }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['documents']);
+      queryClient.invalidateQueries({ queryKey: ['documents'] });
       toast.success('Document deactivated');
       setDeleteDialogOpen(false);
       setDocumentToDelete(null);
@@ -273,7 +273,7 @@ export default function Documents() {
       (docType?.name?.toLowerCase().includes(query)) ||
       (docType?.searchAliases && docType.searchAliases.some(alias => alias.toLowerCase().includes(query)))
     );
-    const matchesVessel = filterVessel === 'all' || d.vessel_id === filterVessel;
+    const matchesVessel = filterVessel === 'all' || d.vessel_id === parseInt(filterVessel);
     const matchesCategory = filterCategory === 'all' || d.category === filterCategory;
     const matchesType = filterType === 'all' || d.document_type === filterType;
     const status = getDocumentStatus(d);

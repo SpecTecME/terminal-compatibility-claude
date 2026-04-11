@@ -104,7 +104,7 @@ export default function VesselDetail() {
 
   const { data: vessel, isLoading } = useQuery({
     queryKey: ['vessel', vesselId],
-    queryFn: () => base44.entities.Vessel.filter({ id: vesselId }).then(r => r[0]),
+    queryFn: () => base44.entities.Vessel.filter({ id: parseInt(vesselId) }).then(r => r[0]),
     enabled: !!vesselId
   });
 
@@ -116,7 +116,7 @@ export default function VesselDetail() {
 
   const { data: documents = [] } = useQuery({
     queryKey: ['documents', vesselId],
-    queryFn: () => base44.entities.Document.filter({ vessel_id: vesselId }),
+    queryFn: () => base44.entities.Document.filter({ vessel_id: parseInt(vesselId) }),
     enabled: !!vesselId
   });
 

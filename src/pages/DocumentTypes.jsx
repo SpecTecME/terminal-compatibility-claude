@@ -184,7 +184,7 @@ export default function DocumentTypes() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.DocumentType.update(id, { isActive: false }),
+    mutationFn: (docType) => base44.entities.DocumentType.update(docType.publicId, { ...docType, isActive: false }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['documentTypes'] });
       toast.success('Document type deactivated');
@@ -205,7 +205,7 @@ export default function DocumentTypes() {
 
   const handleConfirmDelete = () => {
     if (typeToDelete) {
-      deleteMutation.mutate(typeToDelete.publicId);
+      deleteMutation.mutate(typeToDelete);
     }
   };
 

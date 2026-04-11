@@ -22,7 +22,9 @@
       "Bash(curl -s http://localhost:5254/api/terminal-types)",
       "Bash(curl -s http://localhost:5254/api/terminal-document-requirements)",
       "Bash(curl:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(xargs -I {} basename {})"
     ]
   }
 }

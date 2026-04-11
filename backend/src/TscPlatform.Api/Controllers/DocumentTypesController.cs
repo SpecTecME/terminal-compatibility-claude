@@ -94,6 +94,16 @@ public class DocumentTypesController : ControllerBase
         await _db.SaveChangesAsync();
         return Ok(entity);
     }
+
+    [HttpDelete("{publicId}")]
+    public async Task<IActionResult> Delete(string publicId)
+    {
+        var entity = await _db.DocumentTypes.FirstOrDefaultAsync(t => t.PublicId == publicId);
+        if (entity is null) return NotFound();
+        _db.DocumentTypes.Remove(entity);
+        await _db.SaveChangesAsync();
+        return NoContent();
+    }
 }
 
 public record DocumentTypeBody(

@@ -120,7 +120,7 @@ export default function FuelTypes() {
   const deleteMutation = useMutation({
     mutationFn: (id) => base44.entities.FuelTypeRef.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['fuelTypes']);
+      queryClient.invalidateQueries({ queryKey: ['fuelTypes'] });
       setDeletingFuel(null);
       toast.success('Fuel type deleted');
     },

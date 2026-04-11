@@ -145,7 +145,7 @@ export default function DocumentDetail() {
 
   const { data: document, isLoading } = useQuery({
     queryKey: ['document', documentId],
-    queryFn: () => base44.entities.Document.filter({ id: documentId }).then(r => r[0]),
+    queryFn: () => base44.entities.Document.filter({ id: parseInt(documentId) }).then(r => r[0]),
     enabled: !!documentId
   });
 

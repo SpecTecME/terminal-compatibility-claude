@@ -46,7 +46,7 @@ export default function EditCargoType() {
     queryKey: ['cargoType', cargoTypeId],
     queryFn: async () => {
       const allCargos = await base44.entities.CargoTypeRef.list();
-      return allCargos.find(ct => ct.id === cargoTypeId);
+      return allCargos.find(ct => String(ct.id) === String(cargoTypeId));
     },
     enabled: !!cargoTypeId
   });
@@ -92,8 +92,8 @@ export default function EditCargoType() {
       productTypePublicId: data.productTypePublicId || null
     }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['cargoTypes']);
-      queryClient.invalidateQueries(['cargoType', cargoTypeId]);
+      queryClient.invalidateQueries({ queryKey: ['cargoTypes'] });
+      queryClient.invalidateQueries({ queryKey: ['cargoType', cargoTypeId] });
       toast.success('Cargo type updated');
       navigate(createPageUrl('CargoTypes'));
     },

@@ -121,7 +121,7 @@ export default function VesselTypes() {
   const deleteMutation = useMutation({
     mutationFn: (id) => base44.entities.VesselTypeRef.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['vesselTypes']);
+      queryClient.invalidateQueries({ queryKey: ['vesselTypes'] });
       setDeletingType(null);
       toast.success('Vessel type deleted');
     },

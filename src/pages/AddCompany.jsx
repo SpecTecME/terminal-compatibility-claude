@@ -219,7 +219,7 @@ export default function AddCompany() {
       return company;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['companies']);
+      queryClient.invalidateQueries({ queryKey: ['companies'] });
       toast.success('Company created successfully');
       navigate(createPageUrl('Companies'));
     },

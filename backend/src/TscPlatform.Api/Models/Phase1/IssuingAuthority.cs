@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TscPlatform.Api.Models.Phase1;
 
@@ -13,6 +14,7 @@ public class IssuingAuthority : BaseEntity
     [Required]
     [MaxLength(50)]
     [Column("authority_type")]
+    [JsonPropertyName("authority_type")]
     public string AuthorityType { get; set; } = string.Empty;
 
     public int? CountryId { get; set; }
@@ -29,6 +31,7 @@ public class IssuingAuthority : BaseEntity
 
     [MaxLength(200)]
     [Column("contact_email")]
+    [JsonPropertyName("contact_email")]
     public string? ContactEmail { get; set; }
 
     [MaxLength(500)]

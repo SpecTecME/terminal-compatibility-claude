@@ -75,8 +75,8 @@ export default function EditIssuingAuthority() {
 
   const { data: authority, isLoading } = useQuery({
     queryKey: ['issuingAuthority', authId],
-    queryFn: () => base44.entities.IssuingAuthority.list().then(auths => 
-      auths.find(a => a.id === authId)
+    queryFn: () => base44.entities.IssuingAuthority.list().then(auths =>
+      auths.find(a => String(a.id) === String(authId))
     ),
     enabled: !!authId
   });

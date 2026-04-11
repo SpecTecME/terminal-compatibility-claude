@@ -232,7 +232,7 @@ export default function Contacts() {
   const deleteMutation = useMutation({
     mutationFn: (id) => base44.entities.Contact.delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['contacts']);
+      queryClient.invalidateQueries({ queryKey: ['contacts'] });
       toast.success('Contact deleted');
       setDeleteDialogOpen(false);
       setContactToDelete(null);

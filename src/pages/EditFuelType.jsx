@@ -37,7 +37,7 @@ export default function EditFuelType() {
 
   const { data: fuelType, isLoading } = useQuery({
     queryKey: ['fuelType', fuelTypeId],
-    queryFn: () => base44.entities.FuelTypeRef.filter({ id: fuelTypeId }).then(r => r[0]),
+    queryFn: () => base44.entities.FuelTypeRef.filter({ id: parseInt(fuelTypeId) }).then(r => r[0]),
     enabled: !!fuelTypeId
   });
 
@@ -71,8 +71,8 @@ export default function EditFuelType() {
       sortOrder: parseInt(data.sortOrder) || 0
     }),
     onSuccess: () => {
-      queryClient.invalidateQueries(['fuelTypes']);
-      queryClient.invalidateQueries(['fuelType', fuelTypeId]);
+      queryClient.invalidateQueries({ queryKey: ['fuelTypes'] });
+      queryClient.invalidateQueries({ queryKey: ['fuelType', fuelTypeId] });
       toast.success('Fuel type updated successfully');
       navigate(createPageUrl('FuelTypes'));
     },

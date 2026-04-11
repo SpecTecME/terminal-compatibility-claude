@@ -79,7 +79,7 @@ export default function MaritimeZones() {
   });
 
   const toggleActive = useMutation({
-    mutationFn: ({ id, isActive }) => base44.entities.MaritimeZone.update(id, { isActive }),
+    mutationFn: ({ zone, isActive }) => base44.entities.MaritimeZone.update(zone.id, { ...zone, isActive }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['maritimeZones'] }),
   });
 
@@ -183,7 +183,7 @@ export default function MaritimeZones() {
                     <td className="px-4 py-4">
                       <Switch
                         checked={zone.isActive !== false}
-                        onCheckedChange={(val) => toggleActive.mutate({ id: zone.id, isActive: val })}
+                        onCheckedChange={(val) => toggleActive.mutate({ zone, isActive: val })}
                       />
                     </td>
                     <td className="px-4 py-4">

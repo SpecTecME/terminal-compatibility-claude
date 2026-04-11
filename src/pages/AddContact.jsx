@@ -261,7 +261,7 @@ export default function AddContact() {
       return contact;
     },
     onSuccess: (contact) => {
-      queryClient.invalidateQueries(['contacts']);
+      queryClient.invalidateQueries({ queryKey: ['contacts'] });
       toast.success('Contact created successfully');
       if (terminalId) {
         navigate(createPageUrl(`TerminalDetail?id=${terminalId}`));

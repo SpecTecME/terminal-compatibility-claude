@@ -256,7 +256,7 @@ export default function TerminalRequirements() {
 
   const { data: terminal } = useQuery({
     queryKey: ['terminal', terminalId],
-    queryFn: () => base44.entities.Terminal.filter({ id: terminalId }).then(r => r[0]),
+    queryFn: () => base44.entities.Terminal.filter({ publicId: terminalId }).then(r => r[0]),
     enabled: !!terminalId
   });
 
@@ -286,21 +286,19 @@ export default function TerminalRequirements() {
     mutationFn: async (data) => {
       const tenantId = getCurrentTenantId();
       const publicId = generateUUID();
-      
-      const docType = documentTypes.find(dt => dt.id === data.documentTypeId);
-      
+
+      // data.documentTypeId is the publicId string (Select uses dt.publicId as value)
       return base44.entities.TerminalDocumentRequirement.create({
         publicId,
         tenantId,
-        terminalId,
+        terminalId: terminal.publicId,
         terminalPublicId: terminal.publicId,
         berthId: null,
         berthPublicId: null,
         documentTypeId: data.documentTypeId,
-        documentTypePublicId: docType?.publicId,
+        documentTypePublicId: data.documentTypeId,
         appliesLevel: 'Terminal',
         submissionStage: data.submissionStage,
-        validFrom: data.validFrom,
         effectiveFrom: data.validFrom,
         validTo: data.validTo || null,
         isActive: data.isActive,
@@ -310,8 +308,8 @@ export default function TerminalRequirements() {
         notes: data.notes
       });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['terminalRequirements']);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['terminalRequirements'] });
       setDialogOpen(false);
       setEditingRequirement(null);
       resetForm();
@@ -371,8 +369,8 @@ export default function TerminalRequirements() {
       
       return results;
     },
-    onSuccess: (results) => {
-      queryClient.invalidateQueries(['terminalRequirements']);
+    onSuccess: async (results) => {
+      await queryClient.invalidateQueries({ queryKey: ['terminalRequirements'] });
       setBulkDialogOpen(false);
       resetBulkForm();
       toast.success(`${results.created} requirements created, ${results.updated} updated`);
@@ -398,7 +396,7 @@ export default function TerminalRequirements() {
   const handleEdit = (req) => {
     setEditingRequirement(req);
     setFormData({
-      documentTypeId: req.documentTypeId,
+      documentTypeId: req.documentTypePublicId || req.documentTypeId,
       submissionStage: req.submissionStage,
       validFrom: format(new Date(), 'yyyy-MM-dd'),
       validTo: '',
@@ -418,6 +416,7 @@ export default function TerminalRequirements() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (createMutation.isPending) return;
     if (!formData.documentTypeId || !formData.validFrom) {
       toast.error('Please fill in all required fields');
       return;
@@ -487,7 +486,7 @@ export default function TerminalRequirements() {
   };
 
   const getDocumentTypeName = (id) => {
-    return documentTypes.find(dt => dt.id === id)?.name || 'Unknown';
+    return documentTypes.find(dt => dt.publicId === id)?.name || 'Unknown';
   };
 
   const getBerthName = (id) => {
@@ -497,7 +496,7 @@ export default function TerminalRequirements() {
   const terminalWideReqs = requirements
     .filter(r => !r.berthId)
     .filter(r => {
-      const docName = getDocumentTypeName(r.documentTypeId);
+      const docName = getDocumentTypeName(r.documentTypePublicId || r.documentTypeId);
       const search = searchQuery.toLowerCase();
       return docName.toLowerCase().includes(search) ||
              r.submissionStage?.toLowerCase().includes(search) ||
@@ -512,10 +511,10 @@ export default function TerminalRequirements() {
       if ((a.priority || 999) !== (b.priority || 999)) {
         return (a.priority || 999) - (b.priority || 999);
       }
-      const aName = getDocumentTypeName(a.documentTypeId);
-      const bName = getDocumentTypeName(b.documentTypeId);
+      const aName = getDocumentTypeName(a.documentTypePublicId || a.documentTypeId);
+      const bName = getDocumentTypeName(b.documentTypePublicId || b.documentTypeId);
       if (aName !== bName) return aName.localeCompare(bName);
-      return new Date(b.validFrom) - new Date(a.validFrom);
+      return new Date(b.effectiveFrom || b.validFrom) - new Date(a.effectiveFrom || a.validFrom);
     });
 
 
@@ -627,10 +626,10 @@ export default function TerminalRequirements() {
                       </Badge>
                     </TableCell>
                     <TableCell className="font-medium text-gray-900">
-                      {getDocumentTypeName(req.documentTypeId)}
+                      {getDocumentTypeName(req.documentTypePublicId || req.documentTypeId)}
                     </TableCell>
                     <TableCell className="text-gray-700">
-                      {req.validFrom ? format(new Date(req.validFrom), 'MMM d, yyyy') : '-'}
+                      {(req.effectiveFrom || req.validFrom) ? format(new Date(req.effectiveFrom || req.validFrom), 'MMM d, yyyy') : '-'}
                     </TableCell>
                     <TableCell className="text-gray-700">
                       {req.validTo ? format(new Date(req.validTo), 'MMM d, yyyy') : 'Current'}
@@ -718,7 +717,7 @@ export default function TerminalRequirements() {
                 <SearchableSelect
                   value={formData.documentTypeId}
                   onValueChange={(value) => setFormData({...formData, documentTypeId: value})}
-                  options={documentTypes.filter(dt => dt.isActive).map(dt => ({ value: dt.id, label: dt.name }))}
+                  options={documentTypes.filter(dt => dt.isActive).map(dt => ({ value: dt.publicId, label: dt.name }))}
                   placeholder="Select document type"
                   searchPlaceholder="Search document types..."
                   disabled={!!editingRequirement}

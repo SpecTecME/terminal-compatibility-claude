@@ -164,7 +164,7 @@ export default function EditContact() {
 
   const { data: contact, isLoading } = useQuery({
     queryKey: ['contact', contactId],
-    queryFn: () => base44.entities.Contact.filter({ id: contactId }).then(r => r[0]),
+    queryFn: () => base44.entities.Contact.filter({ id: parseInt(contactId) }).then(r => r[0]),
     enabled: !!contactId
   });
 
@@ -272,7 +272,7 @@ export default function EditContact() {
         const assignments = toAdd.map(tagId => ({
           publicId: crypto.randomUUID(),
           tenantId: 'default-tenant',
-          contactId: contactId,
+          contactId: parseInt(contactId),
           contactPublicId: contact.publicId,
           systemTagId: tagId,
           systemTagPublicId: tags.find(t => t.id === tagId)?.publicId
@@ -288,9 +288,9 @@ export default function EditContact() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['contacts']);
-      queryClient.invalidateQueries(['contact', contactId]);
-      queryClient.invalidateQueries(['systemTagAssignments', contactId]);
+      queryClient.invalidateQueries({ queryKey: ['contacts'] });
+      queryClient.invalidateQueries({ queryKey: ['contact', contactId] });
+      queryClient.invalidateQueries({ queryKey: ['systemTagAssignments', contactId] });
       toast.success('Contact updated successfully');
       navigate(createPageUrl(`ContactDetail?id=${contactId}`));
     },

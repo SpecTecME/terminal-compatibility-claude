@@ -168,7 +168,7 @@ export default function EditCompany() {
 
   const { data: company, isLoading } = useQuery({
     queryKey: ['company', companyId],
-    queryFn: () => base44.entities.Company.filter({ id: companyId }).then(r => r[0]),
+    queryFn: () => base44.entities.Company.filter({ id: parseInt(companyId) }).then(r => r[0]),
     enabled: !!companyId
   });
 
@@ -260,7 +260,7 @@ export default function EditCompany() {
         const assignments = toAdd.map(tagId => ({
           publicId: crypto.randomUUID(),
           tenantId: 'default-tenant',
-          companyId: companyId,
+          companyId: parseInt(companyId),
           companyPublicId: company.publicId || crypto.randomUUID(),
           systemTagId: tagId,
           systemTagPublicId: tags.find(t => t.id === tagId)?.publicId || crypto.randomUUID()
@@ -272,9 +272,9 @@ export default function EditCompany() {
       console.log('Mutation completed');
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['companies']);
-      queryClient.invalidateQueries(['company', companyId]);
-      queryClient.invalidateQueries(['companySystemTagAssignments', companyId]);
+      queryClient.invalidateQueries({ queryKey: ['companies'] });
+      queryClient.invalidateQueries({ queryKey: ['company', companyId] });
+      queryClient.invalidateQueries({ queryKey: ['companySystemTagAssignments', companyId] });
       toast.success('Company updated successfully');
       navigate(createPageUrl(`CompanyDetail?id=${companyId}`));
     },
